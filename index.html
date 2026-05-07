@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linda's Dutch Pancakes — Palm Beach, Aruba</title>
+<meta name="description" content="Authentic Dutch pancakes in Palm Beach, Aruba since 2001. A family restaurant serving fresh, handmade pannenkoeken every morning. Open 8AM–2PM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Olivier';
+  src: url('assets/fonts/olivier.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Telegrafico';
+  src: url('assets/fonts/telegrafico.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --blue: #27AAE1;
+  --blue-dark: #004EAD;
+  --cream: #F1EAD1;
+  --gold: #EFBD40;
+  --orange: #EB8917;
+  --brown-dark: #282204;
+  --brown-warm: #5C3D1A;
+  --white: #FFFFFF;
+  --cream-light: #FAF6ED;
+  --blue-light: #BDDFFF;
+  --wood: #8B5E3C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'Open Sauce One', 'Segoe UI', sans-serif;
+  color: var(--brown-dark);
+  background: var(--cream-light);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════ NAV ═══════════════════ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 2rem;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+nav.scrolled {
+  background: rgba(241, 234, 209, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 30px rgba(40, 34, 4, 0.08);
+}
+
+nav .nav-logo img {
+  height: 42px;
+  transition: opacity 0.3s;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+nav .nav-links a {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.3s;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+nav.scrolled .nav-links a {
+  color: var(--brown-dark);
+  text-shadow: none;
+}
+
+nav .nav-links a:hover { color: var(--blue); }
+
+nav .nav-cta {
+  background: var(--blue);
+  color: var(--white) !important;
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  text-shadow: none !important;
+  transition: background 0.3s, transform 0.2s;
+}
+
+nav .nav-cta:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
+
+/* ═══════════════════ HERO ═══════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 34, 4, 0.25) 0%,
+    rgba(40, 34, 4, 0.15) 40%,
+    rgba(40, 34, 4, 0.55) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.hero-content .logo-hero {
+  width: min(340px, 70vw);
+  margin-bottom: 1.5rem;
+  animation: fadeDown 1s ease 0.2s both;
+}
+
+.hero-tagline {
+  font-family: 'Telegrafico', monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 2rem;
+  animation: fadeDown 1s ease 0.5s both;
+}
+
+.hero-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.7rem 1.5rem;
+  border-radius: 100px;
+  color: var(--white);
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  animation: fadeUp 1s ease 0.7s both;
+}
+
+.hero-hours .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+
+.hero-cta {
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  transition: all 0.3s;
+  animation: fadeUp 1s ease 0.9s both;
+}
+
+.hero-cta:hover {
+  background: var(--blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(39, 170, 225, 0.35);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  animation: bounce 2s infinite 2s;
+}
+
+.scroll-indicator svg {
+  width: 24px;
+  height: 24px;
+  stroke: rgba(255,255,255,0.6);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ═══════════════════ DELFT DIVIDER ═══════════════════ */
+.delft-divider {
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--blue) 0px,
+    var(--blue) 8px,
+    var(--white) 8px,
+    var(--white) 16px,
+    var(--blue-light) 16px,
+    var(--blue-light) 24px,
+    var(--white) 24px,
+    var(--white) 32px
+  );
+  opacity: 0.6;
+}
+
+/* ═══════════════════ STORY ═══════════════════ */
+.story {
+  background: var(--cream);
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.story::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23282204' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.story-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.story-text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.story-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.story-label {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+
+.story-heading {
+  font-family: 'Olivier', cursive;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--brown-dark);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.story p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--brown-warm);
+  margin-bottom: 1rem;
+}
+
+.story-year {
+  display: inline-block;
+  font-family: 'Olivier', cursive;
+  font-size: 4rem;
+  color: var(--blue);
+  opacity: 0.15;
+  line-height: 1;
+  margin-top: 1rem;
+}
+
+.story-photo {
+  position: relative;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease 0.2s;
+}
+
+.story-photo.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.story-photo img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(40, 34, 4, 0.15);
+}
+
+.story-photo::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--blue);
+  border-radius: 12px;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+/* ═══════════════════ MENU ═══════════════════ */
+.menu {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--cream-light);
+  position: relative;
+}
+
+.menu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(to bottom, var(--cream), var(--cream-light));
+  pointer-events: none;
+}
+
+.menu-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-label {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Olivier', cursive;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--brown-dark);
+  line-height: 1.1;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.menu-tab {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  border: 1.5px solid var(--blue);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--blue);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.menu-tab:hover, .menu-tab.active {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* ─── CLASSIC VIEW ─── */
+.menu-inner.classic .menu-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: transparent;
+  border-radius: 0;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.menu-inner.classic .menu-item {
+  background: transparent;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(40, 34, 4, 0.08);
+  border-radius: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.menu-inner.classic .menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-inner.classic .menu-item:hover {
+  background: transparent;
+}
+
+.menu-inner.classic .menu-item > div:first-child {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.menu-inner.classic .menu-item-name {
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.menu-inner.classic .menu-item-desc {
+  width: 100%;
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+.menu-inner.classic .menu-item-name::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1.5px dotted rgba(40, 34, 4, 0.2);
+  margin: 0 0.75rem;
+  min-width: 2rem;
+  position: relative;
+  top: -0.25em;
+}
+
+.menu-inner.classic .menu-item > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu-inner.classic .menu-item-price {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.menu-subtitle {
+  text-align: center;
+  font-family: 'Olivier', cursive;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--brown-warm);
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+  opacity: 0.65;
+  letter-spacing: 0.01em;
+}
+
+.menu-panel {
+  display: none;
+}
+
+.menu-panel.active {
+  display: block;
+  animation: fadeUp 0.4s ease;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: rgba(40, 34, 4, 0.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.menu-item {
+  background: var(--white);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: background 0.3s;
+}
+
+.menu-item:hover {
+  background: var(--cream);
+}
+
+.menu-item-name {
+  font-family: 'Olivier', cursive;
+  font-size: 1.15rem;
+  color: var(--brown-dark);
+  margin-bottom: 0.25rem;
+}
+
+.menu-item-desc {
+  font-size: 0.8rem;
+  color: var(--brown-warm);
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.menu-item-price {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.9rem;
+  color: var(--blue);
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.menu-note {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.2rem;
+  background: var(--cream);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: var(--brown-warm);
+}
+
+.menu-photo-strip {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+}
+
+.menu-photo-strip img {
+  width: 260px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* ═══════════════════ GALLERY ═══════════════════ */
+.gallery {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--brown-dark);
+  position: relative;
+}
+
+.gallery .section-label { color: var(--gold); }
+.gallery .section-title { color: var(--cream); }
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-extra.hidden {
+  display: none !important;
+}
+
+/* ═══════════════════ REVIEWS ═══════════════════ */
+.reviews {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--cream);
+  position: relative;
+}
+
+.reviews-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.reviews-stars {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-stars span {
+  font-size: 1.8rem;
+  color: var(--gold);
+}
+
+.reviews-count {
+  text-align: center;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--brown-warm);
+  opacity: 0.6;
+  margin-bottom: 3rem;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(40, 34, 4, 0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(40, 34, 4, 0.1);
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.review-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--brown-warm);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.review-author {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* ═══════════════════ VISIT ═══════════════════ */
+.visit {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--cream-light);
+}
+
+.visit-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.visit-info h3 {
+  font-family: 'Olivier', cursive;
+  font-size: 1.6rem;
+  color: var(--brown-dark);
+  margin-bottom: 1.5rem;
+}
+
+.visit-detail {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.visit-detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.visit-detail-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--white);
+}
+
+.visit-detail-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--brown-warm);
+}
+
+.visit-detail-text strong {
+  display: block;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brown-dark);
+  margin-bottom: 0.25rem;
+}
+
+.visit-note {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--cream);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--brown-warm);
+  border-left: 3px solid var(--gold);
+}
+
+.visit-map {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(40, 34, 4, 0.1);
+}
+
+.visit-map iframe {
+  width: 100%;
+  height: 400px;
+  border: 0;
+}
+
+.social-pills {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  text-decoration: none;
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid var(--blue);
+  border-radius: 100px;
+  transition: all 0.3s;
+}
+
+.social-pill:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.social-pill svg { flex-shrink: 0; }
+
+/* ═══════════════════ SHOP ═══════════════════ */
+.shop {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--cream-light);
+}
+
+.shop-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.shop-widget {
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 4px 20px rgba(40, 34, 4, 0.06);
+}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer {
+  background: var(--brown-dark);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+footer img {
+  height: 50px;
+  filter: brightness(0) invert(1);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+footer p {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(241, 234, 209, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+footer .social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+footer .social-links a {
+  color: rgba(241, 234, 209, 0.5);
+  transition: color 0.3s;
+  font-size: 0.75rem;
+  font-family: 'Telegrafico', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+footer .social-links a:hover { color: var(--blue); }
+
+/* ═══════════════════ ANIMATIONS ═══════════════════ */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-8px); }
+  60% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════ MOBILE ═══════════════════ */
+@media (max-width: 768px) {
+  .mobile-toggle { display: flex; }
+
+  nav .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--cream);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    transition: right 0.4s ease;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+  }
+
+  nav .nav-links.open { right: 0; }
+
+  nav .nav-links a {
+    color: var(--brown-dark) !important;
+    text-shadow: none !important;
+    font-size: 0.85rem;
+  }
+
+  .story-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .story-photo { order: -1; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid img { height: 200px; }
+
+  .visit-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-photo-strip img {
+    width: 200px;
+    height: 150px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid img { height: 250px; }
+  .menu-grid { grid-template-columns: 1fr; }
+
+  nav { padding: 0 1rem; }
+}
+
+/* ═══════════════════ LIGHTBOX ═══════════════════ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(40, 34, 4, 0.95);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: fadeUp 0.3s ease;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit" class="nav-cta">Visit Us</a></li>
+  </ul>
+  <div class="mobile-toggle" id="mobileToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="assets/photos/CMP24671.jpg" alt="Dutch pancake with fresh strawberries and whipped cream at Linda's" loading="eager">
+  </div>
+  <div class="hero-content">
+    <img src="assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" class="logo-hero">
+    <div class="hero-tagline">Palm Beach, Aruba &middot; Since 2001</div>
+    <div class="hero-hours">
+      <span class="dot"></span>
+      Open 8 AM &ndash; 2 PM &middot; Closed Sundays
+    </div>
+    <a href="#menu" class="hero-cta">See Our Menu</a>
+  </div>
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-inner">
+    <div class="story-text fade-in">
+      <div class="story-label">Our Story</div>
+      <h2 class="story-heading">One Mom.<br>One Recipe.<br>One Island.</h2>
+      <p>In 2001, our mom Linda opened a tiny restaurant in Palm Beach with one beautiful idea: bring authentic Dutch pancakes to paradise.</p>
+      <p>She passed on, but her recipes stayed. Today, we &mdash; her sons &mdash; fire up the stove every morning and make her pannenkoeken the same way she taught us. Same batter. Same love. Same team.</p>
+      <p>Twenty-five years later, we're still here. Hi mom.</p>
+      <div class="story-year">2001</div>
+    </div>
+    <div class="story-photo fade-in">
+      <img src="assets/photos/DSC08190.jpg" alt="Server at Linda's Dutch Pancakes carrying a fresh pancake">
+    </div>
+  </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-inner classic">
+    <div class="section-header fade-in">
+      <div class="section-label">What We Serve</div>
+      <h2 class="section-title">Our Menu</h2>
+    </div>
+
+    <div class="menu-tabs fade-in">
+      <button class="menu-tab active" onclick="showMenu('popular')">Pancakes</button>
+      <button class="menu-tab" onclick="showMenu('create')">Toppings</button>
+      <button class="menu-tab" onclick="showMenu('omelets')">Omelets</button>
+      <button class="menu-tab" onclick="showMenu('sandwiches')">Sandwiches</button>
+      <button class="menu-tab" onclick="showMenu('drinks')">Drinks</button>
+    </div>
+    <div class="menu-subtitle fade-in" id="menuSubtitle">Popular Dutch Pancakes</div>
+
+    <!-- POPULAR -->
+    <div class="menu-panel active" id="panel-popular">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div><div class="menu-item-name">Bacon & Apple</div><div class="menu-item-desc">Bacon strips and sliced apple cooked inside our Dutch pancake</div></div>
+          <div class="menu-item-price">$13.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Strawberries & Whipped Cream</div><div class="menu-item-desc">Topped with fresh strawberries and whipped cream</div></div>
+          <div class="menu-item-price">$13.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Bacon & Cheese</div><div class="menu-item-desc">Bacon strips cooked in, topped with melted Gouda cheese</div></div>
+          <div class="menu-item-price">$13.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Apple & Raisin</div><div class="menu-item-desc">Sliced apple and raisins cooked into our Dutch pancake</div></div>
+          <div class="menu-item-price">$13.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Brie, Walnuts & Honey</div><div class="menu-item-desc">Walnuts cooked in, topped with Brie and a side of honey</div></div>
+          <div class="menu-item-price">$16.25</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Mango, Papaya & Pineapple</div><div class="menu-item-desc">Topped with fresh mango, papaya, and pineapple</div></div>
+          <div class="menu-item-price">$17.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Ham, Cheese & Mushroom</div><div class="menu-item-desc">Diced ham and mushrooms cooked in, topped with melted Gouda</div></div>
+          <div class="menu-item-price">$16.25</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Ham, Cheese & Pineapple</div><div class="menu-item-desc">Diced ham cooked in, with melted Gouda and fresh pineapple</div></div>
+          <div class="menu-item-price">$16.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Pineapple, Coconut & Coconut Rum</div><div class="menu-item-desc">Fresh pineapple, grated coconut, and a shot of coconut rum</div></div>
+          <div class="menu-item-price">$21.25</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Banana, Whipped Cream & Banana Liqueur</div><div class="menu-item-desc">Fresh banana with whipped cream and a shot of banana liqueur</div></div>
+          <div class="menu-item-price">$21.25</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOPPINGS -->
+    <div class="menu-panel" id="panel-create">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div><div class="menu-item-name">Fresh Fruit Toppings</div><div class="menu-item-desc">Apple, Banana, Strawberries, Blueberries, Mango, Papaya, Pineapple</div></div>
+          <div class="menu-item-price">+$3.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Sweet Toppings</div><div class="menu-item-desc">Raisins, Coconut, Honey, Whipped Cream, Syrups, Chocolate Chips, Ice Cream, Nutella, Peanut Butter</div></div>
+          <div class="menu-item-price">+$2.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Savory Toppings</div><div class="menu-item-desc">Bacon, Ham, Gouda, Brie, Mozzarella, Almonds, Walnuts, Tuna, Mushroom, Pepper, Onion, Tomato</div></div>
+          <div class="menu-item-price">+$2.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Shots on the Side</div><div class="menu-item-desc">Banana Liqueur, Rum, Coconut Rum, Amaretto, Grand Marnier, Rum Soaked Raisins</div></div>
+          <div class="menu-item-price">+$7.50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OMELETS -->
+    <div class="menu-panel" id="panel-omelets">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div><div class="menu-item-name">Vegetable</div><div class="menu-item-desc">Green Pepper, Tomato, Mushroom, Onion</div></div>
+          <div class="menu-item-price">$12.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Meat & Cheese</div><div class="menu-item-desc">Bacon, Ham, Cheese</div></div>
+          <div class="menu-item-price">$12.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Farmer's</div><div class="menu-item-desc">Green Pepper, Tomato, Mushroom, Onion, Bacon, Ham, Cheese</div></div>
+          <div class="menu-item-price">$14.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SANDWICHES -->
+    <div class="menu-panel" id="panel-sandwiches">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div><div class="menu-item-name">Ham & Gouda Cheese</div><div class="menu-item-desc">Sliced ham with Dutch Gouda</div></div>
+          <div class="menu-item-price">$7.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Salami & Gouda Cheese</div><div class="menu-item-desc">Savory salami paired with Dutch Gouda</div></div>
+          <div class="menu-item-price">$7.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Tuna Salad</div><div class="menu-item-desc">Homemade tuna salad on French baguette</div></div>
+          <div class="menu-item-price">$7.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Bacon, Lettuce & Tomato</div><div class="menu-item-desc">Bacon, lettuce, and tomato on French baguette</div></div>
+          <div class="menu-item-price">$7.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Brie, Walnuts & Honey</div><div class="menu-item-desc">Brie with crunchy walnuts and a drizzle of honey</div></div>
+          <div class="menu-item-price">$7.50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-panel" id="panel-drinks">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div><div class="menu-item-name">Fresh Orange Juice</div><div class="menu-item-desc">Freshly squeezed to order</div></div>
+          <div class="menu-item-price">$5.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Hot Drinks</div><div class="menu-item-desc">American Coffee, Dutch Coffee, Decaf, Cappuccino, Espresso, Tea, Hot Chocolate</div></div>
+          <div class="menu-item-price">$3.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Mimosas</div><div class="menu-item-desc">Orange, Cranberry, Mango, Pineapple</div></div>
+          <div class="menu-item-price">$8.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Cocktails</div><div class="menu-item-desc">Bloody Mary, Tequila Sunrise, Screwdriver</div></div>
+          <div class="menu-item-price">$11.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Special Coffees</div><div class="menu-item-desc">Linda's Coffee (Amaretto, Kahlua, Bailey's), Irish, French, Mexican</div></div>
+          <div class="menu-item-price">$11.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-photo-strip fade-in">
+      <img src="assets/photos/CMP24684.jpg" alt="Strawberry Dutch pancake" loading="lazy">
+      <img src="assets/photos/CMP24591.jpg" alt="Strawberry pancake with whipped cream and mimosa" loading="lazy">
+      <img src="assets/photos/DSC07925.jpg" alt="Banana pancake with liqueur" loading="lazy">
+      <img src="assets/photos/CMP24602.jpg" alt="Overhead view of pancake and coffee" loading="lazy">
+      <img src="assets/photos/CMP24661.jpg" alt="Strawberry pancake with coffee" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-header fade-in">
+    <div class="section-label">Come See Us</div>
+    <h2 class="section-title">Life at Linda's</h2>
+  </div>
+  <div class="gallery-grid fade-in">
+    <img src="assets/photos/CMP24671.jpg" alt="Strawberry pancake with coffee and Linda's mug" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24809.jpg" alt="Mimosa flight with bokeh lights" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24840.jpg" alt="Bacon and apple pancake with mimosas" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP25021.jpg" alt="Linda's Dutch Pancakes branded mug" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24950.jpg" alt="Honey drizzle on brie walnut sandwich" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24777.jpg" alt="Pineapple coconut pancake with powdered sugar" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP25066.jpg" alt="Veggie omelet with toast and coffee" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24872.jpg" alt="Whipped cream on special coffee" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24826.jpg" alt="Bacon apple pancake with drinks spread" loading="lazy" onclick="openLightbox(this)">
+  </div>
+  <div class="gallery-grid gallery-extra hidden fade-in" id="galleryExtra" style="margin-top:1rem; max-width:1200px; margin-left:auto; margin-right:auto;">
+    <img src="assets/photos/DSC08029.jpg" alt="Guest enjoying a Dutch pancake" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24986.jpg" alt="Farmer's omelet with toast" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/DSC08760.jpg" alt="Linda's merchandise t-shirts" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP25057.jpg" alt="Delft Blue Holland figurine" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/DSC08190.jpg" alt="Server carrying pancakes at Linda's" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP25043.jpg" alt="Delft Blue canal houses decoration" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/CMP24901.jpg" alt="Fresh juice with flower garnish and tulips" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/DSC08552.jpg" alt="Staff in purple hoodie" loading="lazy" onclick="openLightbox(this)">
+    <img src="assets/photos/DSC08129.jpg" alt="Little one enjoying a pancake" loading="lazy" onclick="openLightbox(this)">
+  </div>
+  <div style="text-align:center; margin-top:2rem;" class="fade-in">
+    <button id="showMoreBtn" onclick="document.getElementById('galleryExtra').classList.remove('hidden'); this.style.display='none';" style="background:transparent; border:1.5px solid rgba(241,234,209,0.4); color:var(--cream); font-family:'Telegrafico',monospace; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.8rem 2rem; border-radius:100px; cursor:pointer; transition:all 0.3s;">Show More</button>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="shop-inner">
+    <div class="section-header fade-in">
+      <div class="section-label">Take a Piece Home</div>
+      <h2 class="section-title">Our Merch</h2>
+    </div>
+    <div class="shop-widget fade-in">
+      <iframe style="border-radius:24px;border:none" src="https://embed.creator-spring.com/widget?slug=lindas-dutch-pancakes-3&per=10&currency=&page=1&layout=carousel-wide&theme=light" title="Linda&#x27;s Dutch Pancakes Merch store powered by Spring" width="100%" height="420" data-reactroot=""></iframe>
+    </div>
+    <div style="text-align:center; margin-top:1.5rem;" class="fade-in">
+      <a href="https://lindasaruba.com/" target="_blank" rel="noopener" class="hero-cta" style="animation:none; font-size:0.7rem; padding:0.8rem 2rem;">Visit Our Store</a>
+    </div>
+  </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <div class="section-header fade-in">
+      <div class="section-label">What People Say</div>
+      <h2 class="section-title">Our Reviews</h2>
+    </div>
+    <div class="reviews-stars fade-in">
+      <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+    </div>
+    <div class="reviews-count fade-in">4.5 Stars &middot; 3,300+ Reviews on Google & TripAdvisor</div>
+
+    <div class="reviews-grid fade-in">
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"You can't leave Aruba without breakfast at Linda's. The pancakes are thin, buttery, and absolutely loaded with fresh toppings. This cozy spot feels like home."</div>
+        <div class="review-author">Sarah M. &middot; Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"We came three times during our trip. The bacon and apple pancake is unreal. Service was quick and friendly &mdash; Sandra was amazing. A must-visit!"</div>
+        <div class="review-author">Mike & Lisa T. &middot; TripAdvisor</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="review-text">"Best breakfast in Aruba, hands down. The Brie, Walnuts & Honey pancake is to die for. Get there before 9 AM to beat the crowd &mdash; it's worth it."</div>
+        <div class="review-author">Jennifer K. &middot; Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="section-header fade-in">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">Visit Linda's</h2>
+  </div>
+  <div class="visit-inner fade-in">
+    <div class="visit-info">
+      <div class="visit-detail">
+        <div class="visit-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="visit-detail-text">
+          <strong>Address</strong>
+          Palm Beach 6-D<br>Aruba
+        </div>
+      </div>
+      <div class="visit-detail">
+        <div class="visit-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </div>
+        <div class="visit-detail-text">
+          <strong>Hours</strong>
+          Monday &ndash; Saturday: 8:00 AM &ndash; 2:00 PM<br>
+          Sunday: Closed
+        </div>
+      </div>
+      <div class="visit-detail">
+        <div class="visit-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div class="visit-detail-text">
+          <strong>Phone</strong>
+          297-280-3378
+        </div>
+      </div>
+      <div class="visit-detail">
+        <div class="visit-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div class="visit-detail-text">
+          <strong>Email</strong>
+          <a href="mailto:lindasaruba@gmail.com" style="color:var(--brown-warm); text-decoration:none;">lindasaruba@gmail.com</a>
+        </div>
+      </div>
+      <div class="social-pills">
+        <a href="https://www.instagram.com/lindasaruba/" target="_blank" rel="noopener" class="social-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @lindasaruba
+        </a>
+        <a href="https://www.facebook.com/lindasaruba" target="_blank" rel="noopener" class="social-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://lindasaruba.com/" target="_blank" rel="noopener" class="social-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-4 2l4 4h-2l-2-2-2 2h-2l4-4zm-8 0l4 4H10L8 8 6 10H4l4-4zM4 18v-6h16v6H4z"/></svg>
+          Shop
+        </a>
+      </div>
+    </div>
+    <div class="visit-map">
+      <iframe src="https://www.google.com/maps?q=Linda's+Dutch+Pancakes,+Palm+Beach,+Aruba&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Linda's Dutch Pancakes location on Google Maps"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes">
+  <p>A Family Restaurant Since 2001</p>
+  <p>Palm Beach, Aruba</p>
+  <div class="social-links">
+    <a href="https://www.instagram.com/lindasaruba/" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg> Instagram</a>
+    <a href="https://www.facebook.com/lindasaruba" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a>
+    <a href="https://lindasaruba.com/" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-4 2l4 4h-2l-2-2-2 2h-2l4-4zm-8 0l4 4H10L8 8 6 10H4l4-4zM4 18v-6h16v6H4z"/></svg> Store</a>
+    <a href="https://www.tripadvisor.com/Restaurant_Review-g147249-d1046446-Reviews-Linda_s_Dutch_Pancakes-Palm_Eagle_Beach_Aruba.html" target="_blank" rel="noopener">&#9733; TripAdvisor</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+// Scroll nav background
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Menu tabs
+const menuSubtitles = {
+  popular: 'Popular Dutch Pancakes',
+  create: 'Add any of these toppings to your Dutch Pancake',
+  omelets: 'Three egg omelet with whole wheat or white toast, jelly, and butter',
+  sandwiches: 'Cold French Baguette Sandwiches',
+  drinks: 'Cold and hot drinks'
+};
+function showMenu(panel) {
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + panel).classList.add('active');
+  event.target.classList.add('active');
+  document.getElementById('menuSubtitle').textContent = menuSubtitles[panel] || '';
+}
+
+
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Lightbox
+function openLightbox(img) {
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// ═══════════════════ EDIT MODE (TEMPORARY) ═══════════════════
+(function() {
+  let editMode = false;
+  const markedImages = new Set();
+  const originalTexts = new Map();
+
+  const panel = document.createElement('div');
+  panel.id = 'edit-panel';
+  panel.innerHTML = `
+    <style>
+      #edit-panel {
+        position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+        font-family: 'Segoe UI', sans-serif;
+      }
+      #edit-toggle {
+        background: #27AAE1; color: white; border: none; padding: 0.8rem 1.4rem;
+        border-radius: 100px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.3s;
+      }
+      #edit-toggle:hover { background: #004EAD; transform: translateY(-1px); }
+      #edit-toggle.active { background: #e74c3c; }
+      #edit-summary {
+        display: none; background: white; border-radius: 16px; padding: 1.2rem;
+        margin-bottom: 0.75rem; box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        max-width: 340px; max-height: 50vh; overflow-y: auto; font-size: 0.8rem;
+        line-height: 1.5; color: #282204;
+      }
+      #edit-summary h4 { margin: 0 0 0.5rem; font-size: 0.9rem; }
+      #edit-summary .marked-img {
+        display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      #edit-summary .marked-img img { width: 50px; height: 35px; object-fit: cover; border-radius: 4px; }
+      #edit-summary .marked-img span { font-size: 0.75rem; color: #666; }
+      #edit-summary .unmark-btn {
+        background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.7rem;
+        margin-left: auto; padding: 0.2rem 0.4rem;
+      }
+      .edit-mode-img-overlay {
+        outline: 4px solid #e74c3c !important; outline-offset: -4px;
+        cursor: pointer !important; position: relative;
+      }
+      .edit-mode-img-overlay::after {
+        content: '✕ Replace'; position: absolute; top: 8px; right: 8px;
+        background: #e74c3c; color: white; padding: 0.3rem 0.6rem;
+        border-radius: 6px; font-size: 0.7rem; font-weight: 600;
+      }
+      .edit-mode-active [contenteditable="true"] {
+        outline: 2px dashed #27AAE1; outline-offset: 2px; cursor: text;
+        border-radius: 4px; min-height: 1em;
+      }
+      .edit-mode-active [contenteditable="true"]:focus {
+        outline: 2px solid #27AAE1; background: rgba(39,170,225,0.05);
+      }
+      .edit-hint {
+        position: fixed; top: 1rem; left: 50%; transform: translateX(-50%);
+        background: #282204; color: #F1EAD1; padding: 0.7rem 1.5rem;
+        border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+        z-index: 9999; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        display: none; text-align: center;
+      }
+      #done-btn {
+        display: none; background: #2ecc71; color: white; border: none; padding: 0.6rem 1.2rem;
+        border-radius: 100px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+        margin-left: 0.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      }
+      #done-btn:hover { background: #27ae60; }
+    </style>
+    <div class="edit-hint" id="editHint">
+      ✏️ Click any text to edit it &nbsp;·&nbsp; Click any photo to mark it for replacement
+    </div>
+    <div id="edit-summary"></div>
+    <div style="display:flex; align-items:center; justify-content:flex-end; gap:0.5rem;">
+      <button id="edit-toggle">✏️ Edit Mode</button>
+      <button id="done-btn">✅ Done</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const toggle = document.getElementById('edit-toggle');
+  const hint = document.getElementById('editHint');
+  const summary = document.getElementById('edit-summary');
+  const doneBtn = document.getElementById('done-btn');
+
+  const textEls = 'h1,h2,h3,h4,h5,h6,p,.menu-item-name,.menu-item-desc,.menu-item-price,.review-text,.review-author,.story-label,.section-label,.section-title,.hero-tagline,.visit-detail-text,.visit-note,.reviews-count';
+
+  toggle.addEventListener('click', () => {
+    editMode = !editMode;
+    toggle.classList.toggle('active', editMode);
+    toggle.textContent = editMode ? '🛑 Exit Edit Mode' : '✏️ Edit Mode';
+    hint.style.display = editMode ? 'block' : 'none';
+    doneBtn.style.display = editMode ? 'inline-block' : 'none';
+    document.body.classList.toggle('edit-mode-active', editMode);
+
+    document.querySelectorAll(textEls).forEach(el => {
+      if (editMode) {
+        if (!originalTexts.has(el)) originalTexts.set(el, el.innerHTML);
+        el.contentEditable = 'true';
+      } else {
+        el.contentEditable = 'false';
+      }
+    });
+
+    document.querySelectorAll('.gallery-grid img, .hero-bg img, .story-photo img, .menu-photo-strip img').forEach(img => {
+      if (editMode) {
+        img.style.cursor = 'pointer';
+        img._editClick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const src = img.getAttribute('src');
+          if (markedImages.has(src)) {
+            markedImages.delete(src);
+            img.classList.remove('edit-mode-img-overlay');
+          } else {
+            markedImages.add(src);
+            img.classList.add('edit-mode-img-overlay');
+          }
+          updateSummary();
+        };
+        img.addEventListener('click', img._editClick);
+      } else {
+        if (img._editClick) img.removeEventListener('click', img._editClick);
+        img.style.cursor = '';
+      }
+    });
+
+    if (!editMode) updateSummary();
+  });
+
+  doneBtn.addEventListener('click', () => {
+    const changes = [];
+    originalTexts.forEach((original, el) => {
+      if (el.innerHTML !== original) {
+        const label = el.className || el.tagName.toLowerCase();
+        changes.push('• Text changed (' + label.split(' ')[0] + '): "' + el.textContent.substring(0, 60) + '..."');
+      }
+    });
+    markedImages.forEach(src => {
+      changes.push('• Replace photo: ' + src);
+    });
+
+    if (changes.length === 0) {
+      summary.innerHTML = '<h4>No changes yet</h4><p style="color:#888;">Edit some text or click photos to mark them.</p>';
+    } else {
+      summary.innerHTML = '<h4>📋 Your Changes</h4><pre style="white-space:pre-wrap;font-size:0.75rem;background:#f9f7f2;padding:0.8rem;border-radius:8px;max-height:30vh;overflow-y:auto;">' + changes.join('\n') + '</pre><p style="margin-top:0.5rem;color:#888;font-size:0.7rem;">Copy this and paste it to me so I can apply the changes!</p>';
+    }
+    summary.style.display = 'block';
+  });
+
+  function updateSummary() {
+    if (markedImages.size === 0) { summary.style.display = 'none'; return; }
+    summary.style.display = 'block';
+    let html = '<h4>📸 Photos to replace (' + markedImages.size + ')</h4>';
+    markedImages.forEach(src => {
+      html += '<div class="marked-img"><img src="' + src + '"><span>' + src.split('/').pop() + '</span><button class="unmark-btn" data-src="' + src + '">remove</button></div>';
+    });
+    summary.innerHTML = html;
+    summary.querySelectorAll('.unmark-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const s = btn.dataset.src;
+        markedImages.delete(s);
+        document.querySelector('img[src="' + s + '"]')?.classList.remove('edit-mode-img-overlay');
+        updateSummary();
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
