@@ -74,6 +74,18 @@ nav.scrolled {
   box-shadow: 0 2px 30px rgba(40, 34, 4, 0.08);
 }
 
+nav .nav-logo {
+  background: rgba(241, 234, 209, 0.85);
+  padding: 0.35rem 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: background 0.4s;
+}
+
+nav.scrolled .nav-logo {
+  background: transparent;
+}
+
 nav .nav-logo img {
   height: 42px;
   transition: opacity 0.3s;
