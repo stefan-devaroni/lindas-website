@@ -1,0 +1,7 @@
+node_modules/
+package.json
+package-lock.json
+optimize-images.js
+optimize-images-v2.js
+update-html.js
+image-dimensions.json

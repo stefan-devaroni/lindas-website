@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Linda's Dutch Pancakes</title>
+<link rel="icon" type="image/png" href="/assets/logos/social-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Olivier';
+  src: url('/assets/fonts/olivier.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Telegrafico';
+  src: url('/assets/fonts/telegrafico.ttf') format('truetype');
+  font-display: swap;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Open Sauce One', 'Segoe UI', sans-serif;
+  background: #FAF6ED;
+  color: #282204;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.logo {
+  width: min(220px, 60vw);
+  margin-bottom: 2rem;
+}
+
+.code {
+  font-family: 'Olivier', serif;
+  font-size: clamp(4rem, 15vw, 8rem);
+  color: #27AAE1;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-family: 'Telegrafico', monospace;
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #5C3D1A;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  font-size: 1.05rem;
+  color: #5C3D1A;
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  background: #27AAE1;
+  color: #fff;
+  padding: 0.85rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: #004EAD;
+  transform: translateY(-2px);
+}
+
+.divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #27AAE1, #EFBD40);
+  border-radius: 2px;
+  margin: 1.5rem auto;
+}
+
+.footer-note {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.8rem;
+  color: #5C3D1A;
+  opacity: 0.6;
+}
+</style>
+</head>
+<body>
+  <img src="/assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" class="logo">
+  <div class="code">404</div>
+  <h1>Page Not Found</h1>
+  <div class="divider"></div>
+  <p>Looks like this pancake flipped off the plate. The page you're looking for doesn't exist.</p>
+  <a href="/" class="btn">Back to the Menu</a>
+  <div class="footer-note">Linda's Dutch Pancakes &middot; Palm Beach, Aruba</div>
+</body>
+</html>
