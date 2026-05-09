@@ -160,6 +160,8 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+picture { display: block; }
+img { height: auto; }
 
 .sr-only {
   position: absolute;
@@ -517,8 +519,13 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   transform: translateX(0);
 }
 
+.story-photo picture {
+  display: block;
+}
+
 .story-photo img {
   width: 100%;
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(40, 34, 4, 0.15);
 }
