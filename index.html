@@ -759,13 +759,16 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   color: var(--brown-warm);
 }
 
-.menu-photo-strip {
-  display: flex;
-  gap: 1rem;
+.menu-photo-wrap {
   margin-top: 3rem;
   overflow: hidden;
-  padding-bottom: 1rem;
-  position: relative;
+  border-radius: 16px;
+}
+
+.menu-photo-strip {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
 }
 
 .menu-photo-strip picture {
@@ -773,10 +776,10 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-photo-strip img {
-  width: 260px;
-  height: 200px;
+  width: 200px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 10px;
   flex-shrink: 0;
 }
 
@@ -786,7 +789,7 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-photo-strip.scrolling {
-  animation: menuStripScroll 40s linear infinite;
+  animation: menuStripScroll 50s linear infinite;
 }
 
 .menu-photo-strip.scrolling:hover {
@@ -1859,17 +1862,24 @@ footer .social-links a:hover { color: var(--blue); }
       </div>
     </div>
 
-    <div class="menu-photo-strip fade-in" id="menuPhotoStrip">
-      <picture><source srcset="assets/photos/CMP24684.webp" type="image/webp"><source srcset="assets/photos/CMP24684.jpg" type="image/jpeg"><img src="assets/photos/CMP24684.jpg" alt="Strawberry Dutch pancake" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24872.webp" type="image/webp"><source srcset="assets/photos/CMP24872.jpg" type="image/jpeg"><img src="assets/photos/CMP24872.jpg" alt="Special coffee with whipped cream" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24809.webp" type="image/webp"><source srcset="assets/photos/CMP24809.jpg" type="image/jpeg"><img src="assets/photos/CMP24809.jpg" alt="Mimosa flight" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24602.webp" type="image/webp"><source srcset="assets/photos/CMP24602.jpg" type="image/jpeg"><img src="assets/photos/CMP24602.jpg" alt="Overhead view of pancake and coffee" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24840.webp" type="image/webp"><source srcset="assets/photos/CMP24840.jpg" type="image/jpeg"><img src="assets/photos/CMP24840.jpg" alt="Bacon and apple pancake with mimosas" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP25066.webp" type="image/webp"><source srcset="assets/photos/CMP25066.jpg" type="image/jpeg"><img src="assets/photos/CMP25066.jpg" alt="Veggie omelet with toast" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/DSC07925.webp" type="image/webp"><source srcset="assets/photos/DSC07925.jpg" type="image/jpeg"><img src="assets/photos/DSC07925.jpg" alt="Banana pancake with liqueur" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24578.webp" type="image/webp"><source srcset="assets/photos/CMP24578.jpg" type="image/jpeg"><img src="assets/photos/CMP24578.jpg" alt="Syrup swirl pancake with mimosa" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24540.webp" type="image/webp"><source srcset="assets/photos/CMP24540.jpg" type="image/jpeg"><img src="assets/photos/CMP24540.jpg" alt="Plain pancake with coffee setup" loading="lazy"></picture>
-      <picture><source srcset="assets/photos/CMP24986.webp" type="image/webp"><source srcset="assets/photos/CMP24986.jpg" type="image/jpeg"><img src="assets/photos/CMP24986.jpg" alt="Farmer's omelet with toast" loading="lazy"></picture>
+    <div class="menu-photo-wrap fade-in">
+      <div class="menu-photo-strip" id="menuPhotoStrip">
+        <picture><source srcset="assets/photos/CMP24684.webp" type="image/webp"><img src="assets/photos/CMP24684.jpg" alt="Strawberry Dutch pancake" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24872.webp" type="image/webp"><img src="assets/photos/CMP24872.jpg" alt="Special coffee with whipped cream" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24809.webp" type="image/webp"><img src="assets/photos/CMP24809.jpg" alt="Mimosa flight" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24602.webp" type="image/webp"><img src="assets/photos/CMP24602.jpg" alt="Overhead pancake and coffee" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24840.webp" type="image/webp"><img src="assets/photos/CMP24840.jpg" alt="Bacon apple pancake with mimosas" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP25066.webp" type="image/webp"><img src="assets/photos/CMP25066.jpg" alt="Veggie omelet with toast" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/DSC07925.webp" type="image/webp"><img src="assets/photos/DSC07925.jpg" alt="Banana pancake with liqueur" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24578.webp" type="image/webp"><img src="assets/photos/CMP24578.jpg" alt="Syrup swirl pancake" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24540.webp" type="image/webp"><img src="assets/photos/CMP24540.jpg" alt="Plain pancake with coffee" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24986.webp" type="image/webp"><img src="assets/photos/CMP24986.jpg" alt="Farmer's omelet" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24950.webp" type="image/webp"><img src="assets/photos/CMP24950.jpg" alt="Brie walnut honey pancake" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24901.webp" type="image/webp"><img src="assets/photos/CMP24901.jpg" alt="Fresh juice with flowers" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24826.webp" type="image/webp"><img src="assets/photos/CMP24826.jpg" alt="Bacon apple pancake spread" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP25021.webp" type="image/webp"><img src="assets/photos/CMP25021.jpg" alt="Linda's branded mug" loading="lazy"></picture>
+        <picture><source srcset="assets/photos/CMP24777.webp" type="image/webp"><img src="assets/photos/CMP24777.jpg" alt="Pineapple coconut pancake" loading="lazy"></picture>
+      </div>
     </div>
   </div>
 </section>
