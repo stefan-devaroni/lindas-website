@@ -777,6 +777,123 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   scroll-snap-align: start;
 }
 
+/* ═══════════════════ GIFT SHOP ═══════════════════ */
+.giftshop {
+  padding: clamp(4rem, 10vw, 8rem) 2rem;
+  background: var(--cream);
+  position: relative;
+}
+
+.giftshop-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--brown-warm);
+}
+
+.giftshop-brands {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 2rem;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(40, 34, 4, 0.06);
+}
+
+.giftshop-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  transition: opacity 0.3s;
+  height: 50px;
+}
+
+.giftshop-brand:hover {
+  opacity: 1;
+}
+
+.giftshop-brand img {
+  max-height: 50px;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.giftshop-brand-text {
+  font-family: 'Olivier', cursive;
+  font-size: 1.1rem;
+  color: var(--brown-dark);
+  white-space: nowrap;
+}
+
+.giftshop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+}
+
+.giftshop-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(40, 34, 4, 0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.giftshop-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(40, 34, 4, 0.1);
+}
+
+.giftshop-card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.giftshop-card h3 {
+  font-family: 'Olivier', cursive;
+  font-size: 1.25rem;
+  color: var(--brown-dark);
+  margin-bottom: 0.5rem;
+}
+
+.giftshop-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--brown-warm);
+  opacity: 0.8;
+}
+
+.giftshop-note {
+  text-align: center;
+  margin-top: 2rem;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--brown-warm);
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .giftshop-brands {
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .giftshop-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ═══════════════════ GALLERY ═══════════════════ */
 .gallery {
   padding: clamp(4rem, 10vw, 8rem) 2rem;
@@ -1668,6 +1785,60 @@ footer .social-links a:hover { color: var(--blue); }
       <picture><source srcset="assets/photos/CMP24661.webp" type="image/webp"><source srcset="assets/photos/CMP24661.jpg" type="image/jpeg"><img src="assets/photos/CMP24661.jpg" alt="Strawberry pancake with coffee" loading="lazy" width="1600" height="1067"></picture>
     </div>
   </div>
+</section>
+
+<div class="delft-divider"></div>
+
+<!-- GIFT SHOP -->
+<section class="giftshop" id="giftshop">
+  <div class="section-header fade-in">
+    <div class="section-label">Take a Piece of Linda's Home</div>
+    <h2 class="section-title">Our Gift Shop</h2>
+  </div>
+  <p class="giftshop-intro fade-in">Browse our in-restaurant gift shop before you go. We carry local brands we love, island souvenirs, and Linda's own branded gear.</p>
+
+  <div class="giftshop-brands fade-in">
+    <div class="giftshop-brand"><span class="giftshop-brand-text">Linda's Dutch Pancakes</span></div>
+    <div class="giftshop-brand"><span class="giftshop-brand-text">Heinen Delfts Blauw</span></div>
+    <div class="giftshop-brand"><span class="giftshop-brand-text">Smit &amp; Dorlas</span></div>
+    <div class="giftshop-brand"><span class="giftshop-brand-text">Hot Delight</span></div>
+    <div class="giftshop-brand"><span class="giftshop-brand-text">Aruba Sun</span></div>
+  </div>
+
+  <div class="giftshop-grid fade-in stagger-in">
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">👕</div>
+      <h3>Linda's Branded Gear</h3>
+      <p>T-shirts, hoodies, sweaters, caps, hats, and UV shirts &mdash; wear a piece of Linda's wherever you go.</p>
+    </div>
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">🏺</div>
+      <h3>Heinen Delfts Blauw</h3>
+      <p>Authentic Dutch Delft Blue ceramics. We're an official Heinen partner &mdash; take home a real piece of Holland.</p>
+    </div>
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">☕</div>
+      <h3>Smit &amp; Dorlas Coffee</h3>
+      <p>The same premium Dutch coffee we serve every morning. Take a bag home and brew your own Linda's moment.</p>
+    </div>
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">🌶️</div>
+      <h3>Hot Delight Hot Sauces</h3>
+      <p>Locally made with papaya and Madam Jeanette peppers. The same sauces we serve at our tables.</p>
+    </div>
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">☀️</div>
+      <h3>Aruba Sun Sunscreen</h3>
+      <p>Island-made reef-safe sunscreen. Protect your skin the Aruban way.</p>
+    </div>
+    <div class="giftshop-card">
+      <div class="giftshop-card-icon">🎁</div>
+      <h3>Aruba Souvenirs</h3>
+      <p>Magnets, shot glasses, sunglasses, towels, towel clips, kids' plush toys, and more &mdash; something for everyone.</p>
+    </div>
+  </div>
+
+  <div class="giftshop-note fade-in">Available in-restaurant only &middot; Palm Beach 6-D</div>
 </section>
 
 <div class="delft-divider"></div>
