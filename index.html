@@ -944,6 +944,35 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   opacity: 0.5;
 }
 
+.giftshop-online {
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding-top: clamp(3rem, 8vw, 5rem);
+  border-top: 2px dashed var(--gold);
+}
+
+.giftshop-online-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.giftshop-online-title {
+  font-family: 'Olivier', cursive;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--brown-dark);
+  margin-bottom: 0.5rem;
+}
+
+.giftshop-online-sub {
+  font-size: 0.95rem;
+  color: var(--brown-warm);
+  opacity: 0.7;
+}
+
+.giftshop-online .shop-widget {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 @media (max-width: 768px) {
   .giftshop-brands {
     gap: 1.5rem;
@@ -1188,17 +1217,6 @@ a.visit-detail-icon:hover {
 }
 
 .social-pill svg { flex-shrink: 0; }
-
-/* ═══════════════════ SHOP ═══════════════════ */
-.shop {
-  padding: clamp(4rem, 10vw, 8rem) 2rem;
-  background: var(--cream-light);
-}
-
-.shop-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-}
 
 .shop-widget {
   border-radius: 24px;
@@ -1636,7 +1654,6 @@ footer .social-links a:hover { color: var(--blue); }
     <li><a href="#story">Our Story</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#shop">Shop</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#visit" class="nav-cta">Visit Us</a></li>
   </ul>
@@ -1940,6 +1957,21 @@ footer .social-links a:hover { color: var(--blue); }
   </div>
 
   <div class="giftshop-note fade-in">Available in-restaurant only &middot; Palm Beach 6-D</div>
+
+  <!-- ONLINE STORE -->
+  <div class="giftshop-online fade-in">
+    <div class="giftshop-online-header">
+      <div class="section-label">Not in Aruba?</div>
+      <h3 class="giftshop-online-title">Shop Online Today</h3>
+      <p class="giftshop-online-sub">Select products available for worldwide shipping.</p>
+    </div>
+    <div class="shop-widget">
+      <iframe style="border-radius:24px;border:none" src="https://embed.creator-spring.com/widget?slug=lindas-dutch-pancakes-3&per=14&currency=&page=1&layout=carousel-wide&theme=light" title="Linda&#x27;s Dutch Pancakes Merch store powered by Spring" width="100%" height="420" data-reactroot=""></iframe>
+    </div>
+    <div style="text-align:center; margin-top:1.5rem;">
+      <a href="https://lindasaruba.com/" target="_blank" rel="noopener" class="hero-cta" style="animation:none; font-size:0.7rem; padding:0.8rem 2rem;">Visit Our Full Store</a>
+    </div>
+  </div>
 </section>
 
 <div class="delft-divider"></div>
@@ -1982,24 +2014,6 @@ footer .social-links a:hover { color: var(--blue); }
     <button id="showMoreBtn" onclick="document.getElementById('galleryExtra').classList.remove('hidden'); this.style.display='none';" style="background:transparent; border:1.5px solid rgba(241,234,209,0.4); color:var(--cream); font-family:'Telegrafico',monospace; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.8rem 2rem; border-radius:100px; cursor:pointer; transition:all 0.3s;">Show More</button>
   </div>
 </section>
-
-<!-- SHOP -->
-<section class="shop" id="shop">
-  <div class="shop-inner">
-    <div class="section-header fade-in">
-      <div class="section-label">Take a Piece Home</div>
-      <h2 class="section-title">Our Merch</h2>
-    </div>
-    <div class="shop-widget fade-in">
-      <iframe style="border-radius:24px;border:none" src="https://embed.creator-spring.com/widget?slug=lindas-dutch-pancakes-3&per=14&currency=&page=1&layout=carousel-wide&theme=light" title="Linda&#x27;s Dutch Pancakes Merch store powered by Spring" width="100%" height="420" data-reactroot=""></iframe>
-    </div>
-    <div style="text-align:center; margin-top:1.5rem;" class="fade-in">
-      <a href="https://lindasaruba.com/" target="_blank" rel="noopener" class="hero-cta" style="animation:none; font-size:0.7rem; padding:0.8rem 2rem;">Visit Our Store</a>
-    </div>
-  </div>
-</section>
-
-<div class="delft-divider"></div>
 
 <!-- REVIEWS -->
 <section class="reviews" id="reviews">
