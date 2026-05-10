@@ -763,9 +763,13 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   display: flex;
   gap: 1rem;
   margin-top: 3rem;
-  overflow-x: auto;
+  overflow: hidden;
   padding-bottom: 1rem;
-  scroll-snap-type: x mandatory;
+  position: relative;
+}
+
+.menu-photo-strip picture {
+  flex-shrink: 0;
 }
 
 .menu-photo-strip img {
@@ -774,7 +778,44 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   object-fit: cover;
   border-radius: 12px;
   flex-shrink: 0;
-  scroll-snap-align: start;
+}
+
+@keyframes menuStripScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.menu-photo-strip.scrolling {
+  animation: menuStripScroll 40s linear infinite;
+}
+
+.menu-photo-strip.scrolling:hover {
+  animation-play-state: paused;
+}
+
+/* ═══════════════════ CREATE YOUR OWN ═══════════════════ */
+.menu-create-own {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 2px dashed var(--gold);
+}
+
+.menu-create-header {
+  font-family: 'Olivier', cursive;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--brown-dark);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.menu-create-note {
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 /* ═══════════════════ GIFT SHOP ═══════════════════ */
@@ -1647,8 +1688,7 @@ footer .social-links a:hover { color: var(--blue); }
     </div>
 
     <div class="menu-tabs fade-in">
-      <button class="menu-tab active" onclick="showMenu('popular')">Pancakes</button>
-      <button class="menu-tab" onclick="showMenu('create')">Toppings</button>
+      <button class="menu-tab active" onclick="showMenu('popular')">Dutch Pancakes</button>
       <button class="menu-tab" onclick="showMenu('omelets')">Omelets</button>
       <button class="menu-tab" onclick="showMenu('sandwiches')">Sandwiches</button>
       <button class="menu-tab" onclick="showMenu('drinks')">Drinks</button>
@@ -1699,26 +1739,28 @@ footer .social-links a:hover { color: var(--blue); }
           <div class="menu-item-price">$21.25</div>
         </div>
       </div>
-    </div>
 
-    <!-- TOPPINGS -->
-    <div class="menu-panel" id="panel-create">
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div><div class="menu-item-name">Fresh Fruit Toppings</div><div class="menu-item-desc">Apple, Banana, Strawberries, Blueberries, Mango, Papaya, Pineapple</div></div>
-          <div class="menu-item-price">+$3.00</div>
-        </div>
-        <div class="menu-item">
-          <div><div class="menu-item-name">Sweet Toppings</div><div class="menu-item-desc">Raisins, Coconut, Honey, Whipped Cream, Syrups, Chocolate Chips, Ice Cream, Nutella, Peanut Butter</div></div>
-          <div class="menu-item-price">+$2.75</div>
-        </div>
-        <div class="menu-item">
-          <div><div class="menu-item-name">Savory Toppings</div><div class="menu-item-desc">Bacon, Ham, Gouda, Brie, Mozzarella, Almonds, Walnuts, Tuna, Mushroom, Pepper, Onion, Tomato</div></div>
-          <div class="menu-item-price">+$2.75</div>
-        </div>
-        <div class="menu-item">
-          <div><div class="menu-item-name">Shots on the Side</div><div class="menu-item-desc">Banana Liqueur, Rum, Coconut Rum, Amaretto, Grand Marnier, Rum Soaked Raisins</div></div>
-          <div class="menu-item-price">+$7.50</div>
+      <!-- CREATE YOUR OWN -->
+      <div class="menu-create-own">
+        <div class="menu-create-header">Or create your own Dutch Pancake with the choice of all of these toppings.</div>
+        <div class="menu-create-note">Start with a Plain Dutch Pancake &mdash; $8.00</div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><div class="menu-item-name">Fresh Fruit Toppings</div><div class="menu-item-desc">Apple, Banana, Strawberries, Blueberries, Mango, Papaya, Pineapple</div></div>
+            <div class="menu-item-price">+$3.00</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Sweet Toppings</div><div class="menu-item-desc">Raisins, Coconut, Honey, Whipped Cream, Syrups, Chocolate Chips, Ice Cream, Nutella, Peanut Butter</div></div>
+            <div class="menu-item-price">+$2.75</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Savory Toppings</div><div class="menu-item-desc">Bacon, Ham, Gouda, Brie, Mozzarella, Almonds, Walnuts, Tuna, Mushroom, Pepper, Onion, Tomato</div></div>
+            <div class="menu-item-price">+$2.75</div>
+          </div>
+          <div class="menu-item">
+            <div><div class="menu-item-name">Shots on the Side</div><div class="menu-item-desc">Banana Liqueur, Rum, Coconut Rum, Amaretto, Grand Marnier, Rum Soaked Raisins</div></div>
+            <div class="menu-item-price">+$7.50</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1771,12 +1813,24 @@ footer .social-links a:hover { color: var(--blue); }
     <div class="menu-panel" id="panel-drinks">
       <div class="menu-grid">
         <div class="menu-item">
+          <div><div class="menu-item-name">Soft Drinks</div><div class="menu-item-desc">Coca-Cola, Sprite, Iced Tea</div></div>
+          <div class="menu-item-price">$3.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Juices</div><div class="menu-item-desc">Apple, Cranberry, Mango, Pineapple</div></div>
+          <div class="menu-item-price">$3.50</div>
+        </div>
+        <div class="menu-item">
           <div><div class="menu-item-name">Fresh Orange Juice</div><div class="menu-item-desc">Freshly squeezed</div></div>
           <div class="menu-item-price">$5.75</div>
         </div>
         <div class="menu-item">
           <div><div class="menu-item-name">Hot Drinks</div><div class="menu-item-desc">American Coffee, Dutch Coffee, Decaf, Cappuccino, Espresso, Tea, Hot Chocolate</div></div>
           <div class="menu-item-price">$3.75</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Beer</div><div class="menu-item-desc">Balashi, Heineken, Amstel Bright</div></div>
+          <div class="menu-item-price">$5.50</div>
         </div>
         <div class="menu-item">
           <div><div class="menu-item-badge"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Must Try</div><div class="menu-item-name">Mimosas</div><div class="menu-item-desc">Orange, Cranberry, Mango, Pineapple</div></div>
@@ -1787,18 +1841,35 @@ footer .social-links a:hover { color: var(--blue); }
           <div class="menu-item-price">$11.00</div>
         </div>
         <div class="menu-item">
-          <div><div class="menu-item-badge"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Linda's Favorite</div><div class="menu-item-name">Special Coffees</div><div class="menu-item-desc">Linda's Coffee (Amaretto, Kahlua, Bailey's), Irish, French, Mexican</div></div>
+          <div><div class="menu-item-badge"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Linda's Favorite</div><div class="menu-item-name">Linda's Coffee</div><div class="menu-item-desc">Amaretto, Kahlua, and Bailey's</div></div>
+          <div class="menu-item-price">$11.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Irish Coffee</div><div class="menu-item-desc">Whiskey</div></div>
+          <div class="menu-item-price">$11.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">French Coffee</div><div class="menu-item-desc">Grand Marnier</div></div>
+          <div class="menu-item-price">$11.00</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-item-name">Mexican Coffee</div><div class="menu-item-desc">Tequila</div></div>
           <div class="menu-item-price">$11.00</div>
         </div>
       </div>
     </div>
 
-    <div class="menu-photo-strip fade-in">
-      <picture><source srcset="assets/photos/CMP24684.webp" type="image/webp"><source srcset="assets/photos/CMP24684.jpg" type="image/jpeg"><img src="assets/photos/CMP24684.jpg" alt="Strawberry Dutch pancake" loading="lazy" width="1600" height="1067"></picture>
-      <picture><source srcset="assets/photos/CMP24591.webp" type="image/webp"><source srcset="assets/photos/CMP24591.jpg" type="image/jpeg"><img src="assets/photos/CMP24591.jpg" alt="Strawberry pancake with whipped cream and mimosa" loading="lazy" width="1600" height="1067"></picture>
-      <picture><source srcset="assets/photos/DSC07925.webp" type="image/webp"><source srcset="assets/photos/DSC07925.jpg" type="image/jpeg"><img src="assets/photos/DSC07925.jpg" alt="Banana pancake with liqueur" loading="lazy" width="1067" height="1600"></picture>
-      <picture><source srcset="assets/photos/CMP24602.webp" type="image/webp"><source srcset="assets/photos/CMP24602.jpg" type="image/jpeg"><img src="assets/photos/CMP24602.jpg" alt="Overhead view of pancake and coffee" loading="lazy" width="1600" height="1067"></picture>
-      <picture><source srcset="assets/photos/CMP24661.webp" type="image/webp"><source srcset="assets/photos/CMP24661.jpg" type="image/jpeg"><img src="assets/photos/CMP24661.jpg" alt="Strawberry pancake with coffee" loading="lazy" width="1600" height="1067"></picture>
+    <div class="menu-photo-strip fade-in" id="menuPhotoStrip">
+      <picture><source srcset="assets/photos/CMP24684.webp" type="image/webp"><source srcset="assets/photos/CMP24684.jpg" type="image/jpeg"><img src="assets/photos/CMP24684.jpg" alt="Strawberry Dutch pancake" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24872.webp" type="image/webp"><source srcset="assets/photos/CMP24872.jpg" type="image/jpeg"><img src="assets/photos/CMP24872.jpg" alt="Special coffee with whipped cream" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24809.webp" type="image/webp"><source srcset="assets/photos/CMP24809.jpg" type="image/jpeg"><img src="assets/photos/CMP24809.jpg" alt="Mimosa flight" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24602.webp" type="image/webp"><source srcset="assets/photos/CMP24602.jpg" type="image/jpeg"><img src="assets/photos/CMP24602.jpg" alt="Overhead view of pancake and coffee" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24840.webp" type="image/webp"><source srcset="assets/photos/CMP24840.jpg" type="image/jpeg"><img src="assets/photos/CMP24840.jpg" alt="Bacon and apple pancake with mimosas" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP25066.webp" type="image/webp"><source srcset="assets/photos/CMP25066.jpg" type="image/jpeg"><img src="assets/photos/CMP25066.jpg" alt="Veggie omelet with toast" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/DSC07925.webp" type="image/webp"><source srcset="assets/photos/DSC07925.jpg" type="image/jpeg"><img src="assets/photos/DSC07925.jpg" alt="Banana pancake with liqueur" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24578.webp" type="image/webp"><source srcset="assets/photos/CMP24578.jpg" type="image/jpeg"><img src="assets/photos/CMP24578.jpg" alt="Syrup swirl pancake with mimosa" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24540.webp" type="image/webp"><source srcset="assets/photos/CMP24540.jpg" type="image/jpeg"><img src="assets/photos/CMP24540.jpg" alt="Plain pancake with coffee setup" loading="lazy"></picture>
+      <picture><source srcset="assets/photos/CMP24986.webp" type="image/webp"><source srcset="assets/photos/CMP24986.jpg" type="image/jpeg"><img src="assets/photos/CMP24986.jpg" alt="Farmer's omelet with toast" loading="lazy"></picture>
     </div>
   </div>
 </section>
@@ -1817,7 +1888,7 @@ footer .social-links a:hover { color: var(--blue); }
     <div class="giftshop-brand"><img src="assets/brands/lindas.png" alt="Linda's Dutch Pancakes"></div>
     <div class="giftshop-brand"><img src="assets/brands/heinen-delfts-blauw.webp" alt="Heinen Delfts Blauw"></div>
     <div class="giftshop-brand"><img src="assets/brands/smit-dorlas.png" alt="Smit & Dorlas Coffee"></div>
-    <div class="giftshop-brand"><span class="giftshop-brand-text">Hot Delight</span></div>
+    <div class="giftshop-brand"><img src="assets/brands/hot-delight.webp" alt="Hot Delight Hot Sauces"></div>
     <div class="giftshop-brand"><img src="assets/brands/aruba-sun.png" alt="Aruba Sun Sunscreen"></div>
   </div>
 
@@ -1900,7 +1971,7 @@ footer .social-links a:hover { color: var(--blue); }
       <h2 class="section-title">Our Merch</h2>
     </div>
     <div class="shop-widget fade-in">
-      <iframe style="border-radius:24px;border:none" src="https://embed.creator-spring.com/widget?slug=lindas-dutch-pancakes-3&per=10&currency=&page=1&layout=carousel-wide&theme=light" title="Linda&#x27;s Dutch Pancakes Merch store powered by Spring" width="100%" height="420" data-reactroot=""></iframe>
+      <iframe style="border-radius:24px;border:none" src="https://embed.creator-spring.com/widget?slug=lindas-dutch-pancakes-3&per=14&currency=&page=1&layout=carousel-wide&theme=light" title="Linda&#x27;s Dutch Pancakes Merch store powered by Spring" width="100%" height="420" data-reactroot=""></iframe>
     </div>
     <div style="text-align:center; margin-top:1.5rem;" class="fade-in">
       <a href="https://lindasaruba.com/" target="_blank" rel="noopener" class="hero-cta" style="animation:none; font-size:0.7rem; padding:0.8rem 2rem;">Visit Our Store</a>
@@ -2018,7 +2089,7 @@ footer .social-links a:hover { color: var(--blue); }
       </div>
     </div>
     <div class="visit-map slide-right">
-      <iframe src="https://www.google.com/maps?q=Linda's+Dutch+Pancakes,+Palm+Beach,+Aruba&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Linda's Dutch Pancakes location on Google Maps"></iframe>
+      <iframe src="https://maps.google.com/maps?q=Linda%27s+Dutch+Pancakes+Palm+Beach+Aruba&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Linda's Dutch Pancakes location on Google Maps" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -2066,7 +2137,6 @@ window.addEventListener('scroll', () => {
 // Menu tabs
 const menuSubtitles = {
   popular: 'Popular Dutch Pancakes',
-  create: 'Add any of these toppings to your Dutch Pancake',
   omelets: 'Three egg omelet with whole wheat or white toast, jelly, and butter',
   sandwiches: 'Cold French Baguette Sandwiches',
   drinks: 'Cold and hot drinks'
@@ -2121,6 +2191,18 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     document.getElementById('navLinks').classList.remove('open');
   });
 });
+
+// Auto-scroll menu photo strip
+const strip = document.getElementById('menuPhotoStrip');
+if (strip) {
+  // Clone all children for infinite loop
+  const items = Array.from(strip.children);
+  items.forEach(item => {
+    const clone = item.cloneNode(true);
+    strip.appendChild(clone);
+  });
+  strip.classList.add('scrolling');
+}
 
 </script>
 
