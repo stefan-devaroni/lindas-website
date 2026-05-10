@@ -844,7 +844,7 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 .giftshop-card {
   background: var(--white);
   border-radius: 16px;
-  padding: 2rem;
+  overflow: hidden;
   box-shadow: 0 4px 20px rgba(40, 34, 4, 0.06);
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -854,9 +854,25 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   box-shadow: 0 12px 40px rgba(40, 34, 4, 0.1);
 }
 
-.giftshop-card-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.giftshop-card-photo {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.giftshop-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.giftshop-card:hover .giftshop-card-photo img {
+  transform: scale(1.06);
+}
+
+.giftshop-card-body {
+  padding: 1.5rem;
 }
 
 .giftshop-card h3 {
@@ -1802,39 +1818,39 @@ footer .social-links a:hover { color: var(--blue); }
     <div class="giftshop-brand"><img src="assets/brands/heinen-delfts-blauw.webp" alt="Heinen Delfts Blauw"></div>
     <div class="giftshop-brand"><img src="assets/brands/smit-dorlas.png" alt="Smit & Dorlas Coffee"></div>
     <div class="giftshop-brand"><span class="giftshop-brand-text">Hot Delight</span></div>
-    <div class="giftshop-brand"><span class="giftshop-brand-text">Aruba Sun</span></div>
+    <div class="giftshop-brand"><img src="assets/brands/aruba-sun.png" alt="Aruba Sun Sunscreen"></div>
   </div>
 
   <div class="giftshop-grid fade-in stagger-in">
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">👕</div>
-      <h3>Linda's Branded Gear</h3>
-      <p>T-shirts, hoodies, sweaters, caps, hats, and UV shirts &mdash; wear a piece of Linda's wherever you go.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/lindas-gear.webp" type="image/webp"><img src="assets/shop/lindas-gear.jpg" alt="Linda's Dutch Pancakes branded t-shirts" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Linda's Branded Gear</h3>
+      <p>T-shirts, hoodies, sweaters, caps, hats, and UV shirts &mdash; wear a piece of Linda's wherever you go.</p></div>
     </div>
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">🏺</div>
-      <h3>Heinen Delfts Blauw</h3>
-      <p>Authentic Dutch Delft Blue ceramics. We're an official Heinen partner &mdash; take home a real piece of Holland.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/delft-blue.webp" type="image/webp"><img src="assets/shop/delft-blue.jpg" alt="Heinen Delfts Blauw kissing couple figurine" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Heinen Delfts Blauw</h3>
+      <p>Authentic Dutch Delft Blue ceramics. We're an official Heinen partner &mdash; take home a real piece of Holland.</p></div>
     </div>
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">☕</div>
-      <h3>Smit &amp; Dorlas Coffee</h3>
-      <p>The same premium Dutch coffee we serve every morning. Take a bag home and brew your own Linda's moment.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/smit-dorlas-coffee.webp" type="image/webp"><img src="assets/shop/smit-dorlas-coffee.jpg" alt="Smit & Dorlas coffee bags and mugs" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Smit &amp; Dorlas Coffee</h3>
+      <p>The same premium Dutch coffee we serve every morning. Take a bag home and brew your own Linda's moment.</p></div>
     </div>
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">🌶️</div>
-      <h3>Hot Delight Hot Sauces</h3>
-      <p>Locally made with papaya and Madam Jeanette peppers. The same sauces we serve at our tables.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/hot-sauce.webp" type="image/webp"><img src="assets/shop/hot-sauce.jpg" alt="Hot Delight hot sauces display" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Hot Delight Hot Sauces</h3>
+      <p>Locally made with papaya and Madam Jeanette peppers. The same sauces we serve at our tables.</p></div>
     </div>
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">☀️</div>
-      <h3>Aruba Sun Sunscreen</h3>
-      <p>Island-made reef-safe sunscreen. Protect your skin the Aruban way.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/aruba-sun.webp" type="image/webp"><img src="assets/shop/aruba-sun.jpg" alt="Aruba Sun sunscreen display" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Aruba Sun Sunscreen</h3>
+      <p>Island-made reef-safe sunscreen. Protect your skin the Aruban way.</p></div>
     </div>
     <div class="giftshop-card">
-      <div class="giftshop-card-icon">🎁</div>
-      <h3>Aruba Souvenirs</h3>
-      <p>Magnets, shot glasses, sunglasses, towels, towel clips, kids' plush toys, and more &mdash; something for everyone.</p>
+      <div class="giftshop-card-photo"><picture><source srcset="assets/shop/souvenirs.webp" type="image/webp"><img src="assets/shop/souvenirs.jpg" alt="Aruba mason jar mugs and souvenirs" loading="lazy"></picture></div>
+      <div class="giftshop-card-body"><h3>Aruba Souvenirs</h3>
+      <p>Magnets, shot glasses, sunglasses, towels, towel clips, kids' plush toys, and more &mdash; something for everyone.</p></div>
     </div>
   </div>
 
