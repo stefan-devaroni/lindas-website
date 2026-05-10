@@ -1159,9 +1159,18 @@ footer .social-links a:hover { color: var(--blue); }
   width: fit-content;
 }
 
+.menu-inner.classic .menu-item > div:first-child:has(.menu-item-badge) {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.menu-inner.classic .menu-item > div:first-child:has(.menu-item-badge) .menu-item-name {
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+}
+
 .menu-inner.classic .menu-item-badge {
-  flex-basis: 100%;
-  max-width: fit-content;
   margin-bottom: 0.2rem;
 }
 .menu-item-badge svg {
