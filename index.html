@@ -796,6 +796,110 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   animation-play-state: paused;
 }
 
+/* ═══════════════════ ALLERGY-FRIENDLY ═══════════════════ */
+.allergy-friendly {
+  margin-top: 3.5rem;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+  background: var(--white);
+  border-radius: 20px;
+  border: 2px solid var(--gold);
+  position: relative;
+}
+
+.allergy-friendly-badge {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--brown-dark);
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.allergy-friendly h3 {
+  font-family: 'Olivier', cursive;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--brown-dark);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.allergy-friendly-since {
+  text-align: center;
+  font-family: 'Telegrafico', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 2rem;
+}
+
+.allergy-friendly-intro {
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--brown-warm);
+}
+
+.allergy-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+}
+
+.allergy-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.2rem;
+  background: var(--cream-light);
+  border-radius: 12px;
+}
+
+.allergy-option-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 50%;
+}
+
+.allergy-option-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--brown-dark);
+}
+
+.allergy-option-text strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.allergy-friendly-cta {
+  text-align: center;
+  padding: 1.2rem;
+  background: var(--cream);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--brown-warm);
+  line-height: 1.6;
+}
+
 /* ═══════════════════ CREATE YOUR OWN ═══════════════════ */
 .menu-create-own {
   margin-top: 2.5rem;
@@ -1903,6 +2007,34 @@ footer .social-links a:hover { color: var(--blue); }
         <picture><source srcset="assets/photos/CMP24777.webp" type="image/webp"><img src="assets/photos/CMP24777.jpg" alt="Pineapple coconut pancake" loading="lazy"></picture>
       </div>
     </div>
+
+    <!-- GLUTEN-FREE & ALLERGY-FRIENDLY -->
+    <div class="allergy-friendly fade-in" id="gluten-free">
+      <div class="allergy-friendly-badge">Since 2009</div>
+      <h3>Gluten-Free &amp; Allergy-Friendly</h3>
+      <div class="allergy-friendly-since">Aruba's first gluten-free restaurant &middot; 16+ years of experience</div>
+      <p class="allergy-friendly-intro">When Linda discovered she had celiac disease in 2009, we became the first restaurant in Aruba to serve gluten-free food. Every gluten-free dish we make uses dedicated gluten-free flour with zero cross-contamination &mdash; no shared fryers, no shared surfaces.</p>
+      <div class="allergy-options">
+        <div class="allergy-option">
+          <div class="allergy-option-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="allergy-option-text"><strong>Gluten-Free</strong>Dedicated GF flour, no cross-contamination</div>
+        </div>
+        <div class="allergy-option">
+          <div class="allergy-option-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="allergy-option-text"><strong>Dairy-Free</strong>Almond, soy &amp; oat milk available</div>
+        </div>
+        <div class="allergy-option">
+          <div class="allergy-option-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="allergy-option-text"><strong>Egg-Free</strong>Available upon request</div>
+        </div>
+        <div class="allergy-option">
+          <div class="allergy-option-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--gold)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="allergy-option-text"><strong>Other Allergies</strong>We accommodate almost any allergy</div>
+        </div>
+      </div>
+      <div class="allergy-friendly-cta">Just let your server know about any allergies or dietary needs when you order &mdash; we'll take care of the rest.</div>
+    </div>
+
   </div>
 </section>
 
