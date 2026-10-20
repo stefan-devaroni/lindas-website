@@ -252,6 +252,22 @@ nav.scrolled .nav-links a {
 
 nav .nav-links a:hover { color: var(--blue); }
 
+nav .nav-gf {
+  border: 1.5px solid var(--gold);
+  color: var(--gold) !important;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  text-shadow: none !important;
+  transition: all 0.3s;
+}
+nav .nav-gf:hover {
+  background: var(--gold);
+  color: var(--white) !important;
+}
+nav.scrolled .nav-gf {
+  color: var(--gold) !important;
+}
+
 nav .nav-cta {
   background: var(--blue);
   color: var(--white) !important;
@@ -614,6 +630,7 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   background: var(--blue);
   color: var(--white);
 }
+
 
 /* ─── CLASSIC VIEW ─── */
 .menu-inner.classic .menu-grid {
@@ -1761,6 +1778,7 @@ footer .social-links a:hover { color: var(--blue); }
     <li><a href="#giftshop">Gift Shop</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#gluten-free" class="nav-gf">Gluten-Free</a></li>
     <li><a href="#visit" class="nav-cta">Visit Us</a></li>
   </ul>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" onclick="const nl=document.getElementById('navLinks');nl.classList.toggle('open');this.setAttribute('aria-expanded',nl.classList.contains('open'))">
