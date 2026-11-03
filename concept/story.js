@@ -273,11 +273,9 @@ function baconStrip(len, seed) {
   const mesh = new THREE.Mesh(g, m); mesh.rotation.x = -Math.PI / 2; return mesh;
 }
 const appleMat = phys('#F3DE9C', { roughness: 0.35, clearcoat: 0.4 });
-const peelMat = std('#B83A2E', { roughness: 0.4 });
 function appleRing() {
   const g = new THREE.Group();
   g.add(new THREE.Mesh(lathe([[0.13, 0], [0.36, 0], [0.36, 0.06], [0.13, 0.06], [0.13, 0]], 40), appleMat));
-  const peel = new THREE.Mesh(new THREE.TorusGeometry(0.37, 0.028, 6, 40), peelMat); peel.rotation.x = Math.PI / 2; peel.position.y = 0.03; g.add(peel);
   return g;
 }
 const fillings = [];
@@ -315,7 +313,7 @@ function pancakeTex(side) {
       for (const [ax, az] of [[-0.38, 0.65], [0.38, 0.62], [-0.38, -0.62], [0.4, -0.66], [-1.08, -0.45], [1.1, 0.45], [0, 1.1], [0, -1.15]]) {
         const [px, py] = toPx(ax, -az);
         x.fillStyle = '#F6D58C'; x.beginPath(); x.arc(px, py, 0.36 * s, 0, TAU); x.arc(px, py, 0.13 * s, 0, TAU, true); x.fill();
-        x.strokeStyle = '#A64A24'; x.lineWidth = 0.05 * s; x.beginPath(); x.arc(px, py, 0.36 * s, 0, TAU); x.stroke();
+        x.strokeStyle = 'rgba(200,130,50,0.7)'; x.lineWidth = 0.03 * s; x.beginPath(); x.arc(px, py, 0.36 * s, 0, TAU); x.stroke();
         x.strokeStyle = 'rgba(190,110,40,0.6)'; x.lineWidth = 0.04 * s; x.beginPath(); x.arc(px, py, 0.15 * s, 0, TAU); x.stroke();
       }
       // batter in between, a little lighter
