@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>From Scratch — Linda's Dutch Pancakes</title>
+<meta name="description" content="Scroll and watch a Linda's Dutch pancake come together: flour, eggs, milk, bacon and apple, one flip, and served with a smile. Palm Beach, Aruba since 2001.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#27AAE1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: 'Olivier'; src: url('../assets/fonts/olivier.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Telegrafico'; src: url('../assets/fonts/telegrafico.ttf') format('truetype'); font-display: swap; }
+:root {
+  --blue: #27AAE1;
+  --blue-dark: #004EAD;
+  --cream: #F1EAD1;
+  --cream-light: #FAF6ED;
+  --gold: #EFBD40;
+  --ink: #282204;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: var(--cream); }
+body { font-family: 'Open Sauce One', 'Segoe UI', sans-serif; color: var(--ink); background: var(--cream); }
+
+/* The 3D kitchen stays fixed while the page scrolls past it */
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+#scroll { position: relative; height: 1400vh; }
+
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(14px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 14px max(18px, env(safe-area-inset-left));
+  pointer-events: none;
+}
+.topbar a { pointer-events: auto; }
+.topbar img { height: 46px; width: auto; display: block; filter: drop-shadow(0 2px 6px rgba(40,34,4,0.18)); }
+.topbar .home {
+  font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; background: rgba(250,246,237,0.86); padding: 10px 14px; border-radius: 999px;
+}
+
+/* Progress rail: one dot per step */
+.rail { position: fixed; right: max(14px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 9px; }
+.rail { transition: opacity .3s; }
+.rail span { width: 7px; height: 7px; border-radius: 50%; background: rgba(40,34,4,0.18); transition: background .3s, transform .3s; }
+.rail span.on { background: var(--blue); transform: scale(1.35); }
+
+/* Captions */
+.cap {
+  position: fixed; left: 0; right: 0; z-index: 5; pointer-events: none;
+  bottom: calc(9vh + env(safe-area-inset-bottom)); text-align: center;
+  padding: 0 max(22px, env(safe-area-inset-left));
+  opacity: 0; transform: translateY(18px);
+}
+.cap .step { font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-dark); margin-bottom: 6px; }
+.cap h2 {
+  font-family: 'Olivier', cursive; font-weight: normal; color: var(--ink);
+  font-size: clamp(38px, 7.2vw, 84px); line-height: 1.02; text-wrap: balance;
+  text-shadow: 0 2px 0 rgba(250,246,237,0.9), 0 0 28px rgba(250,246,237,0.95), 0 0 6px rgba(250,246,237,1);
+}
+.cap p { margin-top: 10px; font-size: clamp(15px, 1.6vw, 18px); color: #4A4220; text-shadow: 0 0 14px rgba(250,246,237,1), 0 0 4px rgba(250,246,237,1); }
+.cap.hero { bottom: auto; top: 22vh; }
+.cap.top { bottom: auto; top: calc(78px + env(safe-area-inset-top)); }
+.cap.hero h2 { font-size: clamp(48px, 10vw, 120px); }
+.cap.hero h2 em { font-style: normal; color: var(--blue); }
+.hint { margin-top: 18px; font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
+.hint i { display: inline-block; width: 1px; height: 34px; background: var(--ink); margin-top: 10px; animation: drip 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes drip { 0%,100% { transform: scaleY(0.3); opacity: .4 } 50% { transform: scaleY(1); opacity: 1 } }
+
+/* Final card, part of the normal page flow after the story */
+.end {
+  position: relative; z-index: 6; background: var(--blue); color: #fff; text-align: center;
+  padding: 90px max(22px, env(safe-area-inset-right)) calc(80px + env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+}
+.end h2 { font-family: 'Olivier', cursive; font-weight: normal; font-size: clamp(44px, 8vw, 96px); line-height: 1; }
+.end .since { font-family: 'Telegrafico', monospace; letter-spacing: 0.22em; text-transform: uppercase; font-size: 13px; margin: 16px 0 26px; opacity: 0.9; }
+.end p { max-width: 34em; margin: 0 auto 30px; font-size: 17px; line-height: 1.6; }
+.end .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.end a { display: inline-block; text-decoration: none; font-weight: 600; padding: 15px 26px; border-radius: 999px; }
+.end a.primary { background: #fff; color: var(--blue-dark); }
+.end a.ghost { border: 2px solid rgba(255,255,255,0.8); color: #fff; }
+.end .hours { margin-top: 30px; font-size: 14px; opacity: 0.9; }
+
+/* Shown while the 3D scene loads, and kept if the device cannot draw it */
+#loading { position: fixed; inset: 0; display: grid; place-items: center; z-index: 4; font-family: 'Telegrafico', monospace; letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; color: var(--ink); transition: opacity .6s; }
+.no-gl #stage, .no-gl .rail, .no-gl #loading, .no-gl .cap { display: none; }
+.no-gl #scroll { height: auto; }
+.fallback { display: none; }
+.no-gl .fallback { display: block; max-width: 760px; margin: 0 auto; padding: 120px 22px 40px; }
+.fallback figure { margin-bottom: 48px; }
+.fallback img { width: 100%; border-radius: 14px; display: block; }
+.fallback figcaption { font-family: 'Olivier', cursive; font-size: 40px; margin-top: 12px; }
+
+@media (max-width: 640px) {
+  .topbar img { height: 38px; }
+  .rail { gap: 7px; right: 8px; }
+  .rail span { width: 6px; height: 6px; }
+  .cap { bottom: calc(6vh + env(safe-area-inset-bottom)); }
+  .cap.hero { top: 15vh; }
+}
+@media (prefers-reduced-motion: reduce) { .hint i { animation: none; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="loading">Heating the pan…</div>
+
+<header class="topbar">
+  <a href="/" aria-label="Linda's Dutch Pancakes home"><img src="../assets/logos/logo-blue.webp" alt="Linda's Dutch Pancakes" width="160" height="80"></a>
+  <a class="home" href="/#menu">See the menu</a>
+</header>
+
+<nav class="rail" id="rail" aria-hidden="true"></nav>
+
+<!-- Captions: data-in / data-out are moments in the story (0 to 12) -->
+<section class="cap hero" data-in="-1" data-out="0.75">
+  <h2>Every pancake<br>starts <em>simple</em></h2>
+  <div class="hint">Scroll to make one<br><i></i></div>
+</section>
+<section class="cap" data-in="0.95" data-out="1.95"><div class="step">Step 1</div><h2>We start with simple ingredients</h2><p>Flour, eggs and milk. That's where it starts.</p></section>
+<section class="cap" data-in="2.05" data-out="2.95"><div class="step">Step 2</div><h2>Fresh eggs, cracked by hand</h2></section>
+<section class="cap" data-in="3.05" data-out="3.95"><div class="step">Step 3</div><h2>A good splash of milk</h2></section>
+<section class="cap" data-in="4.05" data-out="4.95"><div class="step">Step 4</div><h2>Whisked into our homemade batter</h2><p>Made fresh in our kitchen.</p></section>
+<section class="cap" data-in="5.15" data-out="6.15"><div class="step">Step 5</div><h2>Bacon and apple, sizzling in the pan</h2><p>Cooked right in, the Dutch way.</p></section>
+<section class="cap" data-in="6.3" data-out="7.15"><div class="step">Step 6</div><h2>The batter goes right on top</h2></section>
+<section class="cap" data-in="7.3" data-out="8.15"><div class="step">Step 7</div><h2>Golden, with crispy edges</h2></section>
+<section class="cap" data-in="8.3" data-out="9.15"><div class="step">Step 8</div><h2>One good flip</h2></section>
+<section class="cap" data-in="9.3" data-out="10.15"><div class="step">Step 9</div><h2>Onto our big white plate</h2></section>
+<section class="cap" data-in="10.3" data-out="11.2"><div class="step">Step 10</div><h2>Cooked with love</h2></section>
+<section class="cap top" data-in="11.3" data-out="13"><h2>&hellip;and served<br>with a smile</h2></section>
+
+<div id="scroll"></div>
+
+<div class="fallback">
+  <figure><img loading="lazy" src="../assets/photos/CMP24540.webp" alt="A plain Dutch pancake on a white plate"><figcaption>We start with simple ingredients</figcaption></figure>
+  <figure><img loading="lazy" src="../assets/photos/CMP24597.webp" alt="A golden Dutch pancake with syrup"><figcaption>Golden, with crispy edges</figcaption></figure>
+  <figure><img loading="lazy" src="../assets/photos/CMP24602.webp" alt="A Dutch pancake served with coffee"><figcaption>Cooked with love and served with a smile</figcaption></figure>
+</div>
+
+<footer class="end">
+  <h2>Come hungry</h2>
+  <div class="since">Linda's Dutch Pancakes &middot; Palm Beach, Aruba &middot; Since 2001</div>
+  <p>Every pancake is made fresh in our kitchen, with the toppings cooked right in. Walk in, sit down, and we'll take it from here.</p>
+  <div class="btns">
+    <a class="primary" href="/#menu">See the menu</a>
+    <a class="ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Linda's+Dutch+Pancakes,+Palm+Beach,+Aruba" target="_blank" rel="noopener">Get directions</a>
+  </div>
+  <div class="hours">Monday to Saturday, 8 AM to 2 PM &middot; Walk-ins only &middot; Palm Beach 6-D</div>
+</footer>
+
+<script type="module" src="story.js"></script>
+</body>
+</html>
