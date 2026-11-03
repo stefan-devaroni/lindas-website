@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>From Scratch — Linda's Dutch Pancakes</title>
+<meta name="description" content="Scroll and watch a Linda's Dutch pancake come together: flour, eggs, milk, bacon and apple, one flip, and served with a smile. Palm Beach, Aruba since 2001.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#27AAE1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="frames/wide/01-00.webp" media="(min-aspect-ratio: 1/1)">
+<link rel="preload" as="image" href="frames/tall/01-00.webp" media="(max-aspect-ratio: 1/1)">
+<style>
+@font-face { font-family: 'Olivier'; src: url('../assets/fonts/olivier.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Telegrafico'; src: url('../assets/fonts/telegrafico.ttf') format('truetype'); font-display: swap; }
+:root {
+  --blue: #27AAE1;
+  --blue-dark: #004EAD;
+  --cream: #F1EAD1;
+  --cream-light: #FAF6ED;
+  --ink: #282204;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: #1d1a10; }
+body { font-family: 'Open Sauce One', 'Segoe UI', sans-serif; color: var(--ink); }
+
+/* The film: frames drawn on a fixed canvas while the page scrolls past */
+#film { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.scrim { position: fixed; left: 0; right: 0; bottom: 0; height: 46vh; pointer-events: none; background: linear-gradient(to top, rgba(29,22,8,0.72), rgba(29,22,8,0.35) 45%, rgba(29,22,8,0)); }
+.scrim.top { top: 0; bottom: auto; height: 22vh; background: linear-gradient(to bottom, rgba(29,22,8,0.45), rgba(29,22,8,0)); }
+#scroll { position: relative; height: 1500vh; }
+
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(14px + env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) 14px max(18px, env(safe-area-inset-left));
+  pointer-events: none;
+}
+.topbar a { pointer-events: auto; }
+.topbar .logo { background: rgba(250,246,237,0.92); border-radius: 14px; padding: 6px 10px; display: block; }
+.topbar img { height: 40px; width: auto; display: block; }
+.topbar .home {
+  font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; background: rgba(250,246,237,0.92); padding: 10px 14px; border-radius: 999px;
+}
+
+.rail { position: fixed; right: max(14px, env(safe-area-inset-right)); top: 50%; transform: translateY(-50%); z-index: 10; display: flex; flex-direction: column; gap: 9px; transition: opacity .3s; }
+.rail span { width: 7px; height: 7px; border-radius: 50%; background: rgba(250,246,237,0.35); transition: background .3s, transform .3s; }
+.rail span.on { background: var(--blue); transform: scale(1.35); }
+
+.cap {
+  position: fixed; left: 0; right: 0; z-index: 5; pointer-events: none; color: #fff;
+  bottom: calc(8vh + env(safe-area-inset-bottom)); text-align: center;
+  padding: 0 max(22px, env(safe-area-inset-left));
+  opacity: 0; transform: translateY(18px);
+}
+.cap .step { font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #BDDFFF; margin-bottom: 8px; }
+.cap h2 { font-family: 'Olivier', cursive; font-weight: normal; font-size: clamp(38px, 7vw, 84px); line-height: 1.02; text-wrap: balance; text-shadow: 0 2px 18px rgba(0,0,0,0.35); }
+.cap p { margin-top: 10px; font-size: clamp(15px, 1.6vw, 18px); color: rgba(255,255,255,0.9); }
+.cap.hero h2 { font-size: clamp(50px, 10vw, 124px); }
+.cap.hero h2 em { font-style: normal; color: #8FD6F5; }
+.hint { margin-top: 18px; font-family: 'Telegrafico', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+.hint i { display: inline-block; width: 1px; height: 34px; background: #fff; margin-top: 10px; animation: drip 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes drip { 0%,100% { transform: scaleY(0.3); opacity: .4 } 50% { transform: scaleY(1); opacity: 1 } }
+
+#loading { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 4; color: #fff; font-family: 'Telegrafico', monospace; letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; transition: opacity .5s; }
+
+.end {
+  position: relative; z-index: 6; background: var(--blue); color: #fff; text-align: center;
+  padding: 90px max(22px, env(safe-area-inset-right)) calc(80px + env(safe-area-inset-bottom)) max(22px, env(safe-area-inset-left));
+}
+.end h2 { font-family: 'Olivier', cursive; font-weight: normal; font-size: clamp(44px, 8vw, 96px); line-height: 1; }
+.end .since { font-family: 'Telegrafico', monospace; letter-spacing: 0.22em; text-transform: uppercase; font-size: 13px; margin: 16px 0 26px; opacity: 0.9; }
+.end p { max-width: 34em; margin: 0 auto 30px; font-size: 17px; line-height: 1.6; }
+.end .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.end a { display: inline-block; text-decoration: none; font-weight: 600; padding: 15px 26px; border-radius: 999px; }
+.end a.primary { background: #fff; color: var(--blue-dark); }
+.end a.ghost { border: 2px solid rgba(255,255,255,0.8); color: #fff; }
+.end .hours { margin-top: 30px; font-size: 14px; opacity: 0.9; }
+
+@media (max-width: 640px) {
+  .topbar img { height: 32px; }
+  .rail { gap: 7px; right: 8px; }
+  .rail span { width: 6px; height: 6px; }
+  .cap { bottom: calc(6vh + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) { .hint i { animation: none; } }
+</style>
+</head>
+<body>
+<canvas id="film" aria-hidden="true"></canvas>
+<div class="scrim top"></div>
+<div class="scrim"></div>
+<div id="loading">Heating the pan…</div>
+
+<header class="topbar">
+  <a class="logo" href="/" aria-label="Linda's Dutch Pancakes home"><img src="../assets/logos/logo-blue.webp" alt="Linda's Dutch Pancakes" width="160" height="80"></a>
+  <a class="home" href="/#menu">See the menu</a>
+</header>
+
+<nav class="rail" id="rail" aria-hidden="true"></nav>
+
+<!-- data-in / data-out are moments in the story: 0 = before the first clip, 1-11 = clips 1-10, 12 = end -->
+<section class="cap hero" data-in="-1" data-out="0.8">
+  <h2>Every pancake<br>starts <em>simple</em></h2>
+  <div class="hint">Scroll to make one<br><i></i></div>
+</section>
+<section class="cap" data-in="1.0" data-out="1.95"><div class="step">Step 1</div><h2>We start with simple ingredients</h2><p>Flour, eggs and milk. That's where it starts.</p></section>
+<section class="cap" data-in="2.05" data-out="2.95"><div class="step">Step 2</div><h2>Fresh eggs, cracked by hand</h2></section>
+<section class="cap" data-in="3.05" data-out="3.95"><div class="step">Step 3</div><h2>A good splash of milk</h2></section>
+<section class="cap" data-in="4.05" data-out="4.95"><div class="step">Step 4</div><h2>Whisked into our homemade batter</h2><p>Made fresh in our kitchen.</p></section>
+<section class="cap" data-in="5.1" data-out="6.0"><div class="step">Step 5</div><h2>Bacon and apple, sizzling in the pan</h2><p>Cooked right in, the Dutch way.</p></section>
+<section class="cap" data-in="6.1" data-out="6.95"><div class="step">Step 6</div><h2>The batter goes right on top</h2></section>
+<section class="cap" data-in="7.05" data-out="7.95"><div class="step">Step 7</div><h2>Golden, with crispy edges</h2></section>
+<section class="cap" data-in="8.05" data-out="8.95"><div class="step">Step 8</div><h2>One good flip</h2></section>
+<section class="cap" data-in="9.05" data-out="9.95"><div class="step">Step 9</div><h2>Onto a plate</h2></section>
+<section class="cap" data-in="10.05" data-out="10.9"><div class="step">Step 10</div><h2>Cooked with love</h2></section>
+<section class="cap" data-in="11.0" data-out="13"><h2>&hellip;and served<br>with a smile</h2></section>
+
+<div id="scroll"></div>
+
+<footer class="end">
+  <h2>Come hungry</h2>
+  <div class="since">Linda's Dutch Pancakes &middot; Palm Beach, Aruba &middot; Since 2001</div>
+  <p>Every pancake is made fresh in our kitchen, with the toppings cooked right in. Walk in, sit down, and we'll take it from here.</p>
+  <div class="btns">
+    <a class="primary" href="/#menu">See the menu</a>
+    <a class="ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Linda's+Dutch+Pancakes,+Palm+Beach,+Aruba" target="_blank" rel="noopener">Get directions</a>
+  </div>
+  <div class="hours">Monday to Saturday, 8 AM to 2 PM &middot; Walk-ins only &middot; Palm Beach 6-D</div>
+</footer>
+
+<script>
+// Scroll scrubs through 10 clips of 36 frames each. Phones get a tall crop of the same frames.
+(() => {
+  const CLIPS = 10, PER = 36, END = 12;
+  const canvas = document.getElementById('film'), ctx = canvas.getContext('2d');
+  const scrollEl = document.getElementById('scroll');
+  let kind = innerWidth / innerHeight < 1 ? 'tall' : 'wide';
+  const frames = {};
+  const src = (c, k) => `frames/${kind}/${String(c + 1).padStart(2, '0')}-${String(k).padStart(2, '0')}.webp`;
+  const key = (c, k) => `${kind}/${c}/${k}`;
+  function load(c, k) {
+    const id = key(c, k);
+    if (!frames[id]) { const img = new Image(); img.decoding = 'async'; img.src = src(c, k); frames[id] = img; img.onload = () => { if (c === want.c && Math.abs(k - want.k) < 3) dirty = true; }; }
+    return frames[id];
+  }
+  // load the clip under the reader first, then the rest in order
+  function preload() {
+    const order = [];
+    for (let k = 0; k < PER; k += 4) order.push([0, k]);
+    for (let c = 0; c < CLIPS; c++) for (let k = 0; k < PER; k++) order.push([c, k]);
+    let i = 0;
+    const next = () => { for (let n = 0; n < 6 && i < order.length; n++, i++) load(...order[i]); if (i < order.length) setTimeout(next, 60); };
+    next();
+  }
+
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const want = { c: 0, k: 0 };
+  let t = 0, dirty = true, shown = null;
+  // story time -> frame: 0-1 holds the first frame, 1-11 plays the clips, 11-12 holds the last
+  function frameAt(tt) {
+    if (tt <= 1) return [0, 0];
+    if (tt >= 11) return [CLIPS - 1, PER - 1];
+    const x = tt - 1, c = Math.min(CLIPS - 1, Math.floor(x));
+    return [c, Math.round((x - c) * (PER - 1))];
+  }
+  function nearestLoaded(c, k) {
+    for (let d = 0; d < PER; d++) for (const kk of [k - d, k + d]) { if (kk < 0 || kk >= PER) continue; const img = frames[key(c, kk)]; if (img && img.complete && img.naturalWidth) return img; }
+    return null;
+  }
+  function draw() {
+    const [c, k] = frameAt(t); want.c = c; want.k = k;
+    load(c, k);
+    const img = nearestLoaded(c, k) || shown;
+    if (!img) return;
+    if (img === shown && !dirty) return;
+    shown = img; dirty = false;
+    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    const w = img.naturalWidth * s, h = img.naturalHeight * s;
+    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+    document.getElementById('loading')?.remove();
+  }
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
+    const k2 = innerWidth / innerHeight < 1 ? 'tall' : 'wide';
+    if (k2 !== kind) { kind = k2; shown = null; preload(); }
+    dirty = true;
+  }
+  addEventListener('resize', resize); resize();
+
+  // captions + step dots
+  const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el, a: +el.dataset.in, b: +el.dataset.out }));
+  const rail = document.getElementById('rail');
+  const STEPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  STEPS.forEach(() => rail.appendChild(document.createElement('span')));
+  const dots = [...rail.children];
+  let lastStep = -1;
+  function captions(tt) {
+    for (const c of caps) {
+      const vis = Math.min(clamp((tt - c.a) / 0.15 + (c.a < 0 ? 1 : 0)), clamp((c.b - tt) / 0.15));
+      c.el.style.opacity = vis.toFixed(3);
+      c.el.style.transform = `translateY(${((1 - vis) * 18).toFixed(1)}px)`;
+    }
+    const step = STEPS.filter((s) => tt >= s - 0.05).length - 1;
+    if (step !== lastStep) { dots.forEach((d, i) => d.classList.toggle('on', i === step)); lastStep = step; }
+  }
+  new IntersectionObserver(([e]) => rail.style.opacity = e.isIntersecting ? 0 : 1).observe(document.querySelector('.end'));
+
+  const target = () => clamp(scrollY / Math.max(1, scrollEl.offsetHeight - innerHeight)) * END;
+  t = target();
+  function tick() {
+    const goal = target();
+    t += (goal - t) * 0.18;
+    if (Math.abs(goal - t) < 0.001) t = goal;
+    captions(t); draw();
+    requestAnimationFrame(tick);
+  }
+  preload();
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
