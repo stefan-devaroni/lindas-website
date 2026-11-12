@@ -10,30 +10,3 @@
   for = "/robots.txt"
   [headers.values]
     Content-Type = "text/plain"
-
-# lindasaruba.com (no dash) was the old Teespring shop address.
-# It now sends visitors to the new online store on Amaze Commerce.
-# 302 (temporary) on purpose, so the target can change later without browsers remembering the old one.
-[[redirects]]
-  from = "https://lindasaruba.com/*"
-  to = "https://app.amazecommerce.com/shop/lindasaruba"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "http://lindasaruba.com/*"
-  to = "https://app.amazecommerce.com/shop/lindasaruba"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "https://www.lindasaruba.com/*"
-  to = "https://app.amazecommerce.com/shop/lindasaruba"
-  status = 302
-  force = true
-
-[[redirects]]
-  from = "http://www.lindasaruba.com/*"
-  to = "https://app.amazecommerce.com/shop/lindasaruba"
-  status = 302
-  force = true
