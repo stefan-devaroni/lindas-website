@@ -50,5 +50,9 @@ window.VOTE_PRODUCTS = [
     link: 'https://app.amazecommerce.com/shop/lindasaruba/linda-s-25-years-anniversary-mug' },
   { title: 'Kissing Couple Mug',               price: '$13.99', from: false, note: 'White mug, 11 oz',   kind: 'mug', shirt: 'white',
     photo: 'products/kissing-couple-mug-2.webp',
-    link: 'https://app.amazecommerce.com/shop/lindasaruba/kissing-couple-mug-2' }
+    link: 'https://app.amazecommerce.com/shop/lindasaruba/kissing-couple-mug-2' },
+
+  { title: "Linda's Dutch Pancakes Apron",     price: '$39.99', from: false, note: 'All-over print apron, one size', kind: 'tee', shirt: 'cream',
+    photo: 'products/linda-s-dutch-pancakes-apron.webp',
+    link: 'https://app.amazecommerce.com/shop/lindasaruba/linda-s-dutch-pancakes-apron' }
 ];
