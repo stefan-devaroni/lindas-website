@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aruba photo postcard — Linda's Dutch Pancakes</title>
+<meta name="description" content="Take a selfie, pick a Linda's frame and send a postcard from Palm Beach, Aruba. Your photo stays on your phone.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EAD1">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="preload" href="../assets/fonts/olivier.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="../assets/fonts/telegrafico.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="postcard.css">
+</head>
+<body data-screen="start" data-size="post">
+
+<main id="app">
+
+  <!-- 1. Start -->
+  <section class="screen screen-start" data-screen-name="start">
+    <div class="airmail" aria-hidden="true"></div>
+    <header class="brand">
+      <img src="../assets/logos/logo-blue.png" width="1713" height="591" alt="" data-t-alt="logoAlt">
+    </header>
+    <h1 data-t="startTitle" data-focus tabindex="-1"></h1>
+    <p class="lead" data-t="startLead"></p>
+    <div class="example" id="exampleWrap">
+      <div class="example-card" id="exampleCard" role="img" aria-label="" data-t-aria="exampleAlt">
+        <canvas id="exampleA" width="648" height="810"></canvas>
+        <canvas id="exampleB" width="648" height="810"></canvas>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="btnTake">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.6"/></svg>
+        <span data-t="takePhoto"></span>
+      </button>
+      <label class="btn btn-secondary" for="fileLibrary" role="button" tabindex="0" data-t="choosePhoto"></label>
+      <p class="privacy" data-t="privacy"></p>
+    </div>
+  </section>
+
+  <!-- 2. Camera -->
+  <section class="screen screen-camera" data-screen-name="camera" data-cam="off" hidden>
+    <header class="cam-top">
+      <button type="button" class="round-btn" id="btnCamBack" aria-label="" data-t-aria="close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <h2 class="cam-title" data-focus tabindex="-1"><span data-t="cameraTitle"></span></h2>
+      <span class="cam-frame-name" id="camFrameName"></span>
+    </header>
+
+    <div class="stage-wrap" id="camWrap">
+      <div class="stage" id="camStage">
+        <video id="video" playsinline autoplay muted></video>
+        <canvas class="stage-frame" id="camFrame" width="1080" height="1350"></canvas>
+        <p class="cam-status" id="camStatus" data-t="cameraStarting" hidden></p>
+        <div class="countdown" id="countdown" aria-live="assertive"></div>
+        <div class="flash" id="flash" aria-hidden="true"></div>
+        <button type="button" class="stage-arrow prev" id="camPrev" aria-label="" data-t-aria="prevFrame">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" class="stage-arrow next" id="camNext" aria-label="" data-t-aria="nextFrame">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="cam-fallback" id="camFallback" hidden>
+          <h3 data-t="noCameraTitle"></h3>
+          <p id="camFallbackText"></p>
+          <label class="btn btn-primary" for="fileCamera" role="button" tabindex="0" data-t="openCamera"></label>
+          <label class="btn btn-secondary" for="fileLibrary" role="button" tabindex="0" data-t="choosePhoto"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="cam-controls">
+      <label class="round-btn" for="fileLibrary" role="button" tabindex="0" aria-label="" data-t-aria="choosePhoto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/></svg>
+      </label>
+      <button type="button" class="shutter" id="btnShutter" aria-label="" data-t-aria="shutter" disabled><i></i></button>
+      <button type="button" class="round-btn" id="btnSwitch" aria-label="" data-t-aria="switchCamera" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><path d="M9.2 12.6a3 3 0 0 1 5.3-1.2M14.8 14.6a3 3 0 0 1-5.3 1.2"/><path d="M14.8 9.6v2h-2M9.2 17.6v-2h2"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. Decorate -->
+  <section class="screen screen-decorate" data-screen-name="decorate" hidden>
+    <header class="bar">
+      <button type="button" class="btn-text" id="btnRetake">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span data-t="retake"></span>
+      </button>
+      <h2 data-t="decorateTitle" data-focus tabindex="-1"></h2>
+      <div class="seg" role="group" aria-label="" data-t-aria="sizeLabel">
+        <button type="button" id="sizePost" aria-pressed="true" data-t="sizePost"></button>
+        <button type="button" id="sizeStory" aria-pressed="false" data-t="sizeStory"></button>
+      </div>
+    </header>
+
+    <div class="stage-wrap" id="editWrap">
+      <div class="stage" id="editStage">
+        <canvas class="stage-photo" id="editPhoto" width="1080" height="1350"></canvas>
+        <canvas class="stage-frame" id="editFrame" width="1080" height="1350"></canvas>
+        <button type="button" class="stage-arrow prev" id="editPrev" aria-label="" data-t-aria="prevFrame">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button type="button" class="stage-arrow next" id="editNext" aria-label="" data-t-aria="nextFrame">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="thumbs" id="thumbs"></div>
+
+    <div class="tools">
+      <div class="tool-group">
+        <button type="button" class="tool" id="btnZoomOut" aria-label="" data-t-aria="zoomOut"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M7.5 10.5h6"/></svg></button>
+        <button type="button" class="tool" id="btnZoomIn" aria-label="" data-t-aria="zoomIn"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M7.5 10.5h6M10.5 7.5v6"/></svg></button>
+      </div>
+      <div class="tool-group">
+        <button type="button" class="tool" id="btnLeft" aria-label="" data-t-aria="moveLeft"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button type="button" class="tool" id="btnUp" aria-label="" data-t-aria="moveUp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+        <button type="button" class="tool" id="btnDown" aria-label="" data-t-aria="moveDown"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+        <button type="button" class="tool" id="btnRight" aria-label="" data-t-aria="moveRight"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="tool-group">
+        <button type="button" class="tool" id="btnFlip" aria-pressed="false" aria-label="" data-t-aria="flip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18" stroke-dasharray="2.2 2.6"/><path d="M9 7L4 17h5zM15 7l5 10h-5z"/></svg></button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="btnFinish" data-t="finish"></button>
+    </div>
+  </section>
+
+  <!-- 4. Done -->
+  <section class="screen screen-done" data-screen-name="done" hidden>
+    <h2 data-t="doneTitle" data-focus tabindex="-1"></h2>
+    <div class="final">
+      <img id="finalImg" alt="" data-t-alt="finalAlt">
+    </div>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="btnShare">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M7.5 8L12 3.5 16.5 8"/><path d="M6 12H5a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-1"/></svg>
+        <span data-t="share"></span>
+      </button>
+      <button type="button" class="btn btn-secondary" id="btnSave">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 11L12 15.5 16.5 11M5 20h14"/></svg>
+        <span data-t="save"></span>
+      </button>
+      <p class="hint" id="saveHint"></p>
+    </div>
+    <div class="caption">
+      <p class="caption-label" data-t="captionLabel"></p>
+      <p class="caption-text" id="captionText"></p>
+      <button type="button" class="btn btn-small" id="btnCopy" data-t="copyCaption"></button>
+    </div>
+    <div class="done-links">
+      <button type="button" class="btn-text" id="btnChange" data-t="changeFrame"></button>
+      <button type="button" class="btn-text" id="btnAgain" data-t="startAgain"></button>
+    </div>
+  </section>
+
+  <!-- Kiosk: the big screen at the entrance (?kiosk=1) -->
+  <section class="kiosk-screen" data-screen-name="kiosk" hidden>
+    <div class="kiosk-deck" id="kioskDeck" aria-hidden="true"></div>
+    <div class="kiosk-panel">
+      <img class="kiosk-logo" src="../assets/logos/logo-blue.png" width="1713" height="591" alt="" data-t-alt="logoAlt" draggable="false">
+      <h1 data-t="kioskTitle"></h1>
+      <div class="kiosk-qr">
+        <canvas id="kioskQr" role="img" aria-label="" data-t-aria="kioskQrAlt"></canvas>
+        <p class="kiosk-scan" data-t="kioskScanCaps"></p>
+      </div>
+      <ol class="kiosk-steps">
+        <li data-t="kioskStep1"></li>
+        <li data-t="kioskStep2"></li>
+        <li data-t="kioskStep3"></li>
+      </ol>
+      <p class="kiosk-privacy" data-t="privacy"></p>
+    </div>
+  </section>
+
+</main>
+
+<input type="file" id="fileCamera" class="vh" accept="image/*" capture="user" tabindex="-1" aria-hidden="true">
+<input type="file" id="fileLibrary" class="vh" accept="image/*" tabindex="-1" aria-hidden="true">
+
+<div class="busy" id="busy" hidden><div class="busy-box"><i class="spinner" aria-hidden="true"></i><p id="busyText" role="status"></p></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<noscript><p class="noscript">This page needs JavaScript to open the camera and draw the postcard.</p></noscript>
+
+<script src="js/strings.js"></script>
+<script src="js/qr.js"></script>
+<script src="js/sample.js"></script>
+<script src="js/frames.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

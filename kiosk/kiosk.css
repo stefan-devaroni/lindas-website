@@ -1,0 +1,297 @@
+/* Linda's Dutch Pancakes: the home screen that opens the guest pages.
+   Brand colours and fonts as on the rest of the site. Plain CSS, no build step.
+
+   Two looks in one file:
+     the normal page (phones and laptops) is the default,
+     html.kiosk (set by kiosk.js for ?kiosk=1) is the big touchscreen. */
+
+@font-face { font-family: 'Olivier'; src: url('../assets/fonts/olivier.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Telegrafico'; src: url('../assets/fonts/telegrafico.ttf') format('truetype'); font-display: swap; }
+
+:root {
+  --blue: #27AAE1;        /* signature */
+  --blue-dark: #004EAD;
+  --blue-deep: #003A82;   /* pressed edge of the dark blue */
+  --blue-pale: #BDDFFF;
+  --yellow: #EFBD40;
+  --orange: #EB8917;
+  --cream: #F1EAD1;       /* page */
+  --paper: #FBF7E9;       /* raised surfaces */
+  --ink: #282204;         /* text, never pure black */
+  --ink-soft: #5A5230;
+  --leaf: #3FA353;
+
+  --script: 'Olivier', 'Segoe Script', 'Brush Script MT', cursive;
+  --caps: 'Telegrafico', 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+
+  --k: 10px;              /* the size unit for the tulips, the bar and the sheets; the touchscreen makes it grow with the screen */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--cream); -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: var(--body); color: var(--ink); background: var(--cream); line-height: 1.4; }
+h1, h2, p { margin: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; touch-action: manipulation; }
+img, svg { display: block; }
+:focus-visible { outline: 4px solid var(--orange); outline-offset: 4px; }
+
+/* Capital-letter labels. The brand font has letters only; kiosk.js adds .plain to any label
+   that has a digit or punctuation in it, so nothing ever shows as an empty box. */
+.caps { font-family: var(--caps); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 400; }
+.caps.plain { font-family: var(--body); text-transform: none; letter-spacing: 0.02em; font-weight: 700; }
+
+/* ─────────────── the normal page ─────────────── */
+.home { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+
+.welcome {
+  position: relative; flex: none; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+  padding: calc(18px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 24px max(16px, env(safe-area-inset-left));
+  background: var(--paper); border-bottom: 5px solid var(--blue);
+}
+.logo { display: block; line-height: 0; border-radius: 10px; position: relative; z-index: 1; }
+.logo img { height: clamp(54px, 9vw, 78px); width: auto; }
+.welcome-text { position: relative; z-index: 1; }
+.welcome h1 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(2.5rem, 5vw + 1.3rem, 4.5rem); line-height: 1; text-wrap: balance;
+}
+.welcome p { margin-top: 0.5em; font-size: clamp(1.02rem, 0.6vw + 0.9rem, 1.3rem); color: var(--ink-soft); text-wrap: balance; }
+
+.tiles {
+  flex: 1 0 auto; width: 100%; max-width: 1212px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: 40px 36px;
+  padding: 38px max(16px, env(safe-area-inset-right)) 30px max(16px, env(safe-area-inset-left));
+}
+.tile {
+  flex: 0 1 252px; min-width: 0;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  color: var(--ink); text-decoration: none; border-radius: 14px;
+}
+.tile-pic {
+  position: relative; display: block; width: 100%; max-width: 236px; flex: none;
+  border-radius: 4.6%; box-shadow: 0 8px 0 var(--blue-dark);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.tile-pic svg { width: 100%; height: auto; }
+.tile:active .tile-pic { transform: translateY(5px); box-shadow: 0 3px 0 var(--blue-dark); }
+.tile-text { display: block; min-width: 0; }
+.tile-title {
+  display: block; margin-top: 24px;
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: 2.2rem; line-height: 1.04; text-wrap: balance;
+}
+.tile-title .whole { white-space: nowrap; }
+.tile-line { display: block; margin-top: 7px; font-size: 1.04rem; line-height: 1.36; text-wrap: balance; }
+.tile-out { display: inline-block; vertical-align: baseline; width: 0.5em; height: 0.5em; margin-left: 0.22em; color: var(--blue); }
+.tile-out svg { width: 100%; height: 100%; }
+.empty { font-size: 1.2rem; color: var(--ink-soft); padding: 40px 0; }
+
+.foot {
+  flex: none; text-align: center; font-size: 0.95rem; color: var(--ink-soft);
+  padding: 8px 16px calc(28px + env(safe-area-inset-bottom));
+}
+.foot p { text-wrap: balance; }
+.foot p + p { margin-top: 6px; }
+.foot a { color: var(--blue-dark); font-weight: 600; text-underline-offset: 3px; display: inline-block; padding: 8px 4px; }
+
+/* phones: one tile per row, picture on the left */
+@media (max-width: 619px) {
+  .tiles { flex-direction: column; flex-wrap: nowrap; gap: 26px; padding-top: 28px; }
+  .tile { flex: none; flex-direction: row; align-items: center; text-align: left; gap: 16px; }
+  .tile-pic { width: 31%; max-width: 124px; box-shadow: 0 6px 0 var(--blue-dark); }
+  .tile-title { margin-top: 0; font-size: 1.9rem; text-wrap: wrap; }
+  .tile-line { margin-top: 4px; font-size: 1rem; text-wrap: wrap; }
+}
+
+/* ─────────────── the giant tulips ─────────────── */
+.garden { position: absolute; inset: 0; pointer-events: none; display: none; }
+.tulip {
+  position: absolute; bottom: 0; width: calc(var(--k) * 5.6); margin-left: calc(var(--k) * -2.8);
+  transform-origin: 50% 100%;
+}
+.tulip .stem {
+  position: absolute; left: 50%; top: calc(var(--k) * 5.6); bottom: 0;
+  width: calc(var(--k) * 0.84); margin-left: calc(var(--k) * -0.42);
+  background: var(--leaf); border-radius: var(--k) var(--k) 0 0;
+}
+.tulip .head { position: absolute; left: 0; top: 0; width: 100%; }
+.tulip .head svg { width: 100%; height: auto; }
+.tulip .leaves { position: absolute; left: 50%; bottom: 0; width: 190%; margin-left: -95%; height: min(62%, calc(var(--k) * 20)); }
+.tulip .leaves svg { width: 100%; height: 100%; }
+
+/* on the normal page two pairs stand on the blue line of the header, wide screens only */
+@media (min-width: 900px) {
+  .garden { display: block; }
+  .tulip-a { left: max(46px, calc(50% - 520px)); height: 88%; }
+  .tulip-b { left: max(112px, calc(50% - 452px)); height: 58%; }
+  .tulip-c { left: min(calc(100% - 46px), calc(50% + 520px)); height: 82%; }
+  .tulip-d { left: min(calc(100% - 112px), calc(50% + 452px)); height: 62%; }
+}
+
+/* ─────────────── the touchscreen (?kiosk=1) ─────────────── */
+html.kiosk, html.kiosk body {
+  height: 100%; overflow: hidden; overscroll-behavior: none; touch-action: pan-x pan-y;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; cursor: default;
+}
+html.kiosk { --k: min(1.78vh, 1.6vw); --side: 11vw; }   /* --k is 19 px on a 1920 x 1080 screen */
+html.kiosk img, html.kiosk svg { -webkit-user-drag: none; pointer-events: none; }
+html.kiosk button { cursor: default; }
+
+html.kiosk .home {
+  position: fixed; inset: 0; min-height: 0;
+  padding: calc(var(--k) * 1.5 + env(safe-area-inset-top)) 0 calc(var(--k) * 2.4 + env(safe-area-inset-bottom));
+}
+html.kiosk .garden { display: block; }
+html.kiosk .welcome {
+  position: static; overflow: visible; background: none; border: 0; padding: 0 var(--side);
+  flex-direction: row; justify-content: center; text-align: left; gap: calc(var(--k) * 2.2);
+}
+html.kiosk .logo img { height: calc(var(--k) * 6.6); }
+html.kiosk .welcome h1 { font-size: calc(var(--k) * 4.5); }
+html.kiosk .welcome p { margin-top: 0.3em; font-size: calc(var(--k) * 1.6); color: var(--ink); }
+html.kiosk .foot { display: none; }
+
+/* kiosk.js works out --pic (the size of one picture), the letter sizes --title and --line, --cell and --grid,
+   so that every tile fits on the screen */
+html.kiosk .tiles {
+  position: relative; z-index: 1;
+  flex: 1 1 0; min-height: 0; width: var(--grid, 78vw); max-width: none; margin: calc(var(--k) * 1.7) auto 0; padding: 0;
+  flex-direction: row; flex-wrap: wrap; align-content: center; gap: var(--gap-y, 28px) var(--gap-x, 30px);
+}
+html.kiosk .tile { flex: none; flex-direction: column; text-align: center; gap: 0; width: var(--cell, 300px); border-radius: calc(var(--pic, 220px) * 0.06); }
+html.kiosk .tile-pic { width: var(--pic, 220px); max-width: none; box-shadow: 0 calc(var(--pic, 220px) * 0.04) 0 var(--blue-dark); }
+html.kiosk .tile:active .tile-pic { transform: translateY(calc(var(--pic, 220px) * 0.026)); box-shadow: 0 calc(var(--pic, 220px) * 0.014) 0 var(--blue-dark); }
+html.kiosk .tile-title { margin-top: calc(var(--pic, 220px) * 0.115); font-size: var(--title, 44px); text-wrap: balance; }
+html.kiosk .tile-line { margin-top: calc(var(--title, 44px) * 0.14); font-size: var(--line, 25px); line-height: 1.3; text-wrap: balance; }
+
+/* on a screen that stands upright kiosk.js may pick a list: picture left, bigger words beside it */
+html.kiosk .tiles.list .tile { flex-direction: row; align-items: center; text-align: left; gap: calc(var(--pic, 180px) * 0.2); }
+html.kiosk .tiles.list .tile-text { flex: 1 1 0; }
+html.kiosk .tiles.list .tile-title { margin-top: 0; }
+html.kiosk .tiles.list .tile-line { margin-top: calc(var(--title, 44px) * 0.16); text-wrap: wrap; }
+
+html.kiosk .tulip-a { left: 4.3vw; height: 87%; }
+html.kiosk .tulip-b { left: 8.4vw; height: 54%; }
+html.kiosk .tulip-c { left: calc(100% - 4.3vw); height: 83%; }
+html.kiosk .tulip-d { left: calc(100% - 8.4vw); height: 59%; }
+
+/* a screen that stands upright */
+@media (orientation: portrait) {
+  html.kiosk { --side: 12.5vw; }
+  html.kiosk .home { padding-top: calc(var(--k) * 2.6 + env(safe-area-inset-top)); }
+  html.kiosk .welcome { flex-direction: column; text-align: center; gap: calc(var(--k) * 1.1); padding: 0 calc(var(--side) + var(--k) * 2); }
+  html.kiosk .logo img { height: calc(var(--k) * 7.4); }
+  html.kiosk .welcome h1 { font-size: calc(var(--k) * 5.4); }
+  html.kiosk .welcome p { font-size: calc(var(--k) * 1.9); }
+  html.kiosk .tiles { margin-top: calc(var(--k) * 2.4); }
+  html.kiosk .tulip-a { left: 7.2vw; height: 91%; }
+  html.kiosk .tulip-b { left: 4.6vw; height: 42%; }
+  html.kiosk .tulip-c { left: calc(100% - 7.2vw); height: 87%; }
+  html.kiosk .tulip-d { left: calc(100% - 4.6vw); height: 47%; }
+}
+
+/* The gentle "tap me" movement after a while without a touch: the pictures take turns, the tulips sway. */
+html.kiosk .tile.nudge .tile-pic { animation: nudge 1.7s cubic-bezier(.3, .6, .3, 1) both; }
+html.kiosk .tile.nudge .tile-pic::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 36%; height: 36%; margin: -18% 0 0 -18%;
+  border-radius: 50%; border: calc(var(--pic, 220px) * 0.022) solid var(--orange);
+  animation: ring 1.7s ease-out both; pointer-events: none;
+}
+@keyframes nudge {
+  0%, 100% { transform: none; }
+  28% { transform: translateY(calc(var(--pic, 220px) * -0.045)) rotate(-1.4deg); }
+  58% { transform: translateY(0) rotate(0.8deg); }
+}
+@keyframes ring {
+  0% { transform: scale(0.35); opacity: 0; }
+  22% { opacity: 0.95; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+html.kiosk.attract .tulip { animation: sway 7.5s ease-in-out infinite; }
+html.kiosk.attract .tulip-b, html.kiosk.attract .tulip-c { animation-duration: 9s; animation-delay: -3s; }
+@keyframes sway { 0%, 100% { transform: rotate(-0.8deg); } 50% { transform: rotate(0.8deg); } }
+
+/* ─────────────── a page in its frame, under the HOME bar ─────────────── */
+.viewer { position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column; background: var(--cream); animation: appear .2s ease both; }
+.viewer.bar-bottom { flex-direction: column-reverse; }
+@keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+
+.bar {
+  flex: none; position: relative; display: flex; align-items: center; gap: calc(var(--k) * 1.2);
+  height: calc(var(--k) * 4.9 + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) calc(var(--k) * 1.3) 0;
+  background: var(--blue-dark); border-bottom: calc(var(--k) * 0.24) solid var(--blue);
+}
+.viewer.bar-bottom .bar {
+  height: calc(var(--k) * 4.9 + env(safe-area-inset-bottom)); padding: 0 calc(var(--k) * 1.3) env(safe-area-inset-bottom);
+  border-bottom: 0; border-top: calc(var(--k) * 0.24) solid var(--blue);
+}
+.home-btn {
+  position: relative; z-index: 1; flex: none;
+  height: calc(var(--k) * 3.6); padding: 0 calc(var(--k) * 1.9) 0 calc(var(--k) * 1.4); margin-bottom: calc(var(--k) * 0.28);
+  display: inline-flex; align-items: center; gap: calc(var(--k) * 0.7);
+  border-radius: 999px; background: var(--yellow); color: var(--ink);
+  font-size: calc(var(--k) * 1.42);
+  box-shadow: 0 calc(var(--k) * 0.34) 0 var(--orange);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.home-btn:active { transform: translateY(calc(var(--k) * 0.22)); box-shadow: 0 calc(var(--k) * 0.12) 0 var(--orange); }
+.home-icon { display: block; width: calc(var(--k) * 1.9); height: calc(var(--k) * 1.9); }
+.home-icon svg { width: 100%; height: 100%; }
+.home-btn .caps { padding-left: 0.14em; }
+/* The title sits in the middle of the bar. A very long one is cut off with dots before it can touch the HOME button. */
+.bar-title {
+  flex: 1 1 0; min-width: 0; text-align: center; pointer-events: none;
+  font-family: var(--script); font-weight: 400; color: #fff; font-size: calc(var(--k) * 2.7); line-height: 1.5;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bar::after { content: ""; flex: 0 100 calc(var(--k) * 10.4); }   /* as wide as the HOME button, so the title stays centred */
+
+.frame-box { flex: 1 1 0; min-height: 0; position: relative; background: var(--cream); }
+.frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: var(--cream); opacity: 0; transition: opacity .25s ease; }
+.frame.ready { opacity: 1; }
+.frame-note {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: calc(var(--k) * 3);
+  font-family: var(--script); color: var(--blue-dark); font-size: calc(var(--k) * 3.4); line-height: 1.1; text-wrap: balance;
+}
+
+/* ─────────────── the two sheets: "going to the shop" and "Still there?" ─────────────── */
+.sheet {
+  position: fixed; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center;
+  padding: calc(var(--k) * 2); background: rgba(0, 58, 130, 0.8); animation: appear .18s ease both;
+}
+.sheet-still { z-index: 40; }
+.sheet-card {
+  width: 100%; max-width: calc(var(--k) * 46); text-align: center;
+  background: var(--paper); border: 3px solid var(--blue-dark); border-radius: calc(var(--k) * 1.7);
+  box-shadow: 0 calc(var(--k) * 0.55) 0 var(--blue-deep);
+  padding: calc(var(--k) * 2.6) calc(var(--k) * 3) calc(var(--k) * 3);
+}
+.sheet-pic { width: calc(var(--k) * 10.5); margin: 0 auto calc(var(--k) * 1.5); border-radius: 4.6%; box-shadow: 0 calc(var(--k) * 0.4) 0 var(--blue-dark); }
+.sheet-pic svg { width: 100%; height: auto; }
+.sheet-card h2 { font-family: var(--script); font-weight: 400; color: var(--blue-dark); font-size: calc(var(--k) * 4.6); line-height: 1; text-wrap: balance; }
+.sheet-line { margin-top: calc(var(--k) * 0.9); font-size: calc(var(--k) * 1.75); line-height: 1.35; text-wrap: balance; }
+.count { display: inline-block; min-width: 1.3em; font-weight: 800; font-size: 1.7em; line-height: 1; color: var(--blue-dark); font-variant-numeric: tabular-nums; vertical-align: -0.12em; }
+.sheet-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: calc(var(--k) * 1.2); margin-top: calc(var(--k) * 2.2); }
+.btn {
+  min-height: calc(var(--k) * 4.3); padding: 0 calc(var(--k) * 2.4); border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: calc(var(--k) * 1.3);
+  transition: transform .1s ease, box-shadow .1s ease;
+}
+.btn .caps { padding-left: 0.14em; }
+.btn-primary { background: var(--blue-dark); color: #fff; border: 3px solid var(--blue-dark); box-shadow: 0 calc(var(--k) * 0.36) 0 var(--blue-deep); }
+.btn-ghost { background: var(--paper); color: var(--blue-dark); border: 3px solid var(--blue-dark); box-shadow: 0 calc(var(--k) * 0.36) 0 var(--blue-dark); }
+.btn:active { transform: translateY(calc(var(--k) * 0.24)); box-shadow: 0 calc(var(--k) * 0.1) 0 var(--blue-deep); }
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer, .sheet { animation: none; }
+  .frame { transition: none; }
+  html.kiosk .tile.nudge .tile-pic, html.kiosk.attract .tulip { animation: none; }
+  html.kiosk .tile.nudge .tile-pic::after { animation: none; opacity: 0.9; transform: none; }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stories from our gift shop — Linda's Dutch Pancakes</title>
+<meta name="description" content="Short stories about things you can see and buy in the gift shop at Linda's Dutch Pancakes, Palm Beach, Aruba.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#27AAE1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="stories.css">
+</head>
+<body>
+
+<!--
+  Linda's Dutch Pancakes: Stories.
+  For the waiting-area touchscreen open  stories/?kiosk=1
+  All words are in stories-data.js, all drawings in stories-art.js.
+  No build step, no libraries, no network: this folder works opened from disk too.
+-->
+
+<div class="app" id="app">
+  <header class="top">
+    <button type="button" class="back" id="backBtn" hidden>All stories</button>
+    <a class="logo" id="logoLink" href="../index.html"><img src="../assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" width="1713" height="591"></a>
+  </header>
+
+  <main id="main">
+    <section class="home" id="home" aria-label="Stories"></section>
+    <section class="story" id="story" aria-label="Story" hidden></section>
+  </main>
+</div>
+
+<noscript><p>This page needs JavaScript to show the stories.</p></noscript>
+
+<script src="stories-data.js"></script>
+<script src="stories-art.js"></script>
+<script src="stories.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fun things from Linda's Dutch Pancakes</title>
+<meta name="description" content="A pancake kitchen game, a guest map, a T-shirt vote, photo postcards and short stories from Linda's Dutch Pancakes, Palm Beach, Aruba.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EAD1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="kiosk.css">
+</head>
+<body>
+
+<!--
+  Linda's Dutch Pancakes: the home screen that opens the guest pages.
+
+  Waiting-area touchscreen:   kiosk/?kiosk=1   (pages open inside the screen, under a HOME bar)
+  Phones and laptops:         kiosk/           (the same tiles as plain links)
+  Testing:                    kiosk/?kiosk=1&idle=20   (20 seconds instead of 90 before it goes back to the start)
+
+  What to change where:
+    tiles.js    which tiles show, their words and links, the timing   <- the file to edit
+    art.js      the drawings
+    kiosk.css   the look
+    kiosk.js    how it works
+  No build step, no libraries, nothing loaded from other websites.
+-->
+
+<!-- The home screen: logo, one welcome line, the tiles -->
+<div class="home" id="home">
+  <header class="welcome">
+    <div class="garden" id="garden" aria-hidden="true"></div>
+    <a class="logo" id="logo" href="../"><img src="../assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" width="1713" height="591" draggable="false"></a>
+    <div class="welcome-text">
+      <h1 id="welcomeTitle">Fun things from Linda's</h1>
+      <p id="welcomeLine"></p>
+    </div>
+  </header>
+
+  <main class="tiles" id="tiles"></main>
+
+  <footer class="foot" id="foot">
+    <p id="footLine"></p>
+    <p><a href="../" id="footBack"></a></p>
+  </footer>
+</div>
+
+<!-- Touchscreen only: one of our pages, shown in a frame under the HOME bar -->
+<div class="viewer" id="viewer" hidden>
+  <div class="bar">
+    <button type="button" class="home-btn" id="homeBtn"><span class="home-icon" id="homeIcon"></span><span class="caps" id="homeLabel">HOME</span></button>
+    <h2 class="bar-title" id="barTitle"></h2>
+  </div>
+  <div class="frame-box" id="frameBox">
+    <p class="frame-note" id="frameNote" role="status"></p>
+  </div>
+</div>
+
+<!-- Touchscreen only: "you are going to the online shop" -->
+<div class="sheet" id="leaving" role="dialog" aria-modal="true" aria-labelledby="leavingTitle" hidden>
+  <div class="sheet-card">
+    <div class="sheet-pic" id="leavingPic" aria-hidden="true"></div>
+    <h2 id="leavingTitle"></h2>
+    <p class="sheet-line" id="leavingLine"></p>
+    <div class="sheet-actions">
+      <button type="button" class="btn btn-primary" id="leavingGo"><span class="caps" id="leavingGoLabel"></span></button>
+      <button type="button" class="btn btn-ghost" id="leavingStay"><span class="caps" id="leavingStayLabel"></span></button>
+    </div>
+  </div>
+</div>
+
+<!-- Touchscreen only: the countdown before it goes back to the home screen -->
+<div class="sheet sheet-still" id="still" role="alertdialog" aria-modal="true" aria-labelledby="stillTitle" hidden>
+  <div class="sheet-card">
+    <h2 id="stillTitle"></h2>
+    <p class="sheet-line"><span id="stillLine"></span> <b class="count" id="stillCount">10</b></p>
+    <div class="sheet-actions">
+      <button type="button" class="btn btn-primary" id="stillBtn"><span class="caps" id="stillLabel"></span></button>
+    </div>
+  </div>
+</div>
+
+<noscript><p style="padding:24px;font-family:sans-serif">This page needs JavaScript to show the tiles.</p></noscript>
+
+<script src="tiles.js"></script>
+<script src="art.js"></script>
+<script src="kiosk.js"></script>
+</body>
+</html>

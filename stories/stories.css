@@ -1,0 +1,331 @@
+/* Linda's Dutch Pancakes: "Stories". Brand colours and fonts as on the rest of the site.
+   Plain CSS, no build step. Works from disk and without internet. */
+
+@font-face { font-family: 'Olivier'; src: url('../assets/fonts/olivier.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Telegrafico'; src: url('../assets/fonts/telegrafico.ttf') format('truetype'); font-display: swap; }
+
+:root {
+  --blue: #27AAE1;        /* signature */
+  --blue-dark: #004EAD;
+  --blue-deep: #003A82;   /* pressed edge of the dark blue */
+  --blue-pale: #BDDFFF;
+  --yellow: #EFBD40;
+  --orange: #EB8917;
+  --cream: #F1EAD1;       /* page */
+  --paper: #FBF7E9;       /* raised surfaces */
+  --ink: #282204;         /* text, never pure black */
+  --ink-soft: #5A5230;
+
+  --script: 'Olivier', 'Segoe Script', 'Brush Script MT', cursive;
+  --caps: 'Telegrafico', 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+
+  --gutter: clamp(16px, 2.8vw, 60px);
+  --tap: max(56px, 3.5rem);           /* smallest touch target */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+/* The rem grows with the screen: 16px on a phone, about 22px on a 1920x1080 touchscreen. */
+html {
+  font-size: clamp(16px, 0.55vw + 0.55vh + 6px, 26px);
+  height: 100%;
+  background: var(--cream);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+  height: 100%;
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.4;
+  overflow: hidden;                   /* the app fills the screen; long text scrolls inside its own box */
+  overscroll-behavior: none;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; touch-action: manipulation; }
+img, svg { display: block; }
+:focus-visible { outline: 4px solid var(--orange); outline-offset: 3px; }
+
+/* Capital-letter labels. The brand font has letters only; .plain is used by the script
+   for any label that has a digit or punctuation in it. */
+.caps { font-family: var(--caps); text-transform: uppercase; letter-spacing: 0.14em; font-weight: 400; }
+.caps.plain { font-family: var(--body); text-transform: none; letter-spacing: 0.01em; font-weight: 700; }
+
+/* ─────────────── frame ─────────────── */
+.app { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+
+.top {
+  flex: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(8px + env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right)) 6px max(var(--gutter), env(safe-area-inset-left));
+  min-height: calc(var(--tap) + 14px);
+  border-bottom: 5px solid var(--blue);
+  background: var(--paper);
+}
+.logo { display: block; margin-left: auto; line-height: 0; border-radius: 10px; }
+.logo img { height: clamp(46px, 8vh, 96px); width: auto; margin: -4px 0; }
+
+.back {
+  min-height: var(--tap); padding: 0 1.25rem 0 1rem; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--paper); color: var(--blue-dark);
+  border: 3px solid var(--blue-dark);
+  font-size: clamp(0.82rem, 0.5vw + 0.55vh + 0.3rem, 1.2rem);
+  box-shadow: 0 4px 0 var(--blue-dark);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.back:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--blue-dark); }
+.back svg, .btn svg, .card-go svg { width: 1.25em; height: 1.25em; flex: none; }
+
+main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+
+/* ─────────────── start screen ─────────────── */
+.home {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  display: flex; flex-direction: column; align-items: center;
+  padding: clamp(10px, 2.2vh, 30px) max(var(--gutter), env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+}
+.home-head { text-align: center; flex: none; }
+.home-kicker { color: var(--blue-dark); font-size: clamp(0.78rem, 0.5vw + 0.5vh + 0.3rem, 1.15rem); }
+.home h1 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(2.3rem, 2.9vw + 3.4vh, 6rem); line-height: 1; margin-top: 0.12em; text-wrap: balance;
+}
+.home-sub { margin-top: 0.4em; font-size: clamp(1rem, 0.75vw + 1vh, 1.75rem); color: var(--ink-soft); text-wrap: balance; }
+
+.cards {
+  flex: 1 1 auto; width: 100%; max-width: 1780px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.7vw, 38px);
+  align-content: center; padding-top: clamp(12px, 2.4vh, 34px);
+}
+.card {
+  display: flex; flex-direction: column; text-align: left; min-width: 0;
+  background: var(--paper); border: 3px solid var(--blue-dark); border-radius: 1.2rem;
+  padding: clamp(10px, 1.1vw, 22px);
+  box-shadow: 0 0.45rem 0 var(--blue-dark);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.card:active { transform: translateY(0.3rem); box-shadow: 0 0.15rem 0 var(--blue-dark); }
+.card-art svg { width: 100%; height: auto; }
+.card-body { display: flex; flex-direction: column; flex: 1 1 auto; padding-top: clamp(8px, 1.2vh, 18px); }
+.card h2 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(1.55rem, 1.35vw + 1.5vh, 3.1rem); line-height: 1.02; text-wrap: balance;
+}
+.card p { margin-top: 0.45em; font-size: clamp(0.95rem, 0.6vw + 0.75vh, 1.45rem); line-height: 1.32; color: var(--ink); flex: 1 1 auto; }
+.card-go {
+  align-self: flex-start; margin-top: 0.8em;
+  display: inline-flex; align-items: center; gap: 0.5em;
+  background: var(--blue-dark); color: #fff; border-radius: 999px;
+  padding: 0.55em 1em 0.55em 1.15em; font-size: clamp(0.78rem, 0.45vw + 0.5vh + 0.3rem, 1.15rem);
+}
+
+/* ─────────────── story ─────────────── */
+.story { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+
+.stage { flex: 1 1 auto; min-height: 0; position: relative; touch-action: pan-y; overflow: hidden; overflow: clip; }
+.slide {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: minmax(0, 44fr) minmax(0, 56fr); grid-template-rows: minmax(0, 1fr);
+  gap: clamp(16px, 3.4vw, 76px); align-items: center;
+  padding: clamp(10px, 2.4vh, 34px) max(var(--gutter), env(safe-area-inset-right)) clamp(6px, 1.4vh, 20px) max(var(--gutter), env(safe-area-inset-left));
+}
+.slide.enter { animation: slide-in .32s cubic-bezier(.2,.7,.2,1) both; }
+.slide.enter.from-left { animation-name: slide-in-left; }
+@keyframes slide-in { from { opacity: 0; transform: translateX(34px); } to { opacity: 1; transform: none; } }
+@keyframes slide-in-left { from { opacity: 0; transform: translateX(-34px); } to { opacity: 1; transform: none; } }
+
+/* The picture box. The script sizes .pic so that picture + caption always fit inside. */
+.figure { align-self: stretch; min-width: 0; min-height: 0; height: 100%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.pic { flex: none; max-width: 100%; --pad: 8px; }
+.pic svg { width: 100%; height: auto; filter: drop-shadow(0 6px 0 rgba(0, 78, 173, 0.16)); }
+.pic img { width: 100%; height: auto; border-radius: 10px; }
+.pic.photo { background: #fff; padding: var(--pad); border-radius: 14px; border: 3px solid var(--blue-dark); }
+.pic.photo img { border-radius: 8px; }
+/* An old print: cream card border, slightly tilted, soft shadow. */
+.pic.photo.print {
+  background: #F8F1DC; border: 0; border-radius: 3px; padding: var(--pad) var(--pad) calc(var(--pad) * 1.3);
+  transform: rotate(-2.2deg);
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 24px rgba(40, 34, 4, 0.26), 0 2px 5px rgba(40, 34, 4, 0.22);
+}
+.pic.photo.print img { border-radius: 1px; outline: 1px solid rgba(40, 34, 4, 0.22); }
+.caption {
+  flex: none; margin-top: 0.7em; text-align: center; max-width: 34em;
+  font-size: clamp(0.78rem, 0.42vw + 0.62vh + 0.28rem, 1.1rem); line-height: 1.32; color: var(--ink-soft);
+}
+.caption .credit { display: block; font-size: 0.9em; opacity: 0.92; }
+.figure.print .caption { margin-top: 1.1em; }
+
+.copy { min-width: 0; min-height: 0; max-height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 2px 4px 2px 2px; }
+.kicker { color: var(--blue-dark); font-size: clamp(0.76rem, 0.5vw + 0.55vh + 0.26rem, 1.2rem); }
+.copy h2 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(2.05rem, 2.3vw + 3.1vh, 5.4rem); line-height: 1.04; margin: 0.08em 0 0.28em; text-wrap: balance;
+}
+.copy h2:focus { outline: none; }
+.copy p, .copy li { font-size: clamp(1.15rem, 1.05vw + 1.55vh, 2.3rem); line-height: 1.42; max-width: 31em; }
+.copy .fit-1 p, .copy.fit-1 p, .copy.fit-1 li { font-size: clamp(1.06rem, 0.97vw + 1.42vh, 2.1rem); }
+.copy.fit-2 p, .copy.fit-2 li { font-size: clamp(0.98rem, 0.9vw + 1.3vh, 1.95rem); line-height: 1.36; }
+.copy.fit-1 h2 { font-size: clamp(1.85rem, 2.1vw + 2.8vh, 5rem); }
+.copy.fit-2 h2 { font-size: clamp(1.65rem, 1.9vw + 2.5vh, 4.6rem); }
+
+/* Did you know? */
+.facts li { position: relative; padding-left: 1.5em; }
+.facts li + li { margin-top: 0.62em; }
+.facts li::before {
+  content: ""; position: absolute; left: 0.1em; top: 0.42em; width: 0.62em; height: 0.62em;
+  background: var(--orange); border: 0.14em solid var(--blue-dark); transform: rotate(45deg); border-radius: 0.1em;
+}
+
+/* Quiz */
+.answers { display: grid; gap: clamp(10px, 1.4vh, 18px); margin-top: 0.3rem; max-width: 46rem; }
+.answer {
+  min-height: var(--tap); width: 100%; text-align: left;
+  display: flex; align-items: center; gap: 0.8em;
+  padding: 0.5em 1.1em; border-radius: 1rem;
+  background: var(--paper); border: 3px solid var(--blue-dark); color: var(--ink);
+  font-size: clamp(1.1rem, 0.95vw + 1.4vh, 2.1rem); line-height: 1.2; font-weight: 600;
+  box-shadow: 0 4px 0 var(--blue-dark);
+  transition: transform .12s ease, box-shadow .12s ease, background-color .15s ease;
+}
+.answer:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--blue-dark); }
+.answer .mark { flex: none; width: 1.5em; height: 1.5em; border-radius: 50%; border: 3px solid var(--blue-dark); display: grid; place-items: center; background: #fff; }
+.answer .mark svg { width: 0.95em; height: 0.95em; display: none; }
+.answer.right { background: var(--blue-dark); color: #fff; box-shadow: 0 4px 0 var(--blue-deep); }
+.answer.right .mark { background: var(--yellow); border-color: #fff; color: var(--ink); }
+.answer.right .mark .tick { display: block; }
+.answer.wrong { background: #F4E7CB; color: var(--ink-soft); border-color: var(--orange); box-shadow: 0 4px 0 var(--orange); }
+.answer.wrong .mark { border-color: var(--orange); color: var(--orange); }
+.answer.wrong .mark .cross { display: block; }
+.verdict { margin-top: 0.7em; min-height: 2.9em; }
+.copy p.verdict { font-size: clamp(1.05rem, 0.9vw + 1.3vh, 2rem); }
+.verdict strong { color: var(--blue-dark); }
+
+/* Gift shop line, sources, other stories */
+.sources { margin-top: 1.1em; }
+.copy p.sources { font-size: clamp(0.8rem, 0.42vw + 0.62vh + 0.28rem, 1.1rem); line-height: 1.35; color: var(--ink-soft); max-width: 44em; }
+.sources b { font-weight: 700; color: var(--ink); }
+.more { margin-top: 1.2em; }
+.more-label { color: var(--blue-dark); font-size: clamp(0.76rem, 0.5vw + 0.55vh + 0.26rem, 1.15rem); }
+.more-list { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-top: 0.6em; }
+.chip {
+  min-height: var(--tap); padding: 0.3em 1.15em; border-radius: 999px;
+  background: var(--paper); border: 3px solid var(--blue-dark); color: var(--blue-dark);
+  font-family: var(--script); font-size: clamp(1.3rem, 0.9vw + 1.2vh, 2.2rem); line-height: 1.05;
+  box-shadow: 0 4px 0 var(--blue-dark);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.chip:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--blue-dark); }
+
+/* ─────────────── bottom controls ─────────────── */
+.controls {
+  flex: none; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 12px;
+  padding: 8px max(var(--gutter), env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+}
+.btn {
+  min-height: max(60px, 3.9rem); min-width: max(60px, 9rem); padding: 0 1.5rem; border-radius: 999px; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem;
+  font-size: clamp(0.92rem, 0.6vw + 0.7vh + 0.3rem, 1.45rem);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-back { justify-self: start; background: var(--paper); color: var(--blue-dark); border: 3px solid var(--blue-dark); box-shadow: 0 5px 0 var(--blue-dark); }
+.btn-next { justify-self: end; background: var(--blue-dark); color: #fff; border: 3px solid var(--blue-dark); box-shadow: 0 5px 0 var(--blue-deep); }
+.btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--blue-deep); }
+.progress { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+.dots { display: flex; gap: clamp(5px, 0.6vw, 12px); align-items: center; }
+.dots i { display: block; width: clamp(8px, 0.5rem, 14px); height: clamp(8px, 0.5rem, 14px); border-radius: 50%; background: rgba(0, 78, 173, 0.22); transition: transform .2s ease, background-color .2s ease; }
+.dots i.done { background: var(--blue); }
+.dots i.on { background: var(--blue-dark); transform: scale(1.45); }
+.count { font-size: clamp(0.78rem, 0.4vw + 0.5vh + 0.3rem, 1.05rem); color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ─────────────── portrait and small screens: picture on top, words below ─────────────── */
+@media (orientation: portrait), (max-width: 720px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; }
+  .slide { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 40fr) minmax(0, 60fr); align-items: start; gap: clamp(8px, 1.6vh, 28px); }
+  .slide.has-photo { grid-template-rows: minmax(0, 50fr) minmax(0, 50fr); }
+  .slide.has-print { grid-template-rows: minmax(0, 56fr) minmax(0, 44fr); }
+  .slide.compact { grid-template-rows: minmax(0, 20fr) minmax(0, 80fr); }
+  .slide.compact.has-photo { grid-template-rows: minmax(0, 26fr) minmax(0, 74fr); }
+  .copy { height: 100%; }
+  .btn { min-width: max(60px, 6.4rem); padding: 0 1.1rem; }
+}
+/* A tall portrait screen (a kiosk turned upright, a tablet): more room for the picture. */
+@media (orientation: portrait) and (min-width: 721px) {
+  .slide { grid-template-rows: minmax(0, 46fr) minmax(0, 54fr); padding-left: 8vw; padding-right: 8vw; }
+  .slide.compact { grid-template-rows: minmax(0, 30fr) minmax(0, 70fr); }
+}
+/* Phones */
+@media (max-width: 520px) {
+  .card p { display: none; }                       /* the teaser lines cost too much height */
+  .card-art { width: 88%; margin: 0 auto; }
+  .card-go { margin-top: 0.6em; }
+  .home { padding-top: 8px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .cards { padding-top: 10px; }
+  .home-sub { font-size: 0.98rem; }
+  .logo img { height: 46px; margin: 0; }
+  .count { display: none; }
+  /* dots on their own row above the two buttons */
+  .controls { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; padding-top: 4px; }
+  .progress { grid-column: 1 / -1; grid-row: 1; }
+  .btn { min-height: 56px; }
+  .chip { font-size: 1.22rem; padding: 0.3em 0.9em; }
+  .more-list { gap: 10px 8px; }
+  .more { margin-top: 0.9em; }
+  .sources { margin-top: 0.8em; }
+}
+/* Small phones: the last three slides (facts, quiz, gift shop) drop their little picture,
+   and story panels give the words a bit more of the screen. */
+@media (max-width: 520px) and (max-height: 680px) {
+  .slide { grid-template-rows: minmax(0, 35fr) minmax(0, 65fr); }
+  .slide.has-print { grid-template-rows: minmax(0, 50fr) minmax(0, 50fr); }
+  .slide.compact, .slide.compact.has-photo { grid-template-rows: minmax(0, 1fr); }
+  .slide.compact .figure { display: none; }
+}
+/* The start screen as a list (picture left, title right) wherever four tall cards would not
+   fit without scrolling: phones that are not very tall, and tablets held upright. */
+@media (max-width: 520px) and (min-aspect-ratio: 47/100), (orientation: portrait) and (min-width: 521px) and (min-aspect-ratio: 3/5) {
+  .cards { grid-template-columns: minmax(0, 1fr); gap: clamp(10px, 1.6vh, 22px); padding-top: clamp(12px, 2vh, 28px); align-content: start; max-width: 900px; }
+  .card { flex-direction: row; align-items: center; gap: clamp(14px, 3vw, 30px); padding: clamp(8px, 1.2vh, 16px); padding-right: clamp(12px, 2.4vw, 24px); box-shadow: 0 0.3rem 0 var(--blue-dark); }
+  .card-art { flex: none; width: clamp(64px, 12.5vh, 170px); margin: 0; }
+  .card-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 12px; padding-top: 0; }
+  .card h2 { font-size: clamp(1.6rem, 4.6vw, 2.7rem); grid-column: 1; }
+  .card p { grid-column: 1; margin-top: 0.3em; }
+  .card-go { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; padding: 0; width: max(44px, 2.8rem); height: max(44px, 2.8rem); justify-content: center; }
+  .card-go span { display: none; }
+}
+@media (max-width: 520px) and (min-aspect-ratio: 47/100) {
+  .home h1 { font-size: 2.05rem; }
+  .home-sub { font-size: 0.92rem; margin-top: 0.25em; }
+}
+/* Very low screens (a phone held sideways): everything still works, long slides scroll. */
+@media (max-height: 480px) and (orientation: landscape) {
+  .top { min-height: 0; padding-top: 3px; padding-bottom: 3px; }
+  .logo img { height: 36px; margin: 0; }
+  .controls { padding-top: 2px; padding-bottom: 6px; }
+  .btn { min-height: 56px; }
+  .count { display: none; }
+  .home-sub { display: none; }
+  .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card p { display: none; }
+  .card-art { width: 62%; margin: 0 auto; }
+  .slide.compact { grid-template-columns: minmax(0, 1fr); }
+  .slide.compact .figure { display: none; }
+}
+
+/* ─────────────── kiosk mode (?kiosk=1) ─────────────── */
+.kiosk, .kiosk body { overscroll-behavior: none; touch-action: pan-x pan-y; }
+.kiosk * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+.kiosk .logo { pointer-events: none; }
+.kiosk a { cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide.enter { animation: none; }
+  .card, .btn, .back, .answer, .chip { transition: none; }
+}
+
+noscript p { padding: 24px; font-size: 1.2rem; }

@@ -1,0 +1,388 @@
+/* Linda's "vote for our next T-shirt" page. Brand colours and fonts as on the rest of the site. */
+
+@font-face { font-family: 'Olivier'; src: url('../assets/fonts/olivier.ttf') format('truetype'); font-display: swap; }
+@font-face { font-family: 'Telegrafico'; src: url('../assets/fonts/telegrafico.ttf') format('truetype'); font-display: swap; }
+
+:root {
+  --blue: #27AAE1;        /* signature */
+  --blue-dark: #004EAD;
+  --blue-deep: #003A82;   /* pressed edge of the dark blue */
+  --blue-pale: #BDDFFF;
+  --yellow: #EFBD40;
+  --orange: #EB8917;
+  --cream: #F1EAD1;       /* page */
+  --paper: #FBF7E9;       /* raised surfaces */
+  --ink: #282204;         /* text, never pure black */
+  --ink-soft: #5E5632;
+
+  --script: 'Olivier', 'Segoe Script', 'Brush Script MT', cursive;
+  --caps: 'Telegrafico', 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+
+  --gutter: clamp(16px, 2.6vw, 56px);
+  --radius: 1.1rem;
+
+  /* One Delft tile: quarter rosettes in the corners, a small diamond in the middle. */
+  --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23BDDFFF'/%3E%3Cg fill='none' stroke='%239CCDF5' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle r='24'/%3E%3Ccircle cx='120' r='24'/%3E%3Ccircle cy='120' r='24'/%3E%3Ccircle cx='120' cy='120' r='24'/%3E%3Ccircle r='11'/%3E%3Ccircle cx='120' r='11'/%3E%3Ccircle cy='120' r='11'/%3E%3Ccircle cx='120' cy='120' r='11'/%3E%3Cpath d='M25 25q16 3 21 21q-18-5-21-21zM95 25q-16 3-21 21q18-5 21-21zM25 95q16-3 21-21q-18 5-21 21zM95 95q-16-3-21-21q18 5 21 21z'/%3E%3Cpath d='M60 49l11 11l-11 11l-11-11z'/%3E%3C/g%3E%3Ccircle cx='60' cy='60' r='2.6' fill='%239CCDF5'/%3E%3Cpath d='M0 0h120v120h-120z' fill='none' stroke='%23E4F2FF' stroke-width='3.5'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+/* Everything is sized in rem, and the rem grows with the screen: a phone gets 16px,
+   a 1920x1080 touchscreen about 22px, so buttons and type scale up together. */
+html {
+  font-size: clamp(16px, 0.55vw + 0.55vh + 6px, 26px);
+  background: var(--cream);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.45;
+}
+h1, h2, h3, p, ol, ul { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; touch-action: manipulation; }
+img, svg { display: block; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+.app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+main { flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0; }
+
+/* Capital-letter labels. The brand font has letters only, so the page falls back to .lbl-plain
+   for any label with a digit, an accent or punctuation in it. */
+.lbl { font-family: var(--caps); text-transform: uppercase; letter-spacing: 0.13em; font-weight: 400; }
+.lbl-plain { font-family: var(--body); text-transform: none; letter-spacing: 0.01em; font-weight: 700; }
+
+/* ---------- Top bar ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  padding: calc(0.65rem + env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right)) 0.65rem max(var(--gutter), env(safe-area-inset-left));
+}
+.brand { display: block; flex: 0 0 auto; }
+.brand img { height: 2.6rem; width: auto; }
+.top-nav { display: flex; gap: 0.5rem; }
+.chip {
+  min-height: 2.75rem; padding: 0 1.05rem; border-radius: 999px;
+  background: var(--paper); color: var(--blue-dark); font-weight: 600; font-size: 0.92rem;
+  box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.22);
+  white-space: nowrap;
+  transition: background-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.chip:active { transform: scale(0.97); }
+.chip.is-nudge { background: var(--yellow); color: var(--ink); box-shadow: inset 0 0 0 2px rgba(40, 34, 4, 0.25); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  min-height: 3.6rem; padding: 0 1.5rem; border-radius: var(--radius);
+  font-size: 1.12rem; line-height: 1; text-decoration: none;
+  color: var(--blue-dark); background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--blue-dark), 0 0.28rem 0 rgba(0, 78, 173, 0.28);
+  transform: translateY(-0.14rem);
+  transition: transform 0.08s, box-shadow 0.08s, background-color 0.2s, color 0.2s, opacity 0.2s;
+  -webkit-user-select: none; user-select: none;
+}
+.btn:active { transform: translateY(0.1rem); box-shadow: inset 0 0 0 2px var(--blue-dark), 0 0.04rem 0 rgba(0, 78, 173, 0.28); }
+.btn .lbl { white-space: nowrap; }
+.btn svg { width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.btn-primary { color: #fff; background: var(--blue-dark); box-shadow: 0 0.28rem 0 var(--blue-deep); }
+.btn-primary:active { box-shadow: 0 0.04rem 0 var(--blue-deep); }
+.btn.is-voted, .btn.is-voted:active {
+  color: var(--ink); background: var(--yellow); cursor: default;
+  box-shadow: 0 0.28rem 0 #C99520; transform: translateY(-0.14rem);
+}
+.btn.is-off, .btn.is-off:active {
+  color: var(--ink-soft); background: rgba(40, 34, 4, 0.07);
+  box-shadow: inset 0 0 0 2px rgba(40, 34, 4, 0.16); transform: none;
+}
+.btn-small { min-height: 2.9rem; font-size: 0.92rem; padding: 0 1.1rem; }
+
+/* ---------- Voting ---------- */
+.vote {
+  flex: 1 1 auto; width: 100%; max-width: 1900px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(15.5rem, 1fr) auto;
+  grid-template-areas: "intro" "stage" "panel";
+  gap: 0.7rem;
+  padding: 0.2rem max(var(--gutter), env(safe-area-inset-right)) calc(0.9rem + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+}
+.intro { grid-area: intro; }
+.intro h1 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(2.05rem, 9vw, 3.9rem); line-height: 0.98; text-wrap: balance;
+}
+.intro p { margin-top: 0.3rem; font-size: 1.02rem; color: var(--ink-soft); }
+
+.stage {
+  grid-area: stage; position: relative; overflow: hidden; min-height: 15.5rem;
+  border-radius: calc(var(--radius) * 1.3);
+  background: var(--blue-pale) var(--tile) center top / clamp(84px, 8.5vw, 150px);
+  box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.14);
+  touch-action: pan-y;
+}
+.stage-tee { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: zoom-in; }
+.stage.is-close .stage-tee { cursor: zoom-out; }
+.stage-tee .tee { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage-tee:focus-visible { outline-offset: -5px; }
+@keyframes tee-in-next { from { opacity: 0; transform: translateX(7%); } to { opacity: 1; transform: none; } }
+@keyframes tee-in-prev { from { opacity: 0; transform: translateX(-7%); } to { opacity: 1; transform: none; } }
+.stage-tee.from-next .tee { animation: tee-in-next 0.26s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.stage-tee.from-prev .tee { animation: tee-in-prev 0.26s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+.pick-badge {
+  position: absolute; left: 0.8rem; top: 0.8rem; z-index: 2;
+  display: grid; place-items: center; text-align: center;
+  width: 5.2rem; height: 5.2rem; border-radius: 50%; padding: 0.4rem;
+  background: var(--yellow); color: var(--ink);
+  font-family: var(--script); font-size: 1.32rem; line-height: 0.95;
+  box-shadow: 0 0 0 0.22rem var(--paper), 0 0.3rem 0 0.2rem rgba(40, 34, 4, 0.14);
+  transform: rotate(-9deg); pointer-events: none;
+}
+@keyframes badge-pop { 0% { transform: rotate(-9deg) scale(0.3); opacity: 0; } 70% { transform: rotate(-9deg) scale(1.12); opacity: 1; } 100% { transform: rotate(-9deg) scale(1); } }
+.pick-badge.is-new { animation: badge-pop 0.36s cubic-bezier(0.2, 0.8, 0.3, 1); }
+
+.look {
+  position: absolute; right: 0.7rem; top: 0.7rem; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  min-height: 2.75rem; padding: 0 0.95rem 0 0.75rem; border-radius: 999px;
+  background: var(--paper); color: var(--blue-dark); font-weight: 600; font-size: 0.88rem;
+  box-shadow: 0 0.14rem 0 rgba(0, 78, 173, 0.22);
+}
+.look svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+
+.arrow {
+  position: absolute; top: 50%; z-index: 2; width: 3.3rem; height: 3.3rem; margin-top: -1.65rem; border-radius: 50%;
+  display: grid; place-items: center; background: var(--paper); color: var(--blue-dark);
+  box-shadow: 0 0.14rem 0 rgba(0, 78, 173, 0.22);
+  transition: transform 0.1s;
+}
+.arrow:active { transform: scale(0.94); }
+.arrow svg { width: 1.5rem; height: 1.5rem; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.arrow-prev { left: 0.6rem; }
+.arrow-next { right: 0.6rem; }
+/* Looking closer: clear the picture, keep one way back. */
+.stage.is-close .arrow, .stage.is-close .pick-badge { display: none; }
+.stage.is-close .look { top: auto; right: 50%; bottom: 0.55rem; transform: translateX(50%); }
+
+.where { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 2rem; }
+.dots { display: flex; align-items: center; margin-right: -0.4rem; }
+.dot { display: grid; place-items: center; width: 1.35rem; height: 2rem; }
+.dot i {
+  display: block; width: 0.56rem; height: 0.56rem; border-radius: 999px; background: rgba(0, 78, 173, 0.26);
+  transition: width 0.2s, background-color 0.2s;
+}
+.dot.is-voted i { background: var(--yellow); box-shadow: 0 0 0 1.5px var(--ink); }
+.dot.is-current { width: 1.9rem; }
+.dot.is-current i { width: 1.35rem; background: var(--blue-dark); }
+.dot.is-current.is-voted i { background: var(--yellow); }
+
+.panel { grid-area: panel; display: flex; flex-direction: column; min-width: 0; }
+.position { font-size: 0.82rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.design-title {
+  font-family: var(--script); font-weight: 400; color: var(--ink);
+  font-size: clamp(1.75rem, 7.2vw, 2.9rem); line-height: 1.02; margin-top: 0.1rem; text-wrap: balance;
+}
+.caption { margin-top: 0.3rem; font-size: 1.02rem; max-width: 34em; }
+.shown { margin-top: 0.15rem; font-size: 0.82rem; color: var(--ink-soft); }
+.actions { display: flex; gap: 0.7rem; margin-top: 0.85rem; }
+.actions .btn { flex: 1 1 0; min-width: 0; }
+.actions .btn-primary { flex-grow: 1.5; }
+
+.allowance { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.75rem; min-height: 1.8rem; }
+.tokens { display: inline-flex; gap: 0.28rem; }
+.token { width: 1.7rem; height: 1.7rem; transition: transform 0.25s, opacity 0.25s; }
+.token.is-used { opacity: 0.3; transform: scale(0.78); filter: grayscale(1); }
+.allowance-text { font-size: 0.95rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.status { min-height: 1.35em; margin-top: 0.2rem; font-size: 0.88rem; color: var(--ink-soft); }
+.closed { grid-area: stage; align-self: center; text-align: center; font-family: var(--script); font-size: 2rem; color: var(--blue-dark); padding: 2rem 1rem; }
+
+/* All designs at once */
+.vote.is-grid { grid-template-rows: auto 1fr auto; grid-template-areas: "intro" "cards" "tally"; }
+.vote.is-grid .stage, .vote.is-grid .panel { display: none; }
+.cards { grid-area: cards; display: flex; flex-wrap: wrap; justify-content: center; align-content: flex-start; gap: 0.75rem; }
+.card {
+  flex: 0 1 calc(50% - 0.375rem); min-width: 0; display: flex; flex-direction: column;
+  background: var(--paper); border-radius: var(--radius); padding: 0.45rem 0.45rem 0.7rem;
+  box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.1);
+}
+.card.is-voted { box-shadow: inset 0 0 0 3px var(--yellow); }
+.card-tee {
+  position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; overflow: hidden;
+  border-radius: calc(var(--radius) - 0.3rem);
+  background: var(--blue-pale) var(--tile) center top / clamp(60px, 5.5vw, 96px);
+}
+.card-tee .tee { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card h3 { font-family: var(--script); font-weight: 400; font-size: 1.28rem; line-height: 1.05; margin: 0.55rem 0.25rem 0.6rem; flex: 1 0 auto; text-wrap: balance; }
+.card .btn { margin: 0 0.15rem; }
+/* Votes left, floating over the bottom of the list so it is always in view. */
+.grid-tally {
+  grid-area: tally; position: sticky; bottom: calc(0.6rem + env(safe-area-inset-bottom)); z-index: 3; justify-self: center;
+  display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.45rem 1.1rem 0.45rem 0.7rem; border-radius: 999px;
+  background: var(--paper); box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.2), 0 0.3rem 0.9rem rgba(40, 34, 4, 0.16);
+  pointer-events: none;   /* it only informs: a tap goes through to the button underneath */
+}
+
+/* ---------- Standings and shop ---------- */
+.results {
+  flex: 1 1 auto; width: 100%; max-width: 1900px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem;
+  padding: 0.2rem max(var(--gutter), env(safe-area-inset-right)) calc(1.5rem + env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+}
+.standings h1, .sale h2 {
+  font-family: var(--script); font-weight: 400; color: var(--blue-dark);
+  font-size: clamp(2.05rem, 9vw, 3.4rem); line-height: 1; text-wrap: balance;
+}
+.standings h1:focus { outline: none; }
+.results-sub, .sale-sub { margin-top: 0.35rem; color: var(--ink-soft); font-size: 1.02rem; max-width: 36em; }
+
+.bars { margin-top: 1rem; display: grid; gap: 0.55rem; }
+.bar { display: grid; grid-template-columns: 2.9rem minmax(0, 1fr) auto; align-items: center; column-gap: 0.7rem; }
+.bar-chip { width: 2.9rem; height: 2.9rem; border-radius: 0.6rem; display: grid; place-items: center; padding: 0.3rem; box-shadow: inset 0 0 0 1.5px rgba(40, 34, 4, 0.14); }
+.bar-chip img { max-width: 100%; max-height: 100%; width: auto; height: auto; }
+.bar-main { min-width: 0; }
+.bar-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.6rem; row-gap: 0.1rem; }
+.bar-title { font-weight: 600; font-size: 1rem; line-height: 1.2; }
+.tag { font-size: 0.66rem; padding: 0.22em 0.6em 0.2em; border-radius: 999px; white-space: nowrap; line-height: 1.2; }
+.tag-lead { background: var(--blue-dark); color: #fff; }
+.tag-mine { background: var(--yellow); color: var(--ink); }
+.bar-track { margin-top: 0.3rem; height: 0.95rem; border-radius: 999px; background: rgba(0, 78, 173, 0.1); overflow: hidden; }
+.bar-fill { height: 100%; min-width: 0.95rem; border-radius: 999px; background: var(--blue); transition: width 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.bar.is-zero .bar-fill { min-width: 0; }
+.bar.is-lead .bar-fill { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+.bar.is-lead .bar-track { background: rgba(239, 189, 64, 0.26); }
+.bar.is-solo .bar-track { height: 1.2rem; }
+/* Counts and prices use the body font: the 9 in the script font reads like an S. */
+.bar-count { font-weight: 700; font-size: 1.3rem; line-height: 1; min-width: 1.7em; text-align: right; color: var(--blue-dark); font-variant-numeric: tabular-nums; }
+.bar.is-lead .bar-count { color: var(--ink); }
+.bar.is-solo .bar-count { font-size: 1.75rem; }
+.total { margin-top: 0.9rem; font-weight: 600; font-size: 0.95rem; }
+.pick-note { margin-top: 0.25rem; color: var(--ink-soft); font-size: 0.95rem; max-width: 34em; }
+.results-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.1rem; }
+.results-actions .btn { flex: 1 1 auto; padding: 0 1.1rem; }
+.results-actions .btn-primary { flex-grow: 3; }
+.results-actions .btn:not(.btn-primary) { font-size: 0.9rem; padding: 0 0.9rem; }
+
+.sale { position: relative; background: var(--paper); border-radius: calc(var(--radius) * 1.3); padding: 2.1rem 1.1rem 1.2rem; overflow: hidden; align-self: start; }
+.sale::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1.05rem; background: var(--blue-pale) var(--tile) left top / 1.05rem; }
+.products { margin-top: 1rem; display: grid; gap: 0.7rem; grid-template-columns: minmax(0, 1fr); }
+.product {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "thumb text qr" "thumb price qr" "link link link";
+  align-items: start; column-gap: 0.75rem; padding: 0.75rem; border-radius: var(--radius);
+  background: #fff; box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.1);
+}
+.product-thumb { grid-area: thumb; position: relative; width: 3.3rem; height: 3.3rem; border-radius: 0.6rem; overflow: hidden; background: var(--blue-pale); }
+.product-thumb .tee, .product-thumb .mug { position: absolute; inset: 0; width: 100%; height: 100%; }
+.product-thumb .mug { inset: 12%; width: 76%; height: 76%; }
+/* A product picture from the shop: fills the square, slightly zoomed so the product reads at small sizes. */
+.product-thumb.has-photo { background: #f1f1f1; }
+.product-thumb .product-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.18); }
+.product-text { grid-area: text; min-width: 0; }
+.product h3 { font-size: 1rem; font-weight: 700; line-height: 1.2; text-wrap: balance; }
+.product-note { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.12rem; }
+.product-ships { margin-top: 0.12rem; color: var(--ink-soft); font-size: 0.72rem; line-height: 1.3; }
+.product-price { grid-area: price; align-self: end; margin-top: 0.3rem; font-size: 0.85rem; color: var(--ink-soft); }
+.product-price .num { font-weight: 700; font-size: 1.25rem; line-height: 1.1; color: var(--blue-dark); font-variant-numeric: tabular-nums; }
+.product-qr { grid-area: qr; width: 5rem; }
+.product-qr svg { width: 100%; height: auto; }
+.product-link { grid-area: link; margin-top: 0.75rem; display: flex; }
+.elsewhere { margin-top: 0.9rem; font-size: 0.98rem; font-weight: 600; }
+
+.foot { padding: 0 max(var(--gutter), env(safe-area-inset-left)) calc(0.5rem + env(safe-area-inset-bottom)); }
+.device-note { font-size: 0.72rem; color: var(--ink-soft); }
+
+/* ---------- Narrow phones ---------- */
+@media (max-width: 374px) {
+  .brand img { height: 2.2rem; }
+  .chip { padding: 0 0.8rem; font-size: 0.86rem; min-height: 2.6rem; }
+  .actions .btn { padding: 0 0.8rem; }
+}
+@media (max-width: 335px) {
+  .top { gap: 0.4rem; }
+  .top-nav { gap: 0.3rem; }
+  .brand img { height: 1.8rem; }
+  .chip { padding: 0 0.6rem; font-size: 0.8rem; }
+  .sale { padding-left: 0.7rem; padding-right: 0.7rem; }
+  .product { column-gap: 0.55rem; padding: 0.6rem; }
+  .product-thumb { width: 2.6rem; height: 2.6rem; }
+  .product-qr { width: 4.2rem; }
+}
+
+/* ---------- Roomier screens ---------- */
+@media (min-width: 600px) {
+  .brand img { height: 3rem; }
+  .card { flex-basis: calc(33.333% - 0.5rem); }
+  .products { grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+}
+
+/* Landscape (laptop, wall touchscreen): shirt on the left, sign on the right. */
+@media (min-width: 860px) and (min-aspect-ratio: 11/10) {
+  .vote {
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); grid-template-rows: auto 1fr;
+    grid-template-areas: "stage intro" "stage panel"; column-gap: clamp(1.5rem, 3.2vw, 4rem); row-gap: 1rem;
+    padding-bottom: calc(1.4rem + env(safe-area-inset-bottom));
+  }
+  .intro { padding-top: 0.6rem; }
+  .intro h1 { font-size: clamp(2.6rem, 5.1vw, 5.2rem); }
+  .intro p { font-size: 1.15rem; margin-top: 0.6rem; }
+  .panel { align-self: center; padding-bottom: 1.5rem; }
+  .design-title { font-size: clamp(2rem, 3.4vw, 3.4rem); }
+  .caption { font-size: 1.15rem; }
+  .position, .shown { font-size: 0.9rem; }
+  .actions { margin-top: 1.3rem; max-width: 34rem; }
+  .btn { min-height: 4rem; font-size: 1.2rem; }
+  .btn-small { min-height: 2.9rem; font-size: 0.9rem; }
+  .allowance { margin-top: 1.1rem; }
+  .token { width: 2rem; height: 2rem; }
+  .pick-badge { width: 6.4rem; height: 6.4rem; font-size: 1.62rem; left: 1.1rem; top: 1.1rem; }
+  .look { right: 1rem; top: 1rem; }
+  .arrow { width: 3.8rem; height: 3.8rem; margin-top: -1.9rem; }
+  .arrow-prev { left: 1rem; } .arrow-next { right: 1rem; }
+  .where { justify-content: flex-start; gap: 1.1rem; }
+
+  .vote.is-grid { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr; grid-template-areas: "intro tally" "cards cards"; row-gap: 0.9rem; }
+  .grid-tally { position: static; align-self: center; box-shadow: inset 0 0 0 2px rgba(0, 78, 173, 0.2); }
+  .vote.is-grid .intro { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 1.4rem; padding-top: 0; }
+  .vote.is-grid .intro h1 { font-size: clamp(2rem, 3.4vw, 3.4rem); }
+  /* Two tidy rows: the page tells us how many cards go in one (--per-row). */
+  .cards { --gap: 0.9rem; --card: 15.6rem; gap: var(--gap); width: 100%; margin: 0 auto;
+    max-width: calc(var(--per-row, 5) * var(--card) + (var(--per-row, 5) - 1) * var(--gap) + 1px); }
+  .card { flex: 0 0 auto; width: min(var(--card), calc((100% - (var(--per-row, 5) - 1) * var(--gap)) / var(--per-row, 5))); padding: 0.5rem 0.5rem 0.75rem; }
+  .card-tee { aspect-ratio: 5 / 4; }
+
+  .results { grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); column-gap: clamp(1.5rem, 3vw, 3.4rem); align-items: start; padding-top: 0.4rem; padding-bottom: calc(0.6rem + env(safe-area-inset-bottom)); }
+  .standings h1, .sale h2 { font-size: clamp(2.2rem, 3.6vw, 3.6rem); }
+  .bars { gap: 0.3rem; margin-top: 0.8rem; }
+  .bar { grid-template-columns: 2.4rem minmax(0, 1fr) auto; }
+  .bar-chip { width: 2.4rem; height: 2.4rem; }
+  .total { margin-top: 0.7rem; }
+  .results-actions { margin-top: 0.9rem; }
+  .sale { padding: 1.95rem 1.3rem 1.1rem; }
+  /* On a screen that should not scroll, the note floats in the corner instead of pushing things down. */
+  .foot { position: fixed; left: 0; bottom: 0; padding-bottom: calc(0.3rem + env(safe-area-inset-bottom)); pointer-events: none; }
+  .sale h2 { font-size: clamp(2rem, 3.1vw, 3.1rem); }
+  .products { grid-template-columns: repeat(auto-fill, minmax(15.4rem, 1fr)); gap: 0.65rem; margin-top: 0.8rem; }
+  .product { grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "qr thumb price" "qr text text" "link link link"; column-gap: 0.6rem; row-gap: 0.35rem; padding: 0.65rem; }
+  .product-qr { width: 6.8rem; align-self: center; }
+  .product-thumb { width: 3rem; height: 3rem; }
+  .product-price { align-self: center; margin-top: 0; }
+  .product-price .num { display: block; }
+  .product h3 { font-size: 0.95rem; }
+  .product-note { font-size: 0.8rem; }
+  .product-ships { font-size: 0.68rem; }
+  .elsewhere { margin-top: 0.75rem; }
+}
+
+/* ---------- Touchscreen in the shop ---------- */
+html.kiosk, html.kiosk body { overscroll-behavior: none; touch-action: pan-y; }
+html.kiosk body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; cursor: default; }
+html.kiosk img, html.kiosk svg { -webkit-user-drag: none; pointer-events: none; }
+html.kiosk .stage-tee { cursor: default; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}

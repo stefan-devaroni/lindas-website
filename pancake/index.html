@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Create your own Dutch pancake | Linda's Dutch Pancakes</title>
+<meta name="description" content="Build your own Dutch pancake at Linda's Dutch Pancakes, Palm Beach, Aruba: start plain and tap the toppings you want on it.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EAD1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="pancake.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="left">
+    <header class="head">
+      <a class="logo" id="pk-logo" href="../"><img src="../assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" width="1713" height="591"></a>
+      <h1 id="pk-title">Create your own Dutch pancake</h1>
+    </header>
+    <p class="intro" id="pk-intro"></p>
+
+    <!-- The pancake. On a phone this part stays in view while the list scrolls under it. -->
+    <div class="board">
+      <div class="stage">
+        <canvas id="pk-canvas" role="img"></canvas>
+        <button type="button" class="pill pill-l" id="pk-reset"></button>
+        <button type="button" class="pill pill-r" id="pk-save"></button>
+      </div>
+      <div class="caption">
+        <p class="cap-name" id="pk-cap-name" hidden></p>
+        <p class="cap-sum" id="pk-summary" aria-live="polite"></p>
+        <p class="cap-total" id="pk-total" hidden></p>
+      </div>
+    </div>
+
+    <div class="namebox">
+      <label class="sr" for="pk-name" id="pk-name-label"></label>
+      <input id="pk-name" type="text" maxlength="28" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done">
+      <button type="button" id="pk-suggest"></button>
+    </div>
+  </div>
+
+  <!-- The toppings, grouped like the menu. Filled in by app.js from toppings.js and strings.js. -->
+  <main class="list" id="pk-list"></main>
+</div>
+
+<div class="toast" id="pk-toast" role="status" hidden></div>
+<noscript><p style="padding:24px;font-family:sans-serif">This page needs JavaScript to draw the pancake.</p></noscript>
+
+<script src="toppings.js"></script>
+<script src="strings.js"></script>
+<script src="art.js"></script>
+<script src="art2.js"></script>
+<script src="scene.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

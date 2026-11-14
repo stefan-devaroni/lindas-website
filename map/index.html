@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guest map | Linda's Dutch Pancakes</title>
+<meta name="description" content="Where are you from? Add a pin for your home town on the guest map of Linda's Dutch Pancakes, Palm Beach, Aruba.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EAD1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+
+<!-- Start screen: the map, the counters and the big button -->
+<div class="app" id="app">
+  <header class="brand">
+    <a class="logo" id="logo" href="../"><img src="../assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes" width="1713" height="591"></a>
+    <h1 id="title">Where are you from?</h1>
+  </header>
+
+  <div class="map" id="map">
+    <canvas id="land"></canvas>
+    <canvas id="pins"></canvas>
+    <canvas id="fx"></canvas>
+    <div class="marks" id="marks"></div>
+  </div>
+
+  <div class="bottom" id="bottom">
+    <nav class="regions" id="regions"></nav>
+    <div class="cta" id="cta"></div>
+  </div>
+
+  <aside class="side" id="side">
+    <div class="count" id="count"></div>
+    <div class="by" id="by"></div>
+  </aside>
+
+  <p class="note" id="note" hidden></p>
+</div>
+
+<!-- Picking a country, state and city -->
+<div class="picker" id="picker" hidden></div>
+
+<!-- "You are guest 812 from the United States" -->
+<div class="drop" id="drop" hidden></div>
+
+<noscript><p style="padding:24px;font-family:sans-serif">This map needs JavaScript.</p></noscript>
+
+<!-- No build step: plain files, loaded in this order. config.js may be missing; the map then keeps pins on the device. -->
+<script src="config.js"></script>
+<script src="strings.js"></script>
+<script src="data-world.js"></script>
+<script src="data-usa.js"></script>
+<script src="data-cities.js"></script>
+<script src="store.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

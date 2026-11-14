@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Linda's Breakfast Rush</title>
+<meta name="description" content="A small kitchen game from Linda's Dutch Pancakes on Palm Beach, Aruba. Mix the batter, flip once, serve the guests.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#004EAD">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="style.css">
+<!-- Open Sauce One is a nice-to-have. It loads in the background and the game never waits for it. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+</head>
+<body>
+<div id="app">
+  <canvas id="stage" aria-label="The kitchen at Linda's"></canvas>
+
+  <header id="hud" class="hud" hidden>
+    <div class="hud-item"><span class="lbl">LEVEL</span><span class="num plain" id="hud-level">1</span></div>
+    <div class="hud-item hud-score"><span class="lbl">SCORE</span><span class="num plain" id="hud-score">0</span></div>
+    <div class="hud-item"><span class="lbl">SERVED</span><span class="num plain"><span id="hud-served">0/3</span><span class="lost" id="hud-lost" aria-label="Guests who walked out"></span></span></div>
+  </header>
+
+  <div class="corner">
+    <button id="btn-pause" class="icon-btn" type="button" aria-label="Pause" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4.2" height="14" rx="1.2"/><rect x="13.8" y="5" width="4.2" height="14" rx="1.2"/></svg>
+    </button>
+    <button id="btn-mute" class="icon-btn" type="button" aria-label="Sound is on. Turn it off" aria-pressed="false">
+      <svg class="snd-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8l-4.8-3.9H4z"/><path class="wave" d="M15 9.2a4 4 0 0 1 0 5.6M17.4 6.8a7.4 7.4 0 0 1 0 10.4"/></svg>
+      <svg class="snd-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.2L12 5.6v12.8l-4.8-3.9H4z"/><path class="wave" d="M15.5 9.5l5 5M20.5 9.5l-5 5"/></svg>
+    </button>
+  </div>
+
+  <!-- Title: the entrance of Linda's is drawn on the canvas, this sheet sits beside or below it -->
+  <section id="screen-title" class="screen title">
+    <div class="title-sheet" id="title-sheet">
+      <div class="sheet-inner">
+        <p class="eyebrow">A KITCHEN GAME</p>
+        <h1 class="game-title">Linda's Breakfast Rush</h1>
+        <p class="tagline">Run the kitchen at Linda's. Mix the batter, flip once, and serve before the guests walk out.</p>
+        <div class="actions">
+          <button id="btn-play" class="btn primary big" type="button">Play</button>
+          <button id="btn-reward" class="btn gold" type="button" hidden>Your reward</button>
+        </div>
+        <div class="board" id="board-title"></div>
+        <p class="fine">Palm Beach, Aruba. Since 2001. Open 8 AM to 2 PM, closed Sundays.</p>
+        <p class="fine ext"><a href="../">Back to the Linda's website</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-intro" class="screen overlay" hidden>
+    <div class="card">
+      <p class="eyebrow"><span>LEVEL</span> <b class="num plain" id="intro-n">1</b></p>
+      <h2 id="intro-title">Opening time</h2>
+      <p class="lead" id="intro-lead"></p>
+      <div class="recipe">
+        <canvas id="intro-pic" width="260" height="260" aria-hidden="true"></canvas>
+        <ol id="intro-steps"></ol>
+      </div>
+      <p class="goal" id="intro-goal"></p>
+      <div class="actions column">
+        <button id="btn-start" class="btn primary big" type="button">Start</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-pause" class="screen overlay" hidden>
+    <div class="card small">
+      <h2>Paused</h2>
+      <p class="lead">The pans wait for you.</p>
+      <div class="actions column">
+        <button id="btn-resume" class="btn primary big" type="button">Keep cooking</button>
+        <button id="btn-restart" class="btn ghost" type="button">Start this level again</button>
+        <button id="btn-stop" class="btn ghost" type="button">Stop and save score</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-result" class="screen overlay" hidden>
+    <div class="card">
+      <p class="eyebrow"><span>LEVEL</span> <b class="num plain" id="result-n">1</b></p>
+      <h2 id="result-title">Level done</h2>
+      <div class="stars" id="result-stars" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="lead" id="result-lead"></p>
+      <dl class="tally" id="result-tally"></dl>
+      <div class="actions column">
+        <button id="btn-next" class="btn primary big" type="button">Next level</button>
+        <button id="btn-retry" class="btn primary big" type="button">Try again</button>
+        <button id="btn-giveup" class="btn ghost" type="button">Stop and save score</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-name" class="screen overlay" hidden>
+    <div class="card" id="name-card">
+      <h2 id="name-title">Put your name on the board</h2>
+      <p class="lead"><b class="num big" id="name-score">0</b> points</p>
+      <input id="name-input" type="text" maxlength="10" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="YOUR NAME" aria-label="Your name. Up to 10 letters or digits.">
+      <p class="name-msg" id="name-msg" role="status" aria-live="polite"></p>
+      <div class="keys" id="name-keys" hidden></div>
+      <div class="actions column">
+        <button id="btn-save" class="btn primary big" type="button">Save score</button>
+        <button id="btn-skip" class="btn ghost" type="button">Skip</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-end" class="screen overlay" hidden>
+    <div class="card wide">
+      <h2 id="end-title">Kitchen closed</h2>
+      <p class="lead" id="end-lead"></p>
+      <div class="board" id="board-end"></div>
+      <div class="actions">
+        <button id="btn-again" class="btn primary big" type="button">Play again</button>
+        <button id="btn-end-reward" class="btn gold" type="button" hidden>Your reward</button>
+        <button id="btn-home" class="btn ghost" type="button">Title screen</button>
+      </div>
+      <p class="fine ext"><a href="../">Back to the Linda's website</a></p>
+    </div>
+  </section>
+
+  <section id="screen-reward" class="screen overlay reward" hidden>
+    <div class="reward-frame">
+      <div class="reward-card" id="reward-card">
+        <div class="giftsign">GIFT SHOP</div>
+        <h2>You beat the kitchen</h2>
+        <p class="lead" id="reward-text">Show this screen at the gift shop in Linda's for an extra 10% off, on top of the 10% you already get. Valid today only.</p>
+        <canvas id="reward-anim" width="640" height="240" aria-hidden="true"></canvas>
+        <dl class="reward-data">
+          <div><dt>NAME</dt><dd id="reward-name">GUEST</dd></div>
+          <div><dt>SCORE</dt><dd id="reward-score" class="num">0</dd></div>
+          <div class="span"><dt>VALID ON</dt><dd id="reward-date"></dd></div>
+          <div class="span"><dt>ARUBA TIME NOW</dt><dd id="reward-clock" class="clock"></dd></div>
+        </dl>
+        <div class="actions column">
+          <button id="btn-reward-done" class="btn primary big" type="button">Done</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="idle-warning" class="idle" hidden>
+    <div class="card small">
+      <h2>Still there?</h2>
+      <p class="lead">Back to the start in <b id="idle-count">10</b>.</p>
+      <div class="actions column"><button id="btn-idle" class="btn primary big" type="button">Keep playing</button></div>
+    </div>
+  </div>
+</div>
+<div id="safe-probe" aria-hidden="true"></div>
+
+<!-- config.js sets the leaderboard backend. If it is missing, scores are kept on this device. -->
+<script src="config.js"></script>
+<script src="leaderboard.js"></script>
+<script src="audio.js"></script>
+<script src="art.js"></script>
+<script src="scene.js"></script>
+<script src="game.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>

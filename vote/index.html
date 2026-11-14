@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vote for our next T-shirt | Linda's Dutch Pancakes</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F1EAD1">
+<link rel="icon" type="image/png" href="../assets/logos/social-1.png">
+<link rel="stylesheet" href="vote.css">
+</head>
+<body>
+
+<!--
+  Linda's "vote for our next T-shirt" page.
+  Guests' phones:      /vote/
+  Shop touchscreen:    /vote/?kiosk=1   (no outside links, starts over after a while without a touch)
+
+  What to change where:
+    designs.js    the designs in the vote, and how many votes each guest gets
+    products.js   the shirts that are on sale, with their links and prices
+    strings.js    every word on the page (add Dutch or Spanish there)
+    config.js     where the votes are stored
+-->
+
+<div class="app" id="app">
+
+  <header class="top">
+    <span class="brand" id="brand"><img id="logo" src="../assets/logos/logo-blue.png" width="1713" height="591" alt=""></span>
+    <nav class="top-nav" id="topNav">
+      <button type="button" class="chip" id="btnMode"></button>
+      <button type="button" class="chip" id="btnStandings"></button>
+      <button type="button" class="chip" id="btnBackTop" hidden></button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Voting: one shirt at a time, or all of them -->
+    <section class="vote" id="viewVote" aria-labelledby="headline">
+      <div class="intro">
+        <h1 id="headline"></h1>
+        <p id="intro"></p>
+      </div>
+
+      <div class="stage" id="stage">
+        <button type="button" class="stage-tee" id="stageTee"></button>
+        <span class="pick-badge" id="pickBadge" hidden></span>
+        <button type="button" class="look" id="btnLook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/><path class="look-plus" d="M10.5 7.8v5.4M7.8 10.5h5.4"/></svg>
+          <span id="lookLabel"></span>
+        </button>
+        <button type="button" class="arrow arrow-prev" id="btnPrev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>
+        <button type="button" class="arrow arrow-next" id="btnNextArrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="where">
+          <p class="position" id="position"></p>
+          <div class="dots" id="dots"></div>
+        </div>
+        <h2 class="design-title" id="designTitle"></h2>
+        <p class="caption" id="caption"></p>
+        <p class="shown" id="shown"></p>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btnVote"></button>
+          <button type="button" class="btn" id="btnNext"></button>
+        </div>
+        <div class="allowance">
+          <span class="tokens" id="tokens" aria-hidden="true"></span>
+          <span class="allowance-text" id="votesLeft"></span>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="cards" id="cards" hidden></div>
+      <div class="grid-tally" id="gridTally" hidden>
+        <span class="tokens" id="gridTokens" aria-hidden="true"></span>
+        <span class="allowance-text" id="gridVotesLeft"></span>
+      </div>
+      <p class="closed" id="closed" hidden></p>
+    </section>
+
+    <!-- After voting: the standings, then the shirts already on sale -->
+    <section class="results" id="viewResults" hidden>
+      <div class="standings">
+        <h1 id="resultsTitle" tabindex="-1"></h1>
+        <p class="results-sub" id="resultsSub"></p>
+        <ol class="bars" id="bars"></ol>
+        <p class="total" id="total"></p>
+        <p class="pick-note" id="pickNote"></p>
+        <div class="results-actions">
+          <button type="button" class="btn btn-primary" id="btnDone" hidden></button>
+          <button type="button" class="btn" id="btnBack"></button>
+        </div>
+      </div>
+
+      <div class="sale" id="sale">
+        <h2 id="saleTitle"></h2>
+        <p class="sale-sub" id="saleSub"></p>
+        <ul class="products" id="products"></ul>
+        <p class="elsewhere" id="elsewhere"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="device-note" id="deviceNote" hidden></p>
+  </footer>
+</div>
+
+<noscript><p style="padding:24px;font-family:sans-serif">This page needs JavaScript to show the T-shirts.</p></noscript>
+
+<script src="config.js"></script>
+<script src="strings.js"></script>
+<script src="designs.js"></script>
+<script src="products.js"></script>
+<script src="qr.js"></script>
+<script src="tee.js"></script>
+<script src="backend.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
