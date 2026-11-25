@@ -11,25 +11,7 @@
 <link rel="icon" type="image/png" href="assets/logos/social-1.png">
 <link rel="apple-touch-icon" href="assets/logos/social-1.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face {
-  font-family: 'Olivier';
-  src: url('assets/fonts/olivier.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Telegrafico';
-  src: url('assets/fonts/telegrafico.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --blue: #27AAE1;
   --blue-dark: #004EAD;
@@ -46,7 +28,6 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
-  font-family: 'Open Sauce One', 'Segoe UI', sans-serif;
   color: var(--brown-dark);
   background: var(--cream-light);
   overflow-x: hidden;
@@ -79,10 +60,6 @@ nav .nav-links {
 }
 
 nav .nav-links a {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--brown-dark);
   text-decoration: none;
   transition: color 0.3s;
@@ -115,18 +92,13 @@ nav .nav-cta:hover {
 }
 
 .careers-hero h1 {
-  font-family: 'Olivier', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: normal;
   margin-bottom: 1rem;
 }
 
 .careers-hero p {
-  font-size: 1.05rem;
   max-width: 560px;
   margin: 0 auto;
   opacity: 0.9;
-  line-height: 1.6;
 }
 
 /* FORM SECTION */
@@ -137,18 +109,13 @@ nav .nav-cta:hover {
 }
 
 .form-section h2 {
-  font-family: 'Olivier', serif;
-  font-size: 1.5rem;
-  font-weight: normal;
   margin-bottom: 0.5rem;
   color: var(--brown-dark);
 }
 
 .form-section .form-intro {
   color: var(--brown-warm);
-  font-size: 0.9rem;
   margin-bottom: 2rem;
-  line-height: 1.5;
 }
 
 .form-group {
@@ -157,11 +124,8 @@ nav .nav-cta:hover {
 
 .form-group label {
   display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
   color: var(--brown-dark);
   margin-bottom: 0.4rem;
-  letter-spacing: 0.02em;
 }
 
 .form-group label .required {
@@ -185,8 +149,6 @@ nav .nav-cta:hover {
   padding: 0.75rem 1rem;
   border: 1.5px solid rgba(40, 34, 4, 0.12);
   border-radius: 12px;
-  font-family: inherit;
-  font-size: 0.95rem;
   background: var(--white);
   color: var(--brown-dark);
   transition: border-color 0.2s;
@@ -206,7 +168,6 @@ nav .nav-cta:hover {
 
 .form-group input[type="file"] {
   padding: 0.6rem;
-  font-size: 0.85rem;
 }
 
 .form-group select {
@@ -224,10 +185,6 @@ nav .nav-cta:hover {
   color: var(--white);
   border: none;
   border-radius: 100px;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   margin-top: 0.5rem;
@@ -249,8 +206,6 @@ nav .nav-cta:hover {
   padding: 1rem 1.25rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
   display: none;
 }
 
@@ -282,16 +237,12 @@ nav .nav-cta:hover {
 }
 
 .success-state h2 {
-  font-family: 'Olivier', serif;
-  font-size: 1.8rem;
   color: var(--brown-dark);
   margin-bottom: 0.75rem;
 }
 
 .success-state p {
   color: var(--brown-warm);
-  font-size: 1rem;
-  line-height: 1.6;
 }
 
 /* FOOTER */
@@ -309,10 +260,6 @@ footer img {
 }
 
 footer p {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
   color: rgba(241, 234, 209, 0.4);
   margin-bottom: 0.5rem;
 }
@@ -328,10 +275,6 @@ footer .social-links {
 footer .social-links a {
   color: rgba(241, 234, 209, 0.5);
   transition: color 0.3s;
-  font-size: 0.75rem;
-  font-family: 'Telegrafico', monospace;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -340,6 +283,7 @@ footer .social-links a {
 
 footer .social-links a:hover { color: var(--blue); }
 </style>
+<link rel="stylesheet" href="/assets/type.css">
 </head>
 <body>
 

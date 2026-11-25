@@ -1,0 +1,331 @@
+/* Linda's website: all type in one place (Stefan's design rules, Nov 2026).
+   Two families: Olivier for every heading, Open Sauce for all text and all numbers. Weights 400 and 500 only.
+   One scale; each step has its own line height, and letter spacing tightens as type gets bigger.
+   The pages' own <style> blocks hold layout and colour only: no font-family, size, weight or spacing there. */
+
+@font-face {
+  font-family: 'Olivier';
+  src: url('fonts/olivier.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sauce One';
+  src: url('fonts/open-sauce-one-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sauce One';
+  src: url('fonts/open-sauce-one-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-head: 'Olivier', Georgia, serif;
+  --font-text: 'Open Sauce One', 'Segoe UI', system-ui, sans-serif;
+
+  /* The scale */
+  --t-label: 0.6875rem;   /* 11  small uppercase labels */
+  --t-caption: 0.75rem;   /* 12  captions */
+  --t-button: 0.8125rem;  /* 13  small buttons, notes */
+  --t-small: 0.875rem;    /* 14  buttons, menu descriptions */
+  --t-card: 0.9375rem;    /* 15  text inside cards */
+  --t-body: 1rem;         /* 16  page text and form fields (16 so iPhones don't zoom in) */
+  --t-card-title: 1.125rem; /* 18  card titles */
+  --t-heading: 1.375rem;  /* 22  section sub-headings */
+  --t-figure: 1.5rem;     /* 24  icons */
+  --t-title: 1.75rem;     /* 28  section titles on phones */
+  --t-display: 2.125rem;  /* 34  section titles on computers */
+}
+
+/* ---- Base ---------------------------------------------------------------------------------------------- */
+
+body {
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  line-height: 1.6;
+  font-weight: 400;
+  font-style: normal;
+  /* Only 400 and 500 exist: never let the browser fake a bold or a slanted letter */
+  font-synthesis: none;
+  /* Numbers line up in columns everywhere */
+  font-variant-numeric: tabular-nums;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-style: normal;
+  text-wrap: balance;
+}
+
+/* Any heading without a role of its own still lands on the scale */
+h1, h2 {
+  font-size: var(--t-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--t-heading);
+  line-height: 1.25;
+}
+
+h4 {
+  font-size: var(--t-card-title);
+  line-height: 1.3;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+strong, b {
+  font-weight: 500;
+}
+
+em, i {
+  font-style: normal;
+}
+
+button, input, select, textarea {
+  font-family: var(--font-text);
+}
+
+/* ---- Headings: one family, three sizes ------------------------------------------------------------------- */
+
+/* Section titles */
+.section-title,
+.story-heading,
+.careers-hero h1,
+.notfound-title {
+  font-family: var(--font-head);
+  font-size: var(--t-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+/* Sub-headings inside a section */
+.menu-subtitle,
+.menu-create-header,
+.allergy-friendly h3,
+.visit-info h3,
+.form-section h2,
+.success-state h2 {
+  font-family: var(--font-head);
+  font-size: var(--t-heading);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+
+/* Card titles: smaller than section headings */
+.menu-item-name,
+.menu-inner.classic .menu-item-name,
+.giftshop-card h3,
+.giftshop-brand-text {
+  font-family: var(--font-head);
+  font-size: var(--t-card-title);
+  line-height: 1.3;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* ---- Text -------------------------------------------------------------------------------------------------- */
+
+/* Page text */
+.story p,
+.giftshop-intro,
+.careers-hero p,
+.success-state p,
+.instagram-intro,
+.notfound-text {
+  font-size: var(--t-body);
+  line-height: 1.6;
+}
+
+/* Text inside cards: one step under page text */
+.review-text,
+.allergy-friendly-intro,
+.allergy-friendly-cta,
+.visit-detail-text,
+.giftshop-card p,
+.giftshop-online-link,
+.menu-create-note,
+.form-section .form-intro,
+.form-message {
+  font-family: var(--font-text);
+  font-size: var(--t-card);
+  line-height: 1.55;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.giftshop-online-link a,
+.allergy-option-text strong {
+  font-weight: 500;
+}
+
+/* Menu descriptions and other small text */
+.menu-item-desc,
+.menu-inner.classic .menu-item-desc,
+.allergy-option-text {
+  font-size: var(--t-small);
+  line-height: 1.45;
+}
+
+/* Notes */
+.menu-note,
+.visit-note,
+.footer-note,
+.form-group input[type="file"] {
+  font-size: var(--t-button);
+  line-height: 1.4;
+}
+
+/* Prices and other figures: the text font, medium, never the heading font */
+.menu-item-price,
+.menu-inner.classic .menu-item-price {
+  font-family: var(--font-text);
+  font-size: var(--t-card);
+  line-height: 1.3;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-year {
+  font-family: var(--font-text);
+  font-size: var(--t-display);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The @ of the Instagram name: Olivier has no @, so it is set in the text font one step smaller */
+.at-sign {
+  font-family: var(--font-text);
+  font-size: var(--t-title);
+  letter-spacing: 0;
+}
+
+/* ---- The one label style: every small uppercase label ------------------------------------------------- */
+
+.hero-tagline,
+.hero-hours,
+.story-label,
+.section-label,
+.menu-item-badge,
+.allergy-friendly-badge,
+.allergy-friendly-since,
+.giftshop-note,
+.reviews-count,
+.review-author,
+.visit-detail-text strong,
+footer p,
+footer .social-links a,
+.mobile-sticky-info,
+.form-group label,
+.notfound-code {
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Navigation and buttons: one step under the text around them ---------------------------------- */
+
+nav .nav-links a,
+.hero-cta,
+.menu-tab,
+.instagram-follow-btn,
+.social-pill,
+.submit-btn,
+.show-more-btn,
+.notfound-btn {
+  font-family: var(--font-text);
+  font-size: var(--t-small);
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.menu-tab,
+.social-pill,
+.mobile-sticky-bar .sticky-btn {
+  font-family: var(--font-text);
+  font-size: var(--t-button);
+  line-height: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Form fields: 16 so iPhones don't zoom in */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-size: var(--t-body);
+  line-height: 1.5;
+}
+
+/* ---- Icons set as text ---------------------------------------------------------------------------------- */
+
+.reviews-stars span {
+  font-size: var(--t-title);
+  line-height: 1;
+}
+
+.review-stars {
+  font-size: var(--t-small);
+  line-height: 1;
+}
+
+.allergy-option-icon {
+  font-size: var(--t-figure);
+  line-height: 1;
+}
+
+.lightbox-close {
+  font-size: var(--t-card-title);
+  line-height: 1;
+}
+
+/* ---- Phones --------------------------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .section-title,
+  .story-heading,
+  .careers-hero h1,
+  .notfound-title {
+    font-size: var(--t-title);
+    line-height: 1.2;
+  }
+
+  .story-year {
+    font-size: var(--t-title);
+  }
+
+  .at-sign {
+    font-size: var(--t-heading);
+  }
+
+  /* The opened phone menu: bigger, easy to tap */
+  nav .nav-links a {
+    font-size: var(--t-body);
+    line-height: 1.5rem;
+  }
+}

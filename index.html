@@ -126,25 +126,7 @@
 }
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sauce+One:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face {
-  font-family: 'Olivier';
-  src: url('assets/fonts/olivier.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Telegrafico';
-  src: url('assets/fonts/telegrafico.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --blue: #27AAE1;
   --blue-dark: #004EAD;
@@ -181,7 +163,6 @@ html {
 }
 
 body {
-  font-family: 'Open Sauce One', 'Segoe UI', sans-serif;
   color: var(--brown-dark);
   background: var(--cream-light);
   overflow-x: hidden;
@@ -235,10 +216,6 @@ nav .nav-links {
 }
 
 nav .nav-links a {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
   transition: color 0.3s;
@@ -360,10 +337,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .hero-tagline {
-  font-family: 'Telegrafico', monospace;
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
   color: var(--cream);
   margin-bottom: 2rem;
   animation: fadeDown 1s ease 0.5s both;
@@ -379,10 +352,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   padding: 0.7rem 1.5rem;
   border-radius: 100px;
   color: var(--white);
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   margin-bottom: 2rem;
   animation: fadeUp 1s ease 0.7s both;
 }
@@ -399,10 +368,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   display: inline-block;
   background: var(--blue);
   color: var(--white);
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   text-decoration: none;
   padding: 1rem 2.5rem;
   border-radius: 100px;
@@ -490,36 +455,24 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .story-label {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
   color: var(--blue);
   margin-bottom: 1rem;
 }
 
 .story-heading {
-  font-family: 'Olivier', cursive;
-  font-size: clamp(2rem, 4vw, 3rem);
   color: var(--brown-dark);
-  line-height: 1.15;
   margin-bottom: 1.5rem;
 }
 
 .story p {
-  font-size: 1.05rem;
-  line-height: 1.8;
   color: var(--brown-warm);
   margin-bottom: 1rem;
 }
 
 .story-year {
   display: inline-block;
-  font-family: 'Olivier', cursive;
-  font-size: 4rem;
   color: var(--blue);
   opacity: 0.15;
-  line-height: 1;
   margin-top: 1rem;
 }
 
@@ -589,19 +542,12 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .section-label {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
   color: var(--blue);
   margin-bottom: 0.75rem;
 }
 
 .section-title {
-  font-family: 'Olivier', cursive;
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
   color: var(--brown-dark);
-  line-height: 1.1;
 }
 
 .menu-tabs {
@@ -613,10 +559,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-tab {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   padding: 0.7rem 1.3rem;
   border: 1.5px solid var(--blue);
   border-radius: 100px;
@@ -670,14 +612,12 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-inner.classic .menu-item-name {
-  font-size: 1.05rem;
   white-space: nowrap;
 }
 
 .menu-inner.classic .menu-item-desc {
   width: 100%;
   margin-top: 0.15rem;
-  font-size: 0.75rem;
   opacity: 0.5;
 }
 
@@ -697,19 +637,15 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-inner.classic .menu-item-price {
-  font-size: 1rem;
   flex-shrink: 0;
 }
 
 .menu-subtitle {
   text-align: center;
-  font-family: 'Olivier', cursive;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   color: var(--brown-warm);
   margin-bottom: 2.5rem;
   padding: 0 1rem;
   opacity: 0.65;
-  letter-spacing: 0.01em;
 }
 
 .menu-panel {
@@ -745,25 +681,18 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-item-name {
-  font-family: 'Olivier', cursive;
-  font-size: 1.15rem;
   color: var(--brown-dark);
   margin-bottom: 0.25rem;
 }
 
 .menu-item-desc {
-  font-size: 0.8rem;
   color: var(--brown-warm);
   opacity: 0.7;
-  line-height: 1.5;
 }
 
 .menu-item-price {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.9rem;
   color: var(--blue);
   white-space: nowrap;
-  font-weight: bold;
 }
 
 .menu-note {
@@ -772,7 +701,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   padding: 1.2rem;
   background: var(--cream);
   border-radius: 12px;
-  font-size: 0.85rem;
   color: var(--brown-warm);
 }
 
@@ -831,18 +759,12 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   transform: translateX(-50%);
   background: var(--gold);
   color: var(--brown-dark);
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
   padding: 0.4rem 1.2rem;
   border-radius: 20px;
   white-space: nowrap;
 }
 
 .allergy-friendly h3 {
-  font-family: 'Olivier', cursive;
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
   color: var(--brown-dark);
   text-align: center;
   margin-bottom: 0.5rem;
@@ -850,10 +772,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 
 .allergy-friendly-since {
   text-align: center;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--blue);
   margin-bottom: 2rem;
 }
@@ -862,8 +780,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   max-width: 640px;
   margin: 0 auto 2rem;
   text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.7;
   color: var(--brown-warm);
 }
 
@@ -885,7 +801,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .allergy-option-icon {
-  font-size: 1.5rem;
   flex-shrink: 0;
   width: 2.2rem;
   height: 2.2rem;
@@ -897,14 +812,11 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .allergy-option-text {
-  font-size: 0.85rem;
-  line-height: 1.4;
   color: var(--brown-dark);
 }
 
 .allergy-option-text strong {
   display: block;
-  font-size: 0.9rem;
   margin-bottom: 0.15rem;
 }
 
@@ -913,9 +825,7 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   padding: 1.2rem;
   background: var(--cream);
   border-radius: 12px;
-  font-size: 0.9rem;
   color: var(--brown-warm);
-  line-height: 1.6;
 }
 
 /* ═══════════════════ CREATE YOUR OWN ═══════════════════ */
@@ -926,18 +836,12 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .menu-create-header {
-  font-family: 'Olivier', cursive;
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   color: var(--brown-dark);
   text-align: center;
   margin-bottom: 0.5rem;
 }
 
 .menu-create-note {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--blue);
   text-align: center;
   margin-bottom: 2rem;
@@ -954,8 +858,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
   text-align: center;
   max-width: 600px;
   margin: 0 auto 3rem;
-  font-size: 1.05rem;
-  line-height: 1.8;
   color: var(--brown-warm);
 }
 
@@ -993,8 +895,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .giftshop-brand-text {
-  font-family: 'Olivier', cursive;
-  font-size: 1.1rem;
   color: var(--brown-dark);
   white-space: nowrap;
 }
@@ -1042,15 +942,11 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .giftshop-card h3 {
-  font-family: 'Olivier', cursive;
-  font-size: 1.25rem;
   color: var(--brown-dark);
   margin-bottom: 0.5rem;
 }
 
 .giftshop-card p {
-  font-size: 0.9rem;
-  line-height: 1.6;
   color: var(--brown-warm);
   opacity: 0.8;
 }
@@ -1058,10 +954,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 .giftshop-note {
   text-align: center;
   margin-top: 2rem;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--brown-warm);
   opacity: 0.5;
 }
@@ -1069,13 +961,11 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 .giftshop-online-link {
   text-align: center;
   margin-top: 1rem;
-  font-size: 0.95rem;
   color: var(--brown-warm);
 }
 
 .giftshop-online-link a {
   color: var(--blue-dark);
-  font-weight: 600;
   text-underline-offset: 3px;
 }
 
@@ -1148,15 +1038,11 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .reviews-stars span {
-  font-size: 1.8rem;
   color: var(--gold);
 }
 
 .reviews-count {
   text-align: center;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
   color: var(--brown-warm);
   opacity: 0.6;
   margin-bottom: 3rem;
@@ -1183,23 +1069,15 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 
 .review-stars {
   color: var(--gold);
-  font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
 .review-text {
-  font-size: 0.95rem;
-  line-height: 1.7;
   color: var(--brown-warm);
   margin-bottom: 1.2rem;
-  font-style: italic;
 }
 
 .review-author {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--blue);
 }
 
@@ -1219,8 +1097,6 @@ nav.scrolled .mobile-toggle span { background: var(--brown-dark); }
 }
 
 .visit-info h3 {
-  font-family: 'Olivier', cursive;
-  font-size: 1.6rem;
   color: var(--brown-dark);
   margin-bottom: 1.5rem;
 }
@@ -1258,17 +1134,11 @@ a.visit-detail-icon:hover {
 }
 
 .visit-detail-text {
-  font-size: 0.95rem;
-  line-height: 1.6;
   color: var(--brown-warm);
 }
 
 .visit-detail-text strong {
   display: block;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
   color: var(--brown-dark);
   margin-bottom: 0.25rem;
 }
@@ -1278,7 +1148,6 @@ a.visit-detail-icon:hover {
   padding: 1rem;
   background: var(--cream);
   border-radius: 10px;
-  font-size: 0.8rem;
   color: var(--brown-warm);
   border-left: 3px solid var(--gold);
 }
@@ -1306,9 +1175,6 @@ a.visit-detail-icon:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
   color: var(--blue);
   text-decoration: none;
   padding: 0.55rem 1.1rem;
@@ -1346,10 +1212,6 @@ footer img {
 }
 
 footer p {
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
   color: rgba(241, 234, 209, 0.4);
   margin-bottom: 0.5rem;
 }
@@ -1364,10 +1226,6 @@ footer .social-links {
 footer .social-links a {
   color: rgba(241, 234, 209, 0.5);
   transition: color 0.3s;
-  font-size: 0.75rem;
-  font-family: 'Telegrafico', monospace;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -1454,10 +1312,6 @@ footer .social-links a:hover { color: var(--blue); }
   gap: 0.3rem;
   background: linear-gradient(135deg, #EFBD40, #EB8917);
   color: #fff;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   padding: 0.25rem 0.65rem;
   border-radius: 100px;
   white-space: nowrap;
@@ -1544,10 +1398,6 @@ footer .social-links a:hover { color: var(--blue); }
   gap: 0.6rem;
   background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
   color: #fff;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   text-decoration: none;
   padding: 0.85rem 2rem;
   border-radius: 100px;
@@ -1599,10 +1449,6 @@ footer .social-links a:hover { color: var(--blue); }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: var(--brown-warm);
 }
 
@@ -1621,10 +1467,6 @@ footer .social-links a:hover { color: var(--blue); }
   gap: 0.4rem;
   background: var(--blue);
   color: #fff;
-  font-family: 'Telegrafico', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   text-decoration: none;
   padding: 0.6rem 1.2rem;
   border-radius: 100px;
@@ -1672,7 +1514,6 @@ footer .social-links a:hover { color: var(--blue); }
   nav .nav-links a {
     color: var(--brown-dark) !important;
     text-shadow: none !important;
-    font-size: 0.85rem;
   }
 
   .story-inner {
@@ -1741,13 +1582,13 @@ footer .social-links a:hover { color: var(--blue); }
   background: rgba(255,255,255,0.1);
   border: none;
   color: white;
-  font-size: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 </style>
+<link rel="stylesheet" href="/assets/type.css">
 </head>
 <body>
 
@@ -2136,7 +1977,7 @@ footer .social-links a:hover { color: var(--blue); }
     <picture><source srcset="assets/photos/DSC08552.webp" type="image/webp"><img src="assets/photos/DSC08552.jpg" alt="Staff in purple hoodie" loading="lazy" onclick="openLightbox(this)" width="1067" height="1600"></picture>
   </div>
   <div style="text-align:center; margin-top:2rem;" class="fade-in">
-    <button id="showMoreBtn" onclick="document.getElementById('galleryExtra').classList.remove('hidden'); this.style.display='none';" style="background:transparent; border:1.5px solid rgba(241,234,209,0.4); color:var(--cream); font-family:'Telegrafico',monospace; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.8rem 2rem; border-radius:100px; cursor:pointer; transition:all 0.3s;">Show More</button>
+    <button id="showMoreBtn" onclick="document.getElementById('galleryExtra').classList.remove('hidden'); this.style.display='none';" class="show-more-btn" style="background:transparent; border:1.5px solid rgba(241,234,209,0.4); color:var(--cream); padding:0.8rem 2rem; border-radius:100px; cursor:pointer; transition:all 0.3s;">Show More</button>
   </div>
 </section>
 
@@ -2176,9 +2017,9 @@ footer .social-links a:hover { color: var(--blue); }
 <section class="instagram-section" id="instagram">
   <div class="section-header fade-in">
     <div class="section-label">Follow Along</div>
-    <h2 class="section-title"><span style="font-family:'Open Sauce One','Segoe UI',sans-serif; font-size:0.75em;">@</span>lindasaruba</h2>
+    <h2 class="section-title"><span class="at-sign">@</span>lindasaruba</h2>
   </div>
-  <p class="fade-in" style="font-size:1rem; color:var(--brown-warm); opacity:0.7; max-width:500px; margin:0 auto 2rem; line-height:1.7;">See what's cooking today. Follow us for daily pancake photos, behind-the-scenes moments, and Aruba vibes.</p>
+  <p class="fade-in instagram-intro" style="color:var(--brown-warm); opacity:0.7; max-width:500px; margin:0 auto 2rem;">See what's cooking today. Follow us for daily pancake photos, behind-the-scenes moments, and Aruba vibes.</p>
   <a href="https://www.instagram.com/lindasaruba/" target="_blank" rel="noopener" class="instagram-follow-btn fade-in">
     <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
     Follow Us on Instagram
