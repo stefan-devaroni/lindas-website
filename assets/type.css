@@ -147,7 +147,9 @@ button, input, select, textarea {
 .careers-hero p,
 .success-state p,
 .instagram-intro,
-.notfound-text {
+.notfound-text,
+.legal-text p,
+.legal-text li {
   font-size: var(--t-body);
   line-height: 1.6;
 }
@@ -188,6 +190,9 @@ button, input, select, textarea {
 .menu-note,
 .visit-note,
 .footer-note,
+.form-hint,
+.legal-text .form-hint,
+.form-privacy,
 .form-group input[type="file"] {
   font-size: var(--t-button);
   line-height: 1.4;
@@ -236,6 +241,7 @@ footer p,
 footer .social-links a,
 .mobile-sticky-info,
 .form-group label,
+.legal-lang,
 .notfound-code {
   font-family: var(--font-text);
   font-size: var(--t-label);

@@ -26,7 +26,7 @@ body {
 }
 
 .code {
-  color: #27AAE1;
+  color: #004EAD;
   margin-bottom: 0.5rem;
 }
 
@@ -43,7 +43,7 @@ p {
 
 .btn {
   display: inline-block;
-  background: #27AAE1;
+  background: #004EAD;
   color: #fff;
   padding: 0.85rem 2.5rem;
   border-radius: 50px;
@@ -52,7 +52,7 @@ p {
 }
 
 .btn:hover {
-  background: #004EAD;
+  background: #003B85;
   transform: translateY(-2px);
 }
 
@@ -67,8 +67,23 @@ p {
 .footer-note {
   position: absolute;
   bottom: 2rem;
-  color: #5C3D1A;
-  opacity: 0.6;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  color: #75593A;
+}
+
+.footer-note a {
+  color: #004EAD;
+  text-underline-offset: 3px;
+}
+
+/* For people who asked their phone or computer for less movement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 </style>
 <link rel="stylesheet" href="/assets/type.css">
@@ -80,6 +95,6 @@ p {
   <div class="divider"></div>
   <p>Looks like this pancake flipped off the plate. The page you're looking for doesn't exist.</p>
   <a href="/" class="btn notfound-btn">Back to the home page</a>
-  <div class="footer-note">Linda's Dutch Pancakes &middot; Palm Beach, Aruba</div>
+  <div class="footer-note">Linda's Dutch Pancakes &middot; Palm Beach, Aruba &middot; <a href="/privacy/">Privacy</a></div>
 </body>
 </html>

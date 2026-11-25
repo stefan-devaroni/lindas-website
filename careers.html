@@ -8,6 +8,27 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://lindas-aruba.com/careers.html">
 <meta name="theme-color" content="#27AAE1">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Careers — Linda's Dutch Pancakes">
+<meta property="og:description" content="Join the Linda's Dutch Pancakes team in Palm Beach, Aruba. We're hiring bartenders, waiters, hostesses, cooks and more.">
+<meta property="og:image" content="https://lindas-aruba.com/assets/photos/share-1200x630.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A Dutch pancake and a Linda's Dutch Pancakes coffee mug on a wooden table">
+<meta property="og:url" content="https://lindas-aruba.com/careers.html">
+<meta property="og:site_name" content="Linda's Dutch Pancakes">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Careers — Linda's Dutch Pancakes">
+<meta name="twitter:description" content="Join the Linda's Dutch Pancakes team in Palm Beach, Aruba. We're hiring bartenders, waiters, hostesses, cooks and more.">
+<meta name="twitter:image" content="https://lindas-aruba.com/assets/photos/share-1200x630.jpg">
+<meta name="twitter:image:alt" content="A Dutch pancake and a Linda's Dutch Pancakes coffee mug on a wooden table">
+
 <link rel="icon" type="image/png" href="assets/logos/social-1.png">
 <link rel="apple-touch-icon" href="assets/logos/social-1.png">
 
@@ -15,11 +36,13 @@
 :root {
   --blue: #27AAE1;
   --blue-dark: #004EAD;
+  --blue-deep: #003B85;
   --cream: #F1EAD1;
   --gold: #EFBD40;
   --orange: #EB8917;
   --brown-dark: #282204;
   --brown-warm: #5C3D1A;
+  --red-dark: #B4470B;
   --white: #FFFFFF;
   --cream-light: #FAF6ED;
 }
@@ -65,10 +88,10 @@ nav .nav-links a {
   transition: color 0.3s;
 }
 
-nav .nav-links a:hover { color: var(--blue); }
+nav .nav-links a:hover { color: var(--blue-dark); }
 
 nav .nav-cta {
-  background: var(--blue);
+  background: var(--blue-dark);
   color: var(--white) !important;
   padding: 0.5rem 1.2rem;
   border-radius: 100px;
@@ -76,16 +99,64 @@ nav .nav-cta {
 }
 
 nav .nav-cta:hover {
-  background: var(--blue-dark);
+  background: var(--blue-deep);
 }
 
+/* Phone menu: the same button and side panel as the home page */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1001;
+}
+.mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--brown-dark);
+  transition: all 0.3s;
+}
+nav.menu-open .mobile-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.menu-open .mobile-toggle span:nth-child(2) { opacity: 0; }
+nav.menu-open .mobile-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 768px) {
-  nav .nav-links { display: none; }
+  .mobile-toggle { display: flex; }
+
+  nav .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--cream);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    transition: right 0.4s ease, visibility 0s linear 0.4s;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+    visibility: hidden;
+  }
+
+  nav .nav-links.open {
+    right: 0;
+    visibility: visible;
+    transition: right 0.4s ease, visibility 0s;
+  }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 0 1rem; }
 }
 
 /* HERO */
 .careers-hero {
-  background: var(--blue);
+  background: var(--blue-dark);
   padding: 4rem 2rem 3rem;
   text-align: center;
   color: var(--white);
@@ -129,7 +200,7 @@ nav .nav-cta:hover {
 }
 
 .form-group label .required {
-  color: var(--orange);
+  color: var(--red-dark);
 }
 
 .form-row {
@@ -158,7 +229,7 @@ nav .nav-cta:hover {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--blue);
+  border-color: var(--blue-dark);
 }
 
 .form-group textarea {
@@ -178,10 +249,39 @@ nav .nav-cta:hover {
   padding-right: 2.5rem;
 }
 
+/* The small line under the CV field: which files are fine, or what is wrong with the chosen one */
+.form-hint {
+  color: var(--brown-warm);
+  margin-top: 0.4rem;
+}
+
+.form-hint.error {
+  color: #c62828;
+}
+
+/* A field people never see. Only programs that fill in every field write in it. */
+.form-extra {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-privacy {
+  color: var(--brown-warm);
+  margin-top: 1.5rem;
+}
+
+.form-privacy a {
+  color: var(--blue-dark);
+  text-underline-offset: 3px;
+}
+
 .submit-btn {
   width: 100%;
   padding: 0.9rem;
-  background: var(--blue);
+  background: var(--blue-dark);
   color: var(--white);
   border: none;
   border-radius: 100px;
@@ -191,7 +291,7 @@ nav .nav-cta:hover {
 }
 
 .submit-btn:hover {
-  background: var(--blue-dark);
+  background: var(--blue-deep);
   transform: translateY(-1px);
 }
 
@@ -207,6 +307,7 @@ nav .nav-cta:hover {
   border-radius: 12px;
   margin-bottom: 1.5rem;
   display: none;
+  scroll-margin-top: 90px;
 }
 
 .form-message.success {
@@ -239,10 +340,20 @@ nav .nav-cta:hover {
 .success-state h2 {
   color: var(--brown-dark);
   margin-bottom: 0.75rem;
+  outline: none;
 }
 
 .success-state p {
   color: var(--brown-warm);
+}
+
+.success-state p + p {
+  margin-top: 0.75rem;
+}
+
+.success-state a {
+  color: var(--blue-dark);
+  text-underline-offset: 3px;
 }
 
 /* FOOTER */
@@ -260,7 +371,7 @@ footer img {
 }
 
 footer p {
-  color: rgba(241, 234, 209, 0.4);
+  color: rgba(241, 234, 209, 0.7);
   margin-bottom: 0.5rem;
 }
 
@@ -273,7 +384,7 @@ footer .social-links {
 }
 
 footer .social-links a {
-  color: rgba(241, 234, 209, 0.5);
+  color: rgba(241, 234, 209, 0.75);
   transition: color 0.3s;
   text-decoration: none;
   display: inline-flex;
@@ -282,21 +393,34 @@ footer .social-links a {
 }
 
 footer .social-links a:hover { color: var(--blue); }
+
+/* For people who asked their phone or computer for less movement */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 </style>
 <link rel="stylesheet" href="/assets/type.css">
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
+<nav id="nav" aria-label="Main navigation">
   <a href="/" class="nav-logo">
     <picture><source srcset="assets/logos/logo-blue.webp" type="image/webp"><source srcset="assets/logos/logo-blue.png" type="image/png"><img src="assets/logos/logo-blue.png" alt="Linda's Dutch Pancakes"></picture>
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="/">Home</a></li>
     <li><a href="/#menu">Menu</a></li>
     <li><a href="/#visit" class="nav-cta">Visit Us</a></li>
   </ul>
+  <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -310,34 +434,34 @@ footer .social-links a:hover { color: var(--blue); }
   <h2>Apply</h2>
   <p class="form-intro">Fill out the form below and we'll get back to you. All positions are on-site in Palm Beach, Aruba.</p>
 
-  <div class="form-message" id="formMessage"></div>
+  <div class="form-message" id="formMessage" role="alert"></div>
 
-  <form id="applyForm" novalidate>
+  <form id="applyForm">
     <div class="form-row">
       <div class="form-group">
-        <label>Full Name <span class="required">*</span></label>
-        <input type="text" name="name" required autocomplete="name">
+        <label for="f-name">Full Name <span class="required">*</span></label>
+        <input type="text" id="f-name" name="name" required maxlength="120" autocomplete="name">
       </div>
       <div class="form-group">
-        <label>Age</label>
-        <input type="number" name="age" min="16" max="80" autocomplete="off">
+        <label for="f-age">Age</label>
+        <input type="number" id="f-age" name="age" min="14" max="99" step="1" inputmode="numeric" autocomplete="off">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label>Email <span class="required">*</span></label>
-        <input type="email" name="email" required autocomplete="email">
+        <label for="f-email">Email <span class="required">*</span></label>
+        <input type="email" id="f-email" name="email" required maxlength="200" autocomplete="email">
       </div>
       <div class="form-group">
-        <label>Phone <span class="required">*</span></label>
-        <input type="tel" name="phone" required autocomplete="tel">
+        <label for="f-phone">Phone <span class="required">*</span></label>
+        <input type="tel" id="f-phone" name="phone" required maxlength="30" autocomplete="tel">
       </div>
     </div>
 
     <div class="form-group">
-      <label>Position <span class="required">*</span></label>
-      <select name="position" required>
+      <label for="f-position">Position <span class="required">*</span></label>
+      <select id="f-position" name="position" required>
         <option value="">Select a position...</option>
         <option value="bartender">Bartender</option>
         <option value="waiter">Waiter / Waitress</option>
@@ -351,20 +475,28 @@ footer .social-links a:hover { color: var(--blue); }
     </div>
 
     <div class="form-group">
-      <label>Experience</label>
-      <textarea name="experience" placeholder="Tell us about your relevant work experience" rows="4"></textarea>
+      <label for="f-experience">Experience</label>
+      <textarea id="f-experience" name="experience" placeholder="Tell us about your relevant work experience" rows="4" maxlength="2000"></textarea>
     </div>
 
     <div class="form-group">
-      <label>About You</label>
-      <textarea name="about" placeholder="Tell us a bit about yourself" rows="3"></textarea>
+      <label for="f-about">About You</label>
+      <textarea id="f-about" name="about" placeholder="Tell us a bit about yourself" rows="3" maxlength="2000"></textarea>
     </div>
 
     <div class="form-group">
-      <label>Upload CV</label>
-      <input type="file" name="cv" accept=".pdf,.doc,.docx">
+      <label for="f-cv">Upload CV</label>
+      <input type="file" id="f-cv" name="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" aria-describedby="cvHint">
+      <p class="form-hint" id="cvHint" aria-live="polite">PDF, Word, JPG or PNG. 5 MB at most.</p>
     </div>
 
+    <div class="form-extra" aria-hidden="true">
+      <label for="f-website">Website (leave this empty)</label>
+      <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    <input type="hidden" id="f-started" name="started_at" value="">
+
+    <p class="form-privacy">We use what you send only for hiring. Read how on our <a href="/privacy/">privacy page</a>.</p>
     <button type="submit" class="submit-btn" id="submitBtn">Submit Application</button>
   </form>
 </section>
@@ -378,28 +510,154 @@ footer .social-links a:hover { color: var(--blue); }
     <a href="https://www.instagram.com/lindasaruba/" target="_blank" rel="noopener">Instagram</a>
     <a href="https://www.facebook.com/lindasaruba" target="_blank" rel="noopener">Facebook</a>
     <a href="https://www.tripadvisor.com/Restaurant_Review-g147249-d1046446-Reviews-Linda_s_Dutch_Pancakes-Palm_Eagle_Beach_Aruba.html" target="_blank" rel="noopener">TripAdvisor</a>
+    <a href="/privacy/">Privacy</a>
   </div>
 </footer>
 
 <script>
+// Phone menu: open and close, and tell screen readers which it is
+const nav = document.getElementById('nav');
+const navLinks = document.getElementById('navLinks');
+const mobileToggle = document.getElementById('mobileToggle');
+function setMenu(open) {
+  navLinks.classList.toggle('open', open);
+  nav.classList.toggle('menu-open', open);
+  mobileToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  mobileToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+mobileToggle.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    setMenu(false);
+    mobileToggle.focus();
+  }
+});
+
+// ---- checks: start (plain functions, no page needed) ----
+const MAX_CV_BYTES = 5 * 1024 * 1024;
+const MAX_TEXT = 2000;
+const CV_ENDINGS = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'];
+const EMAIL_SHAPE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// Takes what the person filled in and gives back a list of { field, message }. An empty list means all is fine.
+function checkApplication(v) {
+  const problems = [];
+  const name = (v.name || '').trim();
+  const email = (v.email || '').trim();
+  const phone = (v.phone || '').trim();
+  const age = (v.age == null ? '' : String(v.age)).trim();
+
+  if (!name) problems.push({ field: 'name', message: 'Please fill in your full name.' });
+
+  if (!email) problems.push({ field: 'email', message: 'Please fill in your email address.' });
+  else if (!EMAIL_SHAPE.test(email)) problems.push({ field: 'email', message: 'Please check your email address. It should look like name@example.com.' });
+
+  if (!phone) problems.push({ field: 'phone', message: 'Please fill in your phone number.' });
+  else if (phone.replace(/\D/g, '').length < 7) problems.push({ field: 'phone', message: 'Please fill in a phone number with at least 7 digits.' });
+
+  if (age) {
+    const n = Number(age);
+    if (!Number.isInteger(n) || n < 14 || n > 99) problems.push({ field: 'age', message: 'Age must be a whole number from 14 to 99. You can also leave it empty.' });
+  }
+
+  if (!v.position) problems.push({ field: 'position', message: 'Please choose a position.' });
+
+  if ((v.experience || '').length > MAX_TEXT) problems.push({ field: 'experience', message: 'Please keep your experience to 2,000 characters at most.' });
+  if ((v.about || '').length > MAX_TEXT) problems.push({ field: 'about', message: 'Please keep the text about you to 2,000 characters at most.' });
+
+  if (v.cvName) {
+    const ending = v.cvName.includes('.') ? v.cvName.split('.').pop().toLowerCase() : '';
+    if (!CV_ENDINGS.includes(ending)) problems.push({ field: 'cv', message: 'Your CV must be a PDF, Word (DOC or DOCX), JPG or PNG file.' });
+    else if (v.cvSize > MAX_CV_BYTES) problems.push({ field: 'cv', message: 'Your CV is larger than 5 MB. Please choose a smaller file, or email it to lindasaruba@gmail.com.' });
+  }
+
+  return problems;
+}
+
+// Turns the server's answer into what to show. status = the HTTP status, body = the JSON it sent (or {}).
+function readAnswer(status, body) {
+  const good = status >= 200 && status < 300;
+  const said = (body && typeof body.error === 'string' && body.error.trim()) ? body.error.trim() : '';
+  if (good && body && body.cv_failed === true) return { done: true, cvFailed: true };
+  if (good && body && body.ok) return { done: true, cvFailed: false };
+  if (status === 429) return { done: false, message: said || 'Too many tries. Please wait a few minutes and try again.' };
+  return { done: false, message: said || 'Something went wrong. Please try again, or email us at lindasaruba@gmail.com.' };
+}
+// ---- checks: end ----
+
 const form = document.getElementById('applyForm');
 const btn = document.getElementById('submitBtn');
 const msg = document.getElementById('formMessage');
 const section = document.getElementById('formSection');
+const cvHint = document.getElementById('cvHint');
+const CV_HINT_TEXT = cvHint.textContent;
+const FIELDS = ['name', 'email', 'phone', 'age', 'position', 'experience', 'about', 'cv'];
+
+// When the page opened. The server uses it to tell people from programs.
+form.elements.started_at.value = String(Date.now());
+
+function readForm() {
+  const file = form.elements.cv.files && form.elements.cv.files[0];
+  return {
+    name: form.elements.name.value,
+    email: form.elements.email.value,
+    phone: form.elements.phone.value,
+    age: form.elements.age.value,
+    position: form.elements.position.value,
+    experience: form.elements.experience.value,
+    about: form.elements.about.value,
+    cvName: file ? file.name : '',
+    cvSize: file ? file.size : 0,
+  };
+}
+
+// Puts each problem on its own field, so the browser points at the right one and shows our words
+function markFields() {
+  const problems = checkApplication(readForm());
+  FIELDS.forEach(field => {
+    const found = problems.find(p => p.field === field);
+    form.elements[field].setCustomValidity(found ? found.message : '');
+  });
+  const cvProblem = problems.find(p => p.field === 'cv');
+  cvHint.textContent = cvProblem ? cvProblem.message : CV_HINT_TEXT;
+  cvHint.classList.toggle('error', !!cvProblem);
+  return problems;
+}
+
+function showError(text) {
+  msg.textContent = text;
+  msg.className = 'form-message error';
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  msg.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' });
+}
+
+function showDone(cvFailed) {
+  section.innerHTML = '<div class="success-state" role="status">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+    '<h2 tabindex="-1">Application Received</h2>' +
+    '<p>Thanks for applying! We\'ll review your application and get back to you soon.</p>' +
+    (cvFailed ? '<p>Your application arrived, but your CV did not. Please email your CV to <a href="mailto:lindasaruba@gmail.com">lindasaruba@gmail.com</a>.</p>' : '') +
+    '</div>';
+  const heading = section.querySelector('h2');
+  heading.focus();
+  heading.scrollIntoView({ block: 'center' });
+}
+
+form.addEventListener('input', markFields);
+form.addEventListener('change', markFields);
+// Check again right before the browser checks the form, in case a field was filled in without typing
+btn.addEventListener('click', markFields);
+markFields();
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   msg.className = 'form-message';
-  msg.style.display = 'none';
+  msg.textContent = '';
 
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const phone = form.phone.value.trim();
-  const position = form.position.value;
-
-  if (!name || !email || !phone || !position) {
-    msg.textContent = 'Please fill in all required fields.';
-    msg.className = 'form-message error';
+  const problems = markFields();
+  if (problems.length) {
+    showError(problems[0].message);
     return;
   }
 
@@ -407,6 +665,9 @@ form.addEventListener('submit', async function(e) {
   btn.textContent = 'Submitting...';
 
   const data = new FormData(form);
+  data.set('name', form.elements.name.value.trim());
+  data.set('email', form.elements.email.value.trim());
+  data.set('phone', form.elements.phone.value.trim());
 
   try {
     const res = await fetch('https://dashboard.lindas-aruba.com/api/apply', {
@@ -414,23 +675,19 @@ form.addEventListener('submit', async function(e) {
       body: data,
     });
 
-    const result = await res.json();
+    let body = {};
+    try { body = await res.json(); } catch (err) { body = {}; }
 
-    if (res.ok && result.ok) {
-      section.innerHTML = '<div class="success-state">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
-        '<h2>Application Received</h2>' +
-        '<p>Thanks for applying! We\'ll review your application and get back to you soon.</p>' +
-        '</div>';
+    const answer = readAnswer(res.status, body);
+    if (answer.done) {
+      showDone(answer.cvFailed);
     } else {
-      msg.textContent = result.error || 'Something went wrong. Please try again.';
-      msg.className = 'form-message error';
+      showError(answer.message);
       btn.disabled = false;
       btn.textContent = 'Submit Application';
     }
   } catch (err) {
-    msg.textContent = 'Could not submit. Please check your internet connection and try again.';
-    msg.className = 'form-message error';
+    showError('Could not submit. Please check your internet connection and try again.');
     btn.disabled = false;
     btn.textContent = 'Submit Application';
   }

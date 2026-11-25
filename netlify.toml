@@ -1,6 +1,24 @@
 [build]
   publish = "."
 
+# Every page and file: basic safety headers.
+# X-Frame-Options is SAMEORIGIN, not DENY: the touchscreen home screen (/kiosk/) shows the other guest pages inside a frame.
+# Permissions-Policy: the photo postcard uses the camera; nothing on the site uses location, microphone, payment or USB.
+# No Content-Security-Policy on purpose: it needs testing in a browser against the guest pages first.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(self), geolocation=(), microphone=(), payment=(), usb=()"
+
+# Photos, logos, fonts and the type file: browsers may keep them for one week. Pages (HTML) are not cached.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
